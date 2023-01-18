@@ -1,2 +1,1 @@
-# BOTA
-Biomedical Term Annotator
+
