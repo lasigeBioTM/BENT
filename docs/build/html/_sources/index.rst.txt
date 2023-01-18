@@ -13,9 +13,9 @@ Python Library for Named Entity Recogntion (NER) and Linking (NEL) in the biomed
 NER models are based on `PubMedBERT <https://arxiv.org/pdf/2007.15779.pdf>`__ and a post-processing rule-based module.
 NEL model is a graph-based approach based on the Personalized PageRank algorithm and Information content.
 
-`Python package <>`__
+`Python package <https://pypi.org/project/bent/>`__
 
-`Github repository <>`__
+`Github repository <https://github.com/lasigeBioTM/BENT>`__
 
 .. toctree::
    :maxdepth: 3
