@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>annotate &mdash; BENT 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/twemoji.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"></script>
+        <script src="_static/twemoji.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Documentation" href="documentation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> BENT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="documentation.html">Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">annotate</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BENT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="documentation.html">Documentation</a></li>
+      <li class="breadcrumb-item active">annotate</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/annotate.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-bent.annotate">
+<span id="annotate"></span><h1>annotate<a class="headerlink" href="#module-bent.annotate" title="Permalink to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="bent.annotate.annotate">
+<span class="sig-prename descclassname"><span class="pre">bent.annotate.</span></span><span class="sig-name descname"><span class="pre">annotate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">recognize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">link</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ner_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'brat'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'brat'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ner_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pubmedbert'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nel_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'reel_nilinker'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bent.annotate.annotate" title="Permalink to this definition"></a></dt>
+<dd><p>Pipeline to annotate text(s) with recognized entities (Named Entity and
+Recognition) to link them to knowledge base concepts (Named Entity Linking).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>recognize</strong> (<em>bool</em><em>, </em><em>optional</em>) – specifies wether the pipeline performs Named Entity
+Recognition, defaults to False</p></li>
+<li><p><strong>link</strong> (<em>bool</em><em>, </em><em>optional</em>) – specifies wether the pipeline performs Named Entity
+Linking, defaults to False</p></li>
+<li><p><strong>types</strong> (<em>dict</em><em>, </em><em>optional</em>) – types of entities to be recognized along with the respective
+target knowledge bases, defaults to {}. Options:
+{‘disease’: ‘medic’}, {‘disease’: ‘do’},
+{‘chemical’: ‘chebi’}, {‘chemical’: ‘ctd_chem’},
+{‘gene’: ‘ncbi_gene’},
+{‘bioprocess’: ‘go_bp’},
+{‘organism’: ‘ncbi_taxon’},
+{‘anatomical’: ‘uberon’}, {‘anatomical’, ‘ctd_anat’},
+{‘cell_component’: ‘go_cc’},
+{‘cell_line’: ‘cellosaurus’},
+{‘cell_type’: ‘cell_ontology’},
+{‘variant’: ‘’}
+{&lt;entity_type&gt;: &lt;custom_knowledge_base&gt;}</p></li>
+<li><p><strong>input_text</strong> (<em>str</em><em> or </em><em>list</em><em>, </em><em>optional</em>) – text string or list of text strings (each element
+represinting a different document) to be annotated, defaults to None</p></li>
+<li><p><strong>in_dir</strong> (<em>_type_</em><em>, </em><em>optional</em>) – path to directory containing text files to be annotated (NER
+and optionally NEL),
+defaults to None</p></li>
+<li><p><strong>ner_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – directory where the output of the NER stage is located.
+Only applicable when there is already an output from the NER stage.
+Defaults to ‘None’.</p></li>
+<li><p><strong>in_format</strong> – the format of the input files. Options: ‘brat’,
+‘bioc_xml’, ‘bioc_json’, ‘pubtator’</p></li>
+<li><p><strong>out_dir</strong> (<em>str</em><em>, </em><em>defaults to None</em>) – path to directory where the output of the pipeline will be
+located, optional. To choose current directory set out_dir==’’.
+If ‘out_dir’ == None (deafult) a Dataset object
+including all documents and respective annotations will be returned</p></li>
+<li><p><strong>out_format</strong> (<em>str</em><em>, </em><em>optional</em>) – the format of the ouput (‘brat’, None), defaults to None</p></li>
+<li><p><strong>ner_model</strong> (<em>str</em><em>, </em><em>optional</em>) – the Named Entity Recognition model that will be used,
+defaults to ‘pubmedbert’</p></li>
+<li><p><strong>nel_model</strong> (<em>str</em><em>, </em><em>optional</em>) – the Named Entity Linking model that will be used,
+defaults to ‘reel_nilinker’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – if both ‘input_text’ and ‘in_dir’ are None</p></li>
+<li><p><strong>ValueError</strong> – if both ‘recognize’ and ‘link’ are None</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>dataset (an object including all the input texts along with the
+annotations) if ‘out_dir’ is None; an annotation file for each inputed
+text if ‘out_dir’ is different that None</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Dataset object, text file(s)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bent.annotate.linker">
+<span class="sig-prename descclassname"><span class="pre">bent.annotate.</span></span><span class="sig-name descname"><span class="pre">linker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">recognize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">types</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nel_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ner_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bent.annotate.linker" title="Permalink to this definition"></a></dt>
+<dd><p>Pipeline to perform Named Entity Linking. For each input
+annotation files with recognized entities it outputs an updated
+annotations file (BRAT format) with knowledge base identifiers for each
+entity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>recognize</strong> (<em>bool</em><em>, </em><em>optional</em>) – specifies wether the pipeline performs Named Entity
+Recognition, defaults to False</p></li>
+<li><p><strong>types</strong> (<em>dict</em><em>, </em><em>optional</em>) – types of entities to be recognized along with the respective
+target knowledge bases, defaults to {}. Options:
+{‘disease’: ‘medic’}, {‘disease’: ‘do’},
+{‘chemical’: ‘chebi’}, {‘chemical’: ‘ctd_chem’},
+{‘gene’: ‘ncbi_gene’},
+{‘bioprocess’: ‘go_bp’},
+{‘organism’: ‘ncbi_taxon’},
+{‘anatomical’: ‘uberon’}, {‘anatomical’, ‘ctd_anat’},
+{‘cell_component’: ‘go_cc’},
+{‘cell_line’: ‘cellosaurus’},
+{‘cell_type’: ‘cell_ontology’},
+{‘variant’: ‘’}
+{&lt;entity_type&gt;: &lt;custom_knowledge_base&gt;}</p></li>
+<li><p><strong>nel_model</strong> – the Named Entity Linking model that will be used,
+defaults to ‘reel_nilinker’</p></li>
+<li><p><strong>ner_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – directory where the output of the NER stage is located.
+Only applicable when there is already an output from the NER stage.
+Defaults to ‘None’.</p></li>
+<li><p><strong>out_dir</strong> (<em>str</em><em>, </em><em>defaults to None</em>) – path to directory where the output of the pipeline will be
+located, optional. If ‘out_dir’ == None (deafult) a Dataset object
+including all documents and respective annotations will be returned</p></li>
+<li><p><strong>dataset</strong> (<em>Dataset</em><em>, </em><em>optional</em>) – dataset (an object including all the input texts along with
+the annotations from the NER stage), defaults to None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – if ‘ner_dir’==None and recognize==False, which means
+that if the NER stage was not performed it is necessary nevertheless
+indicate the directory containing annotation files corresponding to
+the NER output</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bent.annotate.recognizer">
+<span class="sig-prename descclassname"><span class="pre">bent.annotate.</span></span><span class="sig-name descname"><span class="pre">recognizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_types</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ner_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bent.annotate.recognizer" title="Permalink to this definition"></a></dt>
+<dd><p>Pipeline to perform Named Entity Recognition. For each input
+document/text it outputs either an annotations file (BRAT format) or a
+Dataset object including all documents and respective annotations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_dir</strong> (<em>_type_</em><em>, </em><em>optional</em>) – path to directory containing text files to be annotated,
+defaults to None</p></li>
+<li><p><strong>input_text</strong> (<em>str</em><em> or </em><em>list</em><em>, </em><em>optional</em>) – text string or list of text strings (each element
+represinting a different document) to be annotated, defaults to None</p></li>
+<li><p><strong>types</strong> – the entity types that will be recognized
+:type types: list</p></li>
+<li><p><strong>out_dir</strong> (<em>str</em><em>, </em><em>defaults to None</em>) – path to directory where the output of the pipeline will be
+located, optional. If ‘out_dir’ == None (deafult) a Dataset object
+including all documents and respective annotations will be returned</p></li>
+<li><p><strong>ner_model</strong> (<em>str</em><em>, </em><em>optional</em>) – the Named Entity Recognition model that will be used,
+defaults to ‘pubmedbert’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dataset (an object including all the input texts along with the
+annotations) if ‘out_dir’ is None; an annotation file for each inputed
+text if ‘out_dir’ is different that None</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Dataset object, text file(s)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="documentation.html" class="btn btn-neutral float-left" title="Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Pedro Ruas.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

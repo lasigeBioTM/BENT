@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Usage &mdash; BENT 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/twemoji.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"></script>
+        <script src="_static/twemoji.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Documentation" href="documentation.html" />
+    <link rel="prev" title="Installation" href="install.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> BENT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BENT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Usage</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/usage.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h1>
+<p>BENT can be used for:</p>
+<p>➡️ Named Entity Recognition (NER)</p>
+<p>➡️ Named Entity Linking (NEL)</p>
+<p>➡️ Named Entity Recognition and Linking (NER+NEL)</p>
+<section id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt><a class="reference external" href="#usage">Usage</a></dt><dd><ul>
+<li><dl class="simple">
+<dt><a class="reference external" href="#named-entity-recogniton-ner">Named Entity Recogniton (NER)</a></dt><dd><ul>
+<li><p><a class="reference external" href="#text-files-as-input">Text files as input</a></p></li>
+<li><p><a class="reference external" href="#list-of-texts-as-input">List of texts as input</a></p></li>
+<li><p><a class="reference external" href="#single-text-as-input">Single text as input</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><a class="reference external" href="#named-entity-linking-nel">Named Entity Linking (NEL)</a></dt><dd><ul>
+<li><p><a class="reference external" href="#link-entities-in-annotation-files">Link entities in annotation files</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><a class="reference external" href="#named-entity-recognition-and-linking-nernel">Named Entity Recognition and Linking (NER+NEL)</a></p></li>
+<li><p><a class="reference external" href="#upload-custom-knowledge-basegraphontology">Upload custom knowledge base/graph/ontology</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="named-entity-recogniton-ner">
+<h2>Named Entity Recogniton (NER)<a class="headerlink" href="#named-entity-recogniton-ner" title="Permalink to this heading"></a></h2>
+<p>BENT includes 10 NER models. Each model corresponds to <a class="reference external" href="https://huggingface.co/microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext">PubMedBERT</a> fine-tuned on specific datasets.</p>
+<p>The models and the description of the training datasets are stored in <a class="reference external" href="https://huggingface.co/">Hugging Face</a>. The available models are:</p>
+<ul class="simple">
+<li><p>‘disease’: disease entities.</p></li>
+<li><p>‘chemical’: chemical entities.</p></li>
+<li><p>‘gene’: gene and protein entities.</p></li>
+<li><p>‘organism’: organism (species, genus, …) entities.</p></li>
+<li><p>‘bioprocess’: biological process entities (as defined by Gene Ontology-Biological Process sub-ontology)</p></li>
+<li><p>‘anatomical’: anatomical entities</p></li>
+<li><p>‘cell_component’: cell component entities</p></li>
+<li><p>‘cell_type’: cell type entities</p></li>
+<li><p>‘cell_line’: cell line entities</p></li>
+<li><p>‘variant’: variant entities (a DNA-level or protein-level mutation as defined by the <a class="reference external" href="http://varnomen.hgvs.org/">Human Genome Variation Society nomenclature</a>).</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the current version, the ouput of both NER and NEL is only available for the <a class="reference external" href="https://brat.nlplab.org/standoff.html">BRAT standoff format</a>.</p>
+</div>
+<section id="text-files-as-input">
+<h3>Text files as input<a class="headerlink" href="#text-files-as-input" title="Permalink to this heading"></a></h3>
+<p>To recognize disease entities in text files placed under the directory ‘input/’ set the argument ‘types’:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bent.annotate</span> <span class="k">as</span> <span class="nn">bt</span>
+
+<span class="n">bt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+        <span class="n">recognize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">types</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;disease&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">},</span>
+        <span class="n">in_dir</span><span class="o">=</span><span class="s1">&#39;input/txt/&#39;</span><span class="p">,</span>
+        <span class="n">out_dir</span><span class="o">=</span><span class="s1">&#39;output/ner/&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The annotations files (‘.ann’) will be under the directory ‘output/ner/’.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ensure that the only files in the ‘input_dir/txt/’ are the text files that you want to annotate.</p>
+</div>
+</section>
+<section id="list-of-texts-as-input">
+<h3>List of texts as input<a class="headerlink" href="#list-of-texts-as-input" title="Permalink to this heading"></a></h3>
+<p>To recognize disease, chemical, gene, anatomical, cell line and bioprocess entities in texts provided in an input list:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bent.annotate</span> <span class="k">as</span> <span class="nn">bt</span>
+
+<span class="c1"># Each element of the list corresponds to a different document text</span>
+<span class="n">txt_list</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;Caffeine is a central nervous system (CNS) stimulant. It is hypothesized that caffeine innhibits the activation NF-kappaB in A2058 melanoma cells.&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;The Parkinson disease is a degenerative disorder affecting the motor system. PARK2 gene expression is associated with the Parkinson disease.&#39;</span><span class="p">]</span>
+
+<span class="n">bt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+        <span class="n">recognize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">types</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;disease&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;chemical&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;gene&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;anatomical&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;cell_line&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;bioprocess&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span>
+               <span class="p">},</span>
+        <span class="n">input_text</span><span class="o">=</span><span class="n">txt_list</span><span class="p">,</span>
+        <span class="n">out_dir</span><span class="o">=</span><span class="s1">&#39;output/ner/&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>For each input text will be generated an annotation files (‘.ann’), placed under the directory ‘output/ner’.</p>
+<p>The output will follow the BRAT format:</p>
+<p>doc1.ann:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">T1</span>  <span class="n">chemical</span> <span class="mi">0</span> <span class="mi">7</span>    <span class="n">Caffeine</span>
+<span class="n">T2</span>  <span class="n">anatomical</span> <span class="mi">13</span> <span class="mi">35</span>    <span class="n">central</span> <span class="n">nervous</span> <span class="n">system</span>
+<span class="n">T3</span>  <span class="n">anatomical</span> <span class="mi">37</span> <span class="mi">40</span>    <span class="n">CNS</span>
+<span class="n">T4</span>  <span class="n">chemical</span> <span class="mi">77</span> <span class="mi">85</span>  <span class="n">Caffeine</span>
+<span class="n">T5</span>  <span class="n">gene</span> <span class="mi">111</span> <span class="mi">120</span>    <span class="n">NF</span><span class="o">-</span><span class="n">kappaB</span>
+<span class="n">T1</span>  <span class="n">chemical</span> <span class="mi">0</span> <span class="mi">8</span>    <span class="n">Caffeine</span>
+<span class="n">T6</span>  <span class="n">cell_line</span> <span class="mi">124</span> <span class="mi">129</span> <span class="n">A2058</span>
+</pre></div>
+</div>
+<p>doc2.ann:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">T1</span>  <span class="n">disease</span> <span class="mi">3</span> <span class="mi">21</span>    <span class="n">Parkinson</span> <span class="n">disease</span>
+<span class="n">T2</span>  <span class="n">anatomical</span> <span class="mi">63</span> <span class="mi">75</span>    <span class="n">motor</span> <span class="n">system</span>
+<span class="n">T3</span>  <span class="n">gene</span> <span class="mi">77</span> <span class="mi">82</span>  <span class="n">PARK2</span>
+<span class="n">T4</span>  <span class="n">bioprocess</span> <span class="mi">83</span> <span class="mi">98</span>    <span class="n">gene</span> <span class="n">expression</span>
+<span class="n">T5</span>  <span class="n">disease</span> <span class="mi">122</span> <span class="mi">139</span> <span class="n">Parkinson</span> <span class="n">disease</span>
+</pre></div>
+</div>
+</section>
+<section id="single-text-as-input">
+<h3>Single text as input<a class="headerlink" href="#single-text-as-input" title="Permalink to this heading"></a></h3>
+<p>To recognize disease entities in a text provided as a string and to output the annotations as a ‘dataset’ object ommiting the ‘out_dir’ argument:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bent.annotate</span> <span class="k">as</span> <span class="nn">bt</span>
+
+<span class="n">txt1</span> <span class="o">=</span> <span class="s1">&#39;Reed&#39;</span><span class="n">s</span> <span class="n">Sindrome</span> <span class="n">has</span> <span class="n">several</span> <span class="n">manifestations</span> <span class="ow">and</span> <span class="n">symptoms</span><span class="o">.</span><span class="s1">&#39;</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">bt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+        <span class="n">recognize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">types</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;disease&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">},</span>
+        <span class="n">input_text</span><span class="o">=</span><span class="n">txt1</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>It is possible to access the ‘dataset’ object:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">documents</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">entities</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">entity</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">entity</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Which will output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">disease</span>
+<span class="n">Reed</span><span class="s1">&#39;s Sindrome</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="named-entity-linking-nel">
+<h2>Named Entity Linking (NEL)<a class="headerlink" href="#named-entity-linking-nel" title="Permalink to this heading"></a></h2>
+<p>BENT includes pre-process dictionaries that allow the linking of recognized entities of different types to entries of the following knowledge bases/graphs/ontologies:</p>
+<ul class="simple">
+<li><p>‘disease’ ➡️ ‘medic’ (<a class="reference external" href="http://ctdbase.org/">MEDIC</a>), ‘do’ (<a class="reference external" href="https://disease-ontology.org/">Disease ontology</a>)</p></li>
+<li><p>‘chemical’ ➡️ ‘chebi’ (<a class="reference external" href="https://www.ebi.ac.uk/chebi/">ChEBI ontology</a>) and ‘ctd_chem’ (<a class="reference external" href="http://ctdbase.org/">CTD-Chemicals</a>)</p></li>
+<li><p>‘gene’ ➡️ ‘ncbi_gene’ (<a class="reference external" href="https://www.ncbi.nlm.nih.gov/gene/">NCBI Gene</a>), ‘ctd_gene’ (<a class="reference external" href="http://ctdbase.org/">CTD-GENES</a>)</p></li>
+<li><p>‘organism’ ➡️ ‘ncbi_taxon’ (<a class="reference external" href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI Taxonomy</a>)</p></li>
+<li><p>‘bioprocess’ ➡️ ‘go_bp’ (<a class="reference external" href="http://geneontology.org/">Gene Ontology-Biological Process</a>)</p></li>
+<li><p>‘anatomy’ ➡️ ‘ctd_anat’ (<a class="reference external" href="http://ctdbase.org/">CTD-Anatomy</a>), ‘uberon’ (<a class="reference external" href="http://obophenotype.github.io/uberon/">UBERON ontology</a>)</p></li>
+<li><p>‘cell_component’ ➡️ ‘go_cc’ (<a class="reference external" href="http://geneontology.org/">Gene Ontology-Cellular Component</a>)</p></li>
+<li><p>‘cell_type’ ➡️ ‘cell_ontology’ (<a class="reference external" href="https://cell-ontology.github.io/">Cell Ontology</a>)</p></li>
+<li><p>‘cell_line’ ➡️ ‘cellosaurus’ (<a class="reference external" href="https://www.cellosaurus.org/">Cellosaurus</a>)</p></li>
+</ul>
+<section id="link-entities-in-annotation-files">
+<h3>Link entities in annotation files<a class="headerlink" href="#link-entities-in-annotation-files" title="Permalink to this heading"></a></h3>
+<p>Considering the annotation files outputted before, in this case we also want to link the already recognized entities to entries of several target knowlege bases:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bent.annotate</span> <span class="k">as</span> <span class="nn">bt</span>
+
+<span class="n">bt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+        <span class="n">link</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">types</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;disease&#39;</span><span class="p">:</span> <span class="s1">&#39;medic&#39;</span>
+            <span class="s1">&#39;chemical&#39;</span><span class="p">:</span> <span class="s1">&#39;chebi&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;gene&#39;</span><span class="p">:</span> <span class="s1">&#39;ncbi_gene&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;anatomical&#39;</span><span class="p">:</span> <span class="s1">&#39;uberon&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;cell_line&#39;</span><span class="p">:</span> <span class="s1">&#39;cellosaurus&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;bioprocess&#39;</span><span class="p">:</span> <span class="s1">&#39;go_bp&#39;</span>
+            <span class="p">},</span>
+        <span class="n">ner_dir</span><span class="o">=</span><span class="s1">&#39;output/ner/&#39;</span><span class="p">,</span>
+        <span class="n">out_dir</span><span class="o">=</span><span class="s1">&#39;output/nel/&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The annotations files (‘.ann’) will be under the directory ‘output/nel/’, but will now include the normalized identifiers for each recognized entity.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this case, where we already have the annotations files from the NER stage, it is required to set the argument ‘ner_dir’ instead of ‘in_dir’.</p>
+</div>
+<p>The updated output in the BRAT format will be:</p>
+<p>doc1.ann:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">T1</span>  <span class="n">chemical</span> <span class="mi">0</span> <span class="mi">7</span>    <span class="n">Caffeine</span>
+<span class="n">N1</span>  <span class="n">Reference</span> <span class="n">T1</span> <span class="n">CHEBI</span><span class="p">:</span><span class="mi">27732</span>    <span class="n">Caffeine</span>
+<span class="n">T2</span>  <span class="n">anatomical</span> <span class="mi">13</span> <span class="mi">35</span>    <span class="n">central</span> <span class="n">nervous</span> <span class="n">system</span>
+<span class="n">N2</span>  <span class="n">Reference</span> <span class="n">T2</span> <span class="n">UBERON</span><span class="p">:</span><span class="mi">0001017</span> <span class="n">central</span> <span class="n">nervous</span> <span class="n">system</span>
+<span class="n">T3</span>  <span class="n">anatomical</span> <span class="mi">37</span> <span class="mi">40</span>    <span class="n">CNS</span>
+<span class="n">N3</span>  <span class="n">Reference</span> <span class="n">T3</span> <span class="n">UBERON</span><span class="p">:</span><span class="mi">0001017</span> <span class="n">CNS</span>
+<span class="n">T4</span>  <span class="n">chemical</span> <span class="mi">77</span> <span class="mi">85</span>  <span class="n">Caffeine</span>
+<span class="n">N4</span>  <span class="n">Reference</span> <span class="n">T4</span> <span class="n">CHEBI</span><span class="p">:</span><span class="mi">27732</span>    <span class="n">Caffeine</span>
+<span class="n">T5</span>  <span class="n">gene</span> <span class="mi">111</span> <span class="mi">120</span>    <span class="n">NF</span><span class="o">-</span><span class="n">kappaB</span>
+<span class="n">N5</span>  <span class="n">Reference</span> <span class="n">T5</span> <span class="n">NCBIGene</span><span class="p">:</span><span class="mi">4790</span>  <span class="n">NF</span><span class="o">-</span><span class="n">kappaB</span>
+<span class="n">T1</span>  <span class="n">chemical</span> <span class="mi">0</span> <span class="mi">8</span>    <span class="n">Caffeine</span>
+<span class="n">N6</span>  <span class="n">Reference</span> <span class="n">T6</span> <span class="n">CVCL_1059</span>  <span class="n">A2058</span>
+</pre></div>
+</div>
+<p>doc2.ann:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">T1</span>  <span class="n">disease</span> <span class="mi">3</span> <span class="mi">21</span>    <span class="n">Parkinson</span> <span class="n">disease</span>
+<span class="n">N1</span>  <span class="n">Reference</span> <span class="n">T1</span> <span class="n">MESH</span><span class="p">:</span><span class="n">D010300</span>   <span class="n">Parkinson</span> <span class="n">disease</span>
+<span class="n">T2</span>  <span class="n">anatomical</span> <span class="mi">63</span> <span class="mi">75</span>    <span class="n">motor</span> <span class="n">system</span>
+<span class="n">N2</span>  <span class="n">Reference</span> <span class="n">T2</span> <span class="n">UBERON</span><span class="p">:</span><span class="mi">0025525</span> <span class="n">motor</span> <span class="n">system</span>
+<span class="n">T3</span>  <span class="n">gene</span> <span class="mi">77</span> <span class="mi">82</span>  <span class="n">PARK2</span>
+<span class="n">N3</span>  <span class="n">Reference</span> <span class="n">T3</span> <span class="n">NCBIGene</span><span class="p">:</span><span class="mi">421577</span>    <span class="n">PARK2</span>
+<span class="n">T4</span>  <span class="n">bioprocess</span> <span class="mi">83</span> <span class="mi">98</span>    <span class="n">gene</span> <span class="n">expression</span>
+<span class="n">N4</span>  <span class="n">Reference</span> <span class="n">T4</span> <span class="n">GO</span><span class="p">:</span><span class="mi">0010467</span> <span class="n">gene</span> <span class="n">expression</span>
+<span class="n">T5</span>  <span class="n">disease</span> <span class="mi">122</span> <span class="mi">139</span> <span class="n">Parkinson</span> <span class="n">disease</span>
+<span class="n">N5</span>  <span class="n">Reference</span> <span class="n">T5</span> <span class="n">MESH</span><span class="p">:</span><span class="n">D010300</span>   <span class="n">Parkinson</span> <span class="n">disease</span>
+</pre></div>
+</div>
+<p>In the current version, it is not possible yet to provide a dictionary of texts and NER annotations as input to the NEL pipeline.</p>
+</section>
+</section>
+<section id="named-entity-recognition-and-linking-ner-nel">
+<h2>Named Entity Recognition and Linking (NER+NEL)<a class="headerlink" href="#named-entity-recognition-and-linking-ner-nel" title="Permalink to this heading"></a></h2>
+<p>To apply the complete pipeline of entity extraction to a set of files placed in the input directory set the arguments ‘recognize’ and ‘link’ to True:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bent.annotate</span> <span class="k">as</span> <span class="nn">bt</span>
+
+<span class="n">bt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+        <span class="n">recognize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">link</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">types</span><span class="o">=</span><span class="p">{</span>
+         <span class="s1">&#39;disease&#39;</span><span class="p">:</span> <span class="s1">&#39;medic&#39;</span>
+         <span class="s1">&#39;chemical&#39;</span><span class="p">:</span> <span class="s1">&#39;chebi&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;gene&#39;</span><span class="p">:</span> <span class="s1">&#39;ncbi_gene&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;anatomical&#39;</span><span class="p">:</span> <span class="s1">&#39;uberon&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;cell_line&#39;</span><span class="p">:</span> <span class="s1">&#39;cellosaurus&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;bioprocess&#39;</span><span class="p">:</span> <span class="s1">&#39;go_bp&#39;</span>
+         <span class="p">},</span>
+        <span class="n">in_dir</span><span class="o">=</span><span class="s1">&#39;input/txt/&#39;</span><span class="p">,</span>
+        <span class="n">out_dir</span><span class="o">=</span><span class="s1">&#39;output/nel/&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="upload-custom-knowledge-base-graph-ontology">
+<h2>Upload custom knowledge base/graph/ontology<a class="headerlink" href="#upload-custom-knowledge-base-graph-ontology" title="Permalink to this heading"></a></h2>
+<p>If you want to use a custom knowledge base that is not included in the availabe options, it is necessary to have two text files: <strong>terms.txt</strong> and <strong>edges.txt</strong>.</p>
+<p>The file <strong>terms.txt</strong> is a list of the entries of the custm knowledge base with the format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ID</span><span class="p">:</span><span class="mi">1</span> <span class="n">Entry</span> <span class="mi">1</span>
+<span class="n">ID</span><span class="p">:</span><span class="mi">2</span> <span class="n">Entry</span> <span class="mi">2</span>
+<span class="n">ID</span><span class="p">:</span><span class="mi">3</span> <span class="n">entry</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<p><strong>edges.txt</strong> is a list of <em>is-a</em> (child-parent) relations between the
+entries of the <strong>terms.txt</strong> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ID</span><span class="p">:</span><span class="mi">1</span>  <span class="n">ID</span><span class="p">:</span><span class="mi">3</span>
+<span class="n">ID</span><span class="p">:</span><span class="mi">2</span>  <span class="n">ID</span><span class="p">:</span><span class="mi">3</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In both files, elements in each line are separated by a tab (’\t’).</p>
+</div>
+<p>Run the following code to generate the files for the custom knowledge
+base, indicating the filenames and the desired name:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span>  <span class="nn">bent.src.setup.kb.generate_dicts</span>  <span class="k">as</span>  <span class="nn">bkb</span>
+
+<span class="n">bkb</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span>
+        <span class="n">custom</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">kb_name</span><span class="o">=</span><span class="s1">&#39;disease_KG&#39;</span><span class="p">,</span>
+        <span class="n">terms_filename</span><span class="o">=</span><span class="s1">&#39;terms.txt&#39;</span><span class="p">,</span>
+        <span class="n">edges_filename</span><span class="o">=</span><span class="s1">&#39;edges.txt&#39;</span><span class="p">,</span>
+        <span class="n">input_format</span><span class="o">=</span><span class="s1">&#39;txt&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>After this step, you can apply the above pipelines using the newly
+generated knowledge base by setting the dictionary ‘types’:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bent.annotate</span> <span class="k">as</span> <span class="nn">bt</span>
+
+<span class="n">bt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+        <span class="n">recognize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">link</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">types</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;disease&#39;</span><span class="p">:</span> <span class="s1">&#39;disease_KG&#39;</span><span class="p">},</span>
+        <span class="n">in_dir</span><span class="o">=</span><span class="s1">&#39;input/txt/&#39;</span><span class="p">,</span>
+        <span class="n">out_dir</span><span class="o">=</span><span class="s1">&#39;output/nel/&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="install.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="documentation.html" class="btn btn-neutral float-right" title="Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Pedro Ruas.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
