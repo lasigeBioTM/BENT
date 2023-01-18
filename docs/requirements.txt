@@ -1,0 +1,3 @@
+myst_parser
+sphinxemoji.sphinxemoji
+sphinxcontrib.bibtex
