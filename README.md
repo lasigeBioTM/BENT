@@ -1,6 +1,6 @@
 # BENT: Biomedical Entity Annotation
 
-Python package for Named Entity Recogntion (NER) and Linking (NEL) in the biomedical domain.
+Python package for Named Entity Recognition (NER) and Linking (NEL) in the biomedical domain.
 
 NER models are based on [PubMedBERT](https://arxiv.org/pdf/2007.15779.pdf) and a post-processing rule-based module.
 the NEL model is a graph-based approach based on the Personalized PageRank algorithm and Information content.
