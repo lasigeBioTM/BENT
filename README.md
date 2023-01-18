@@ -9,21 +9,9 @@ Access the full documentation [here](https://bent.readthedocs.io/en/latest/).
 
 Citation:
 
-```
-@article{RUAS2022104137,
-title = {NILINKER: Attention-based approach to NIL Entity Linking},
-journal = {Journal of Biomedical Informatics},
-volume = {132},
-pages = {104137},
-year = {2022},
-issn = {1532-0464},
-doi = {https://doi.org/10.1016/j.jbi.2022.104137},
-url = {https://www.sciencedirect.com/science/article/pii/S1532046422001526},
-author = {Pedro Ruas and Francisco M. Couto},
-keywords = {Biomedical text, Named Entity Linking, Knowledge Bases, Natural language processing, Neural networks, Text mining},
-abstract = {The existence of unlinkable (NIL) entities is a major hurdle affecting the performance of Named Entity Linking approaches, and, consequently, the performance of downstream models that depend on them. Existing approaches to deal with NIL entities focus mainly on clustering and prediction and are limited to general entities. However, other domains, such as the biomedical sciences, are also prone to the existence of NIL entities, given the growing nature of scientific literature. We propose NILINKER, a model that includes a candidate retrieval module for biomedical NIL entities and a neural network that leverages the attention mechanism to find the top-k relevant concepts from target Knowledge Bases (MEDIC, CTD-Chemicals, ChEBI, HP, CTD-Anatomy and Gene Ontology-Biological Process) that may partially represent a given NIL entity. We also make available a new evaluation dataset designated by EvaNIL, suitable for training and evaluating models focusing on the NIL entity linking task. This dataset contains 846,165 documents (abstracts and full-text biomedical articles), including 1,071,776 annotations, distributed by six different partitions: EvaNIL-MEDIC, EvaNIL-CTD-Chemicals, EvaNIL-ChEBI, EvaNIL-HP, EvaNIL-CTD-Anatomy and EvaNIL-Gene Ontology-Biological Process. NILINKER was integrated into a graph-based Named Entity Linking model (REEL) and the results of the experiments show that this approach is able to increase the performance of the Named Entity Linking model.}
-}
-```
+
+> Pedro Ruas, Francisco M. Couto. [NILINKER: Attention-based approach to NIL Entity Linking](https://www.sciencedirect.com/science/article/pii/S1532046422001526). Journal of Biomedical Informatics, Volume 132, 2022. ISSN 1532-0464. https://doi.org/10.1016/j.jbi.2022.104137.
+
 
 ## Installation
 
