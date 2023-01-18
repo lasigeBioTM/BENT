@@ -26,7 +26,7 @@ extensions = [
     'sphinx.ext.autodoc', 
     'sphinx.ext.coverage', 
     'sphinx.ext.napoleon',
-    #'myst_parser',
+    'myst_parser',
     'sphinxemoji.sphinxemoji',
     'sphinxcontrib.bibtex'
     #'sphinx.ext.autoapi'
