@@ -1,4 +1,4 @@
-# BENT: Biomedical Entity Annotation
+# BENT: Biomedical Entity Annotator
 
 Python package for Named Entity Recognition (NER) and Linking (NEL) in the biomedical domain.
 
