@@ -5,6 +5,7 @@ Python package for Named Entity Recognition (NER) and Linking (NEL) in the biome
 NER models are based on [PubMedBERT](https://arxiv.org/pdf/2007.15779.pdf) and a post-processing rule-based module.
 the NEL model is a graph-based approach based on the Personalized PageRank algorithm and Information content.
 
+Access the full documentation [here](https://bent.readthedocs.io/en/latest/).
 
 Citation:
 
@@ -77,4 +78,4 @@ BENT can be used for:
 :arrow_right: Named Entity Recognition and Linking (NER+NEL)
 
 
-Access the full documentation [here]().
+Access the full documentation [here](https://bent.readthedocs.io/en/latest/).
