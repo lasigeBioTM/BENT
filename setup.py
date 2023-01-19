@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="bent",
-    version="0.0.3",
+    version="0.0.5",
     description = "BENT: Biomedical Entity Annotator",
     long_description=open('README.rst').read(),
     author = 'Pedro Ruas',

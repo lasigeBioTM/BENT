@@ -552,10 +552,9 @@ def update_ner_file_with_nel_output(ner_dir, nel_run_ids, out_dir=None):
                     final_output += '\n'
                 
                 key_name = entity_text + '_' + entity_type
-                print(key_name)
+
                 if key_name in linked_entities.keys() and term_id[0] == 'T':
                     kb_id = linked_entities[key_name][0]
-                    print('------->')
                     final_output += 'N{}\tReference {} {}\t{}\n'.format(
                         term_id.split('T')[1], term_id, kb_id, entity_text)
         
