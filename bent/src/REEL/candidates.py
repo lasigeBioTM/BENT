@@ -243,7 +243,7 @@ def generate_candidates_list(
                 try:
                     candidate_id = int(candidate["kb_id"].split("_")[1])
 
-                except ValueError:
+                except:
                     candidate_id = 10000001
            
             # The first candidate in candidate_names 
