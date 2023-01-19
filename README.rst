@@ -14,7 +14,7 @@ BENT can be used for:
 * Named Entity Linking (NEL) 
 * Named Entity Recognition and Linking (NER+NEL)
 
-Access the full documentation `here <ffgdf>`__.
+Access the full documentation `here <https://bent.readthedocs.io/en/latest/>`__.
 
 Citation:
 
@@ -31,18 +31,21 @@ To use the current version of BENT it is required:
 * 22 GB free space
 
 .. note::
+
    Please ensure that you have the appropriate version of Conda installed.
 
 
 Create a Conda environment (adapt for the name of your project):
 
 ::
+
    conda create --name annotation_project python=3.7
 
 
 Activate the environment:
 
 ::
+
    conda activate annotation_project
 
 
