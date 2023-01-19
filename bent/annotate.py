@@ -198,7 +198,7 @@ def linker(
     if recognize:
         
         if out_dir == None:
-            ner_dir = '.tmp/{}/'.format(run_id)
+            ner_dir = './tmp/{}/'.format(run_id)
         
         else:
             # The output of the previous NER step is locacted in the out_dir
