@@ -262,6 +262,12 @@
 <p class="admonition-title">Note</p>
 <p>In this case, where we already have the annotations files from the NER stage, it is required to set the argument ‘ner_dir’ instead of ‘in_dir’.</p>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ensure that the entity types present in the annotation file match the entity types available in BENT.
+Check for differences in capitalization.
+Example: if each annotation in a annotation file has “Disease” as the respective entity type this will conflict with the available entity type “disease”. In this case you will need to change “Disease” to “disease” in the annotations file.</p>
+</div>
 <p>The updated output in the BRAT format will be:</p>
 <p>doc1.ann:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">T1</span>  <span class="n">chemical</span> <span class="mi">0</span> <span class="mi">7</span>    <span class="n">Caffeine</span>

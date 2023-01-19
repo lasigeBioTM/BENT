@@ -221,7 +221,14 @@ Considering the annotation files outputted before, in this case we also want to 
 The annotations files (‘.ann’) will be under the directory ‘output/nel/’, but will now include the normalized identifiers for each recognized entity.
 
 .. note::
+
    In this case, where we already have the annotations files from the NER stage, it is required to set the argument ‘ner_dir’ instead of ‘in_dir’.
+
+.. note::
+
+   Ensure that the entity types present in the annotation file match the entity types available in BENT.
+   Check for differences in capitalization. 
+   Example: if each annotation in a annotation file has "Disease" as the respective entity type this will conflict with the available entity type "disease". In this case you will need to change "Disease" to "disease" in the annotations file.
 
 The updated output in the BRAT format will be:
 
@@ -257,6 +264,7 @@ doc2.ann:
    N4  Reference T4 GO:0010467 gene expression
    T5  disease 122 139 Parkinson disease   
    N5  Reference T5 MESH:D010300   Parkinson disease
+
 
 In the current version, it is not possible yet to provide a dictionary of texts and NER annotations as input to the NEL pipeline.
 

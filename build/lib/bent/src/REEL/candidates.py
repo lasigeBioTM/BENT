@@ -220,10 +220,10 @@ def generate_candidates_list(
                 outcount = 0
                 incount = 0
                 
-            candidate_id = ''
+            candidate_id = 0
             
             if kb == "medic" or kb == "ctd_chem" or kb == "ctd_anat":
-                candidate_id = candidate["kb_id"]
+                candidate_id = candidate["kb_id"][1:]
 
                 if candidate_id == 'MESH_C' \
                         or candidate_id == 'MESH_D'\
@@ -235,16 +235,17 @@ def generate_candidates_list(
                     try:
                         candidate_id = int(candidate_id[6:])
                     
-                    except ValueError:
-                        candidate_id = 10000001
+                    except:
+                        candidate_id = 10000000
                     
             else:
+                candidate_id = candidate["kb_id"][:-5]
 
                 try:
-                    candidate_id = int(candidate["kb_id"].split("_")[1])
+                    candidate_id = int(candidate_id)
 
-                except ValueError:
-                    candidate_id = 10000001
+                except:
+                    candidate_id = 10000000
            
             # The first candidate in candidate_names 
             # should be the correct disambiguation for entity
