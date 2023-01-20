@@ -497,7 +497,7 @@ def update_dataset_with_nel_output(dataset, nel_run_ids):
 
             for entity in sent_entities:
                 key_name = entity.text + '_' + entity.type
-
+                
                 if key_name in linked_entities.keys():
                     kb_id = linked_entities[key_name][0]
                     entity.set_kb_id(kb_id)        
@@ -552,7 +552,7 @@ def update_ner_file_with_nel_output(ner_dir, nel_run_ids, out_dir=None):
                     final_output += '\n'
                 
                 key_name = entity_text + '_' + entity_type
-
+                
                 if key_name in linked_entities.keys() and term_id[0] == 'T':
                     kb_id = linked_entities[key_name][0]
                     final_output += 'N{}\tReference {} {}\t{}\n'.format(

@@ -82,6 +82,8 @@ def build_entity_candidate_dict(
         
         if doc_id in abbreviations:
             doc_abbrvs = abbreviations[doc_id]
+
+        kb_id_2_id = {}
         
         for line in ner_annots:
             annot_type = ''
@@ -103,7 +105,8 @@ def build_entity_candidate_dict(
                 # Get candidates list for entity
                 candidates_list, \
                     changed_cache, \
-                    kb_cache_up = generate_candidates_list(
+                    kb_cache_up, \
+                    kb_id_2_id = generate_candidates_list(
                                                     entity_text, 
                                                     kb, 
                                                     id_to_info, 
@@ -113,7 +116,8 @@ def build_entity_candidate_dict(
                                                     synonym_to_id,  
                                                     kb_cache,  
                                                     min_match_score,
-                                                    doc_abbrvs)
+                                                    doc_abbrvs,
+                                                    kb_id_2_id)
                 
                 if changed_cache:
                     #There is at least 1 change in the cache file
@@ -145,7 +149,8 @@ def build_entity_candidate_dict(
                         
                         candidates_list, \
                             changed_cache, \
-                            kb_cache_up = generate_candidates_list(
+                            kb_cache_up, \
+                            kb_id_2_id = generate_candidates_list(
                                             entity_text, 
                                             kb, 
                                             id_to_info, 
@@ -156,6 +161,7 @@ def build_entity_candidate_dict(
                                             kb_cache, 
                                             min_match_score, 
                                             doc_abbrvs, 
+                                            kb_id_2_id,
                                             nil_candidates=top_candidates_up)
                     
                     elif nil_model_name == 'none':
@@ -190,6 +196,7 @@ def build_entity_candidate_dict(
         
         del doc_abbrvs
         del doc_entities_final
+        del kb_id_2_id
      
     del names
     del synonyms

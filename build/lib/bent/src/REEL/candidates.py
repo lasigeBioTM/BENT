@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import random
 from rapidfuzz import process, fuzz
 from bent.src.REEL.utils import candidate_string
 
@@ -143,7 +144,8 @@ def map_to_kb(
 
 def generate_candidates_list(
         entity_text, kb, id_to_info, names, synonyms, name_to_id, synonym_to_id, 
-        kb_cache, min_match_score, doc_abbreviations, nil_candidates=None):
+        kb_cache, min_match_score, doc_abbreviations, kb_id_2_id, 
+        nil_candidates=None):
     """
     Build a structured candidates list for given entity text.
 
@@ -219,34 +221,17 @@ def generate_candidates_list(
             else:
                 outcount = 0
                 incount = 0
-                
-            candidate_id = 0
             
-            if kb == "medic" or kb == "ctd_chem" or kb == "ctd_anat":
-                candidate_id = candidate["kb_id"][1:]
+            candidate_id = 0
 
-                if candidate_id == 'MESH_C' \
-                        or candidate_id == 'MESH_D'\
-                        or candidate_id == 'MESH_A':
-                    candidate_id = 10000000
-                
-                else:
-                
-                    try:
-                        candidate_id = int(candidate_id[6:])
-                    
-                    except:
-                        candidate_id = 10000000
-                    
+            if candidate["kb_id"] in kb_id_2_id.keys():
+                candidate_id = kb_id_2_id[candidate["kb_id"]]
+            
             else:
-                candidate_id = candidate["kb_id"][:-5]
-
-                try:
-                    candidate_id = int(candidate_id)
-
-                except:
-                    candidate_id = 10000000
-           
+                # generate random id for current candidate
+                candidate_id = random.randint(0, 1000000)
+                kb_id_2_id[candidate["kb_id"]] = candidate_id
+                
             # The first candidate in candidate_names 
             # should be the correct disambiguation for entity
             candidates_list.append(
@@ -257,7 +242,7 @@ def generate_candidates_list(
         else:
             less_than_min_score += 1
    
-    return candidates_list, changed_cache, kb_cache_up
+    return candidates_list, changed_cache, kb_cache_up, kb_id_2_id
 
 
 def check_if_related(c1_url, link_mode, extracted_relations, kb_edges, c2_url):
