@@ -28,7 +28,7 @@ To use the current version of BENT it is required:
 * OS based on Ubuntu/Debian 
 * `Conda <https://docs.conda.io/en/latest/>`__ environment 
 * Python>=3.7
-* 22 GB free space
+* 22 GB free space (if you use all available knowlegde bases for NEL)
 
 .. note::
 
@@ -56,15 +56,59 @@ Install the BENT package using pip:
    pip install bent
 
 
-After the pip installation, it is required a further step to install non-Python dependencies and to download the necessary data:
+After the pip installation, it is required a further step to install non-Python dependencies and to download the necessary data. Specify the knowledge bases that will be used:
 
 ::
 
-   python -c "from bent.setup_package import setup_package;setup_package()"
+   python -c "from bent.setup_package import setup_package;setup_package([<kb1>, <kb2>, <kb3>])"
+
+Available knowledge bases:
+
+* ‘medic’ (`MEDIC <http://ctdbase.org/>`__)
+
+* ‘do’ (`Disease ontology <https://disease-ontology.org/>`__)
+
+* 'chebi’ (`ChEBI ontology <https://www.ebi.ac.uk/chebi/>`__) 
+
+* ‘ctd_chem’ (`CTD-Chemicals <http://ctdbase.org/>`__)
+
+* ‘ncbi_gene’ (`NCBI Gene <https://www.ncbi.nlm.nih.gov/gene/>`__)
+
+* ‘ctd_gene’ (`CTD-GENES <http://ctdbase.org/>`__)
+
+* ‘ncbi_taxon’ (`NCBI Taxonomy <https://www.ncbi.nlm.nih.gov/taxonomy>`__)
+
+* ‘go_bp’ (`Gene Ontology-Biological Process <http://geneontology.org/>`__)
+
+* ‘ctd_anat’ (`CTD-Anatomy <http://ctdbase.org/>`__)
+
+* ‘uberon’ (`UBERON ontology <http://obophenotype.github.io/uberon/>`__)
+
+* ‘go_cc’ (`Gene Ontology-Cellular Component <http://geneontology.org/>`__)
+
+* ‘cell_ontology’ (`Cell Ontology <https://cell-ontology.github.io/>`__)
+
+* cellosaurus’ (`Cellosaurus <https://www.cellosaurus.org/>`__)
+
+Example to download only the MEDIC vocabulary:
+
+::
+
+   python -c "from bent.setup_package import setup_package;setup_package(['medic'])"
+
+
+If you want to download all knowledge bases, choose the option 'all':
+
+::
+
+   python -c "from bent.setup_package import setup_package;setup_package(['all'])"
+
+
+You can download more knowledge bases later by running the same command and specifying the desired knolwedge bases among the ones that are available and setting the argument ' only_kb_dicts' to True:
+
+::
+
+   python -c "from bent.setup_package import setup_package;setup_package([<kb>],  only_kb_dicts=True)"
+
 
 Reinitiate the conda environment.
-
-
-
-
-

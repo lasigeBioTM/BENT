@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="bent",
-    version="0.0.6",
+    version="0.0.7",
     description = "BENT: Biomedical Entity Annotator",
     long_description=open('README.rst').read(),
     author = 'Pedro Ruas',
@@ -24,7 +24,8 @@ setup(
         ["bent/src/REEL/ppr_for_ned_all.class", 
         "bent/src/REEL/ppr_for_ned_all.java", 
         "bent/setup_package.sh",
-        "bent/get_data.sh", 
+        "bent/get_kb_dicts.sh",
+        "bent/get_data.sh",
         "bent/requirements.txt"]
         )
         ],

@@ -9,24 +9,18 @@ cd ../data/
 mkdir datasets/
 mkdir NILINKER/
 
-#-------------------------------------------------------------------------
-#                           Download KB dicts
-#-------------------------------------------------------------------------
-gdown https://drive.google.com/uc?id=1peGmpVYSEHYcogK1NuU7m0AxJ2--V0Wh
-tar -xvf kb_dicts.tar.gz
-rm kb_dicts.tar.gz
 
 #-------------------------------------------------------------------------
 #   Download entity frequency dicts (to resolve overlapping entities)
 #-------------------------------------------------------------------------
-gdown https://drive.google.com/uc?id=1MKt6fJ2t9ZkqBbkdpa-GJCMD1DgumIGc
+gdown https://drive.google.com/uc?id=1PYk84F_eCRYgbZ1c8VMCH9srKqulF0AV
 tar -xvf overlapping_entities.tar.gz
 rm overlapping_entities.tar.gz
 
 #--------------------------------------------------------------------------
 # Download dictionaries with relations
 #-------------------------------------------------------------------------- 
-gdown https://drive.google.com/uc?id=1UjyxM8pNFFxAa1MmtWyCvL-bMUr31-ft
+gdown https://drive.google.com/uc?id=1wDfQkyF526d6FBAbjZlmbrcWsMrUzfdL
 tar -xvf relations.tar.gz
 rm relations.tar.gz
 

@@ -4,6 +4,7 @@ setup.py
 bent/__init__.py
 bent/annotate.py
 bent/get_data.sh
+bent/get_kb_dicts.sh
 bent/requirements.txt
 bent/setup_package.py
 bent/setup_package.sh
