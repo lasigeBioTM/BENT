@@ -9,7 +9,8 @@ To use the current version of BENT it is required:
 
 |:arrow_right:| Python>=3.7
 
-|:arrow_right:| 22 GB free space (if you use all available knowlegde bases for NEL)
+|:arrow_right:| Between 11 and 15 GB (5 GB Anaconda + 2.5 GB to install dependencies + 3.0 GB data or 7.5 GB if you use all available knowlegde bases for NEL)
+
 
 .. note::
    Please ensure that you have the appropriate version of Conda installed.
