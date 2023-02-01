@@ -28,7 +28,7 @@ To use the current version of BENT it is required:
 * OS based on Ubuntu/Debian 
 * `Conda <https://docs.conda.io/en/latest/>`__ environment 
 * Python>=3.7
-* 22 GB free space (if you use all available knowlegde bases for NEL)
+* Between 11 and 15 GB (5 GB Anaconda + 2.5 GB to install dependencies + 3.0 GB data or 7.5 GB if you use all available knowlegde bases for NEL)
 
 .. note::
 
