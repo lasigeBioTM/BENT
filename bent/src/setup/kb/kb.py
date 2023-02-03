@@ -500,7 +500,7 @@ class KnowledgeBase:
             for line in data:
                 
                 if line != '\n':
-                    line_ = line.strip('\n').split(' ')
+                    line_ = line.strip('\n').split('\t')
                     kb_id = line_[0]
                     name = line_[1]
                     name_to_id[name] = kb_id
@@ -521,7 +521,7 @@ class KnowledgeBase:
             for line in data:
                 
                 if line != '\n':
-                    line_ = line.strip('\n').split(' ') # Change for \t
+                    line_ = line.strip('\n').split('\t')
                     term1 = line_[0]
                     term2 = line_[1]
                     edges.append((term1, term2))
