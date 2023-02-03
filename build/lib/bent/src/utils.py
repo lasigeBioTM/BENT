@@ -25,33 +25,20 @@ def check_input_types(types):
         raise ValueError('No specified entity types!')
     
     else:
-        available_kbs = {'disease': ['medic', 'do', ''], 
-                        'chemical': ['ctd_chem', 'chebi', ''],
-                        'gene': ['ncbi_gene', 'ctd_gene'],
-                        'organism': ['ncbi_taxon', ''],
-                        'bioprocess': ['go_bp', ''],
-                        'anatomical': ['ctd_anat', 'uberon', ''] ,
-                        'cell_component': ['go_cc', ''],
-                        'cell_line': ['cellosaurus', ''],
-                        'cell_type': ['cl', ''],
-                        'variant': ['']
-                        }
-
+        available_types = [
+            'disease', 'chemical', 'gene', 'organism', 'bioprocess', 
+            'anatomical', 'cell_component', 'cell_line', 'cell_type', 
+            'variant']
+       
         for ent_type in types:
             
             if ent_type != '':
-                assert ent_type in available_kbs, \
+                assert ent_type in available_types, \
                     '{} is an invalid entity type! Options:\
                     "disease", "chemical", "gene", "organism", "bioprocess", \
                     "bioprocess", "anatomical", "cell_component", "cell_line",\
                     "cell_type", "variant"'.format(ent_type)
-                
-                target_kb = types[ent_type]
-                
-                assert target_kb in available_kbs[ent_type], \
-                    '{} is an invalid KB for entity type "{}"! Options:\
-                    {}'.format(target_kb, ent_type, str(available_kbs[ent_type]))          
-
+                        
 
 def check_input_args(recognize, link, types, input_format, input_text, 
         in_dir, ner_dir, out_dir, ner_model, nel_model):
