@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: bent
-Version: 0.0.9
+Version: 0.0.10
 Summary: BENT: Biomedical Entity Annotator
 Home-page: https://github.com/lasigeBioTM/bent
 Author: Pedro Ruas
@@ -208,6 +208,7 @@ License:                                  Apache License
            limitations under the License.
         
 Keywords: text mining,natural language processing,entity extraction,named entity recognition,named entity linking,normalization,disambiguation,NER,NEL,information extraction
+Platform: UNKNOWN
 Classifier: Development Status :: 3 - Alpha
 Classifier: Intended Audience :: Developers
 Classifier: Intended Audience :: Science/Research
@@ -254,9 +255,11 @@ Installation
 To use the current version of BENT it is required: 
 
 * OS based on Ubuntu/Debian 
-* `Conda <https://docs.conda.io/en/latest/>`__ environment 
+* Conda environment (using `Miniconda <https://docs.conda.io/en/latest/miniconda.html>`__ or `Anaconda <https://docs.conda.io/en/latest/>`__ )
 * Python>=3.7
-* Between 11 and 15 GB free space (5 GB Anaconda + 2.5 GB to install dependencies + 3.0 GB data or 7.5 GB if you use all available knowlegde bases for NEL)
+* Required space between 5.5 GB - 10 GB 
+   * Dependencies: 2.5 GB 
+   * Data: between 3.0 GB (base) or 7.5 GB (if you use all available knowlegde bases for NEL)
 
 .. note::
 
@@ -340,3 +343,5 @@ You can download more knowledge bases later by running the same command and spec
 
 
 Reinitiate the conda environment.
+
+
