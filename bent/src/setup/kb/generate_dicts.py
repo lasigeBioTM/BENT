@@ -5,7 +5,7 @@ import orjson as json
 import os
 from bent.src.setup.kb.kb import KnowledgeBase
 
-dict_dir = cfg.root_path + 'data/kbs/dicts/'
+dict_dir = cfg.root_path + 'data/dicts/'
 
 
 def generate_dicts_4_kb(kb=None, mode='reel', terms_filename=None, 
