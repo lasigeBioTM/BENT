@@ -324,7 +324,7 @@ base, indicating the filenames and the desired name:
 
 ::
 
-   import  bent.src.setup.kb.generate_dicts  as  bkb
+   import  bent.src.build.kb.generate_dicts  as  bkb
 
    bkb.generate(
            custom=True,
