@@ -3,13 +3,15 @@ Installation
 
 To use the current version of BENT it is required: 
 
-|:arrow_right:| Ubuntu/Debian based OS
+|:arrow_right:|  OS based on Ubuntu/Debian 
 
-|:arrow_right:| `Conda <https://docs.conda.io/en/latest/>`__ environment 
+|:arrow_right:|  Conda environment (using `Miniconda <https://docs.conda.io/en/latest/miniconda.html>`__ or `Anaconda <https://docs.conda.io/en/latest/>`__ )
 
-|:arrow_right:| Python>=3.7
+|:arrow_right:|  Python>=3.7
 
-|:arrow_right:| Between 11 and 15 GB (5 GB Anaconda + 2.5 GB to install dependencies + 3.0 GB data or 7.5 GB if you use all available knowlegde bases for NEL)
+|:arrow_right:|  Required space between 5.5 GB - 10 GB 
+   * Dependencies: 2.5 GB 
+   * Data: between 3.0 GB (base) or 7.5 GB (if you use all available knowlegde bases for NEL)
 
 
 .. note::
