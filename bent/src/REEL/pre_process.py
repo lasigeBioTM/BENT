@@ -260,7 +260,7 @@ def pre_process(
     # Load preprocessed dicts
     name_to_id = {}
     synonym_to_id = {}
-    kb_dicts_dir = '{}data/dicts/{}/'.format(cfg.root_path, kb) 
+    kb_dicts_dir = '{}data/kbs/dicts/{}/'.format(cfg.root_path, kb) 
     
     with open(kb_dicts_dir + 'name_to_id.json', 'r') as dict_file:
         name_to_id = json.loads(dict_file.read())

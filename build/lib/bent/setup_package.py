@@ -34,12 +34,12 @@ def setup_package(target_kbs, only_kb_dicts=False):
     
     os.chmod('get_kb_dicts.sh', 0o755)
     
-    kb_dicts_dir = cfg.root_path + 'data/kb_dicts/'
+    kb_dicts_dir = cfg.root_path + 'data/kbs/'
     
     if not os.path.exists(kb_dicts_dir):
         os.mkdir(kb_dicts_dir) 
 
-    kb_dicts_dir = cfg.root_path + 'data/kb_dicts/dicts/'
+    kb_dicts_dir = cfg.root_path + 'data/kbs/dicts/'
     
     if not os.path.exists(kb_dicts_dir):
         os.mkdir(kb_dicts_dir) 

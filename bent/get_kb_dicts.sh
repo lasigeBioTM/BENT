@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ../data/kb_dicts/dicts/
+cd ../data/kbs/dicts/
 
 target_kb=$1
 

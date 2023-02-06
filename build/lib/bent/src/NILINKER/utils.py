@@ -378,10 +378,10 @@ def get_kb_data(partition):
     :rtype: KnowledgeBase object
     """
 
-    source_filename = '{}data/dicts/{}/id_to_name.json'.format(cfg.root_path, partition)
+    source_filename = '{}data/kbs/dicts/{}/id_to_name.json'.format(cfg.root_path, partition)
 
     if partition == 'chebi':
-        source_filename = '{}data/dicts/chebi/id_to_name_nilinker.json'.format(cfg.root_path)
+        source_filename = '{}data/kbs/dicts/chebi/id_to_name_nilinker.json'.format(cfg.root_path)
 
     with open(source_filename, 'r') as in_file:
         id_to_name = json.loads(in_file.read()) 
