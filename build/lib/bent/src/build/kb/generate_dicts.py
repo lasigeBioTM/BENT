@@ -3,7 +3,7 @@
 import bent.src.cfg as cfg
 import orjson as json
 import os
-from bent.src.setup.kb.kb import KnowledgeBase
+from bent.src.build.kb.kb import KnowledgeBase
 
 dict_dir = cfg.root_path + 'data/dicts/'
 

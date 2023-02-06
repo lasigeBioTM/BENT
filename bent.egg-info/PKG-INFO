@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: bent
-Version: 0.0.11
+Version: 0.0.12
 Summary: BENT: Biomedical Entity Annotator
 Home-page: https://github.com/lasigeBioTM/bent
 Author: Pedro Ruas
@@ -208,7 +208,6 @@ License:                                  Apache License
            limitations under the License.
         
 Keywords: text mining,natural language processing,entity extraction,named entity recognition,named entity linking,normalization,disambiguation,NER,NEL,information extraction
-Platform: UNKNOWN
 Classifier: Development Status :: 3 - Alpha
 Classifier: Intended Audience :: Developers
 Classifier: Intended Audience :: Science/Research
@@ -343,5 +342,3 @@ You can download more knowledge bases later by running the same command and spec
 
 
 Reinitiate the conda environment.
-
-
