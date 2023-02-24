@@ -10,7 +10,7 @@ then
 
 elif [ $target_kb = 'cellosaurus' ]
 then
-    download_url='https://drive.google.com/uc?id=1hb_MVEApaivEyU3eaziX1jj9uAqyoLqt'
+    download_url='https://drive.google.com/uc?id=1M2KSW0w8l0KXcmdntgdslxOwV8kturvh'
 
 elif [ $target_kb = 'chebi' ]
 then
