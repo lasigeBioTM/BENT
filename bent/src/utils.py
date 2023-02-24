@@ -173,7 +173,7 @@ def output_parsed_docs(parsed_data, out_dir, recognize=False):
                 ann_file.close()
         
 
-def convert_input_files(format, input_text=None, in_dir=None, recognize=False):
+def convert_input_files(format, input_text=None, recognize=False):
     """Convert input file(s) into brat/standoof format"""
     
     if input_text != None:
@@ -188,7 +188,7 @@ def convert_input_files(format, input_text=None, in_dir=None, recognize=False):
         for i, text in enumerate(input_files):
             doc_id = str(i)
             
-            with open(out_dir + doc_id + '.txt', 'w') as txt_file:
+            with open(in_dir + doc_id + '.txt', 'w') as txt_file:
                 txt_file.write(text)
                 txt_file.close()
     
