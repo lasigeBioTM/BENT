@@ -45,31 +45,31 @@ After the pip installation, it is required a further step to install non-Python 
 
 Available knowledge bases:
 
-* ‘medic’ (`MEDIC <http://ctdbase.org/>`__)
+* 'medic' (`MEDIC <http://ctdbase.org/>`__)
 
-* ‘do’ (`Disease ontology <https://disease-ontology.org/>`__)
+* 'do' (`Disease ontology <https://disease-ontology.org/>`__)
 
-* 'chebi’ (`ChEBI ontology <https://www.ebi.ac.uk/chebi/>`__) 
+* 'chebi' (`ChEBI ontology <https://www.ebi.ac.uk/chebi/>`__) 
 
-* ‘ctd_chem’ (`CTD-Chemicals <http://ctdbase.org/>`__)
+* 'ctd_chem' (`CTD-Chemicals <http://ctdbase.org/>`__)
 
-* ‘ncbi_gene’ (`NCBI Gene <https://www.ncbi.nlm.nih.gov/gene/>`__)
+* 'ncbi_gene' (`NCBI Gene <https://www.ncbi.nlm.nih.gov/gene/>`__)
 
-* ‘ctd_gene’ (`CTD-GENES <http://ctdbase.org/>`__)
+* 'ctd_gene' (`CTD-GENES <http://ctdbase.org/>`__)
 
-* ‘ncbi_taxon’ (`NCBI Taxonomy <https://www.ncbi.nlm.nih.gov/taxonomy>`__)
+* 'ncbi_taxon' (`NCBI Taxonomy <https://www.ncbi.nlm.nih.gov/taxonomy>`__)
 
-* ‘go_bp’ (`Gene Ontology-Biological Process <http://geneontology.org/>`__)
+* 'go_bp' (`Gene Ontology-Biological Process <http://geneontology.org/>`__)
 
-* ‘ctd_anat’ (`CTD-Anatomy <http://ctdbase.org/>`__)
+* 'ctd_anat' (`CTD-Anatomy <http://ctdbase.org/>`__)
 
-* ‘uberon’ (`UBERON ontology <http://obophenotype.github.io/uberon/>`__)
+* 'uberon' (`UBERON ontology <http://obophenotype.github.io/uberon/>`__)
 
-* ‘go_cc’ (`Gene Ontology-Cellular Component <http://geneontology.org/>`__)
+* 'go_cc' (`Gene Ontology-Cellular Component <http://geneontology.org/>`__)
 
-* ‘cell_ontology’ (`Cell Ontology <https://cell-ontology.github.io/>`__)
+* 'cell_ontology' (`Cell Ontology <https://cell-ontology.github.io/>`__)
 
-* cellosaurus’ (`Cellosaurus <https://www.cellosaurus.org/>`__)
+* 'cellosaurus' (`Cellosaurus <https://www.cellosaurus.org/>`__)
 
 Example to download only the MEDIC vocabulary:
 
