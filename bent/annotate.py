@@ -300,9 +300,9 @@ def annotate(recognize=False, link=False, types={}, input_text=None,
     #                   CONVERT INPUT TO THE BRAT FORMAT
     #-------------------------------------------------------------------------- 
     if input_text!= None:
-        
-        utils.convert_input_files(input_format, input_text=input_text, 
-            in_dir=in_dir, recognize=recognize)
+        # The inputs is a string or a list of strings
+        #TODO: create in_dir with txt files in_idr = '.tmp
+        utils.convert_input_files(input_format, input_text=input_text, recognize=recognize)
         
         in_dir += 'brat/'
         
