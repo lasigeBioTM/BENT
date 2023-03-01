@@ -19,8 +19,8 @@ Citation:
 
 * Pedro Ruas and Francisco M. Couto. `Nilinker: attention-based approach to nil entity linking <https://www.sciencedirect.com/science/article/pii/S1532046422001526>`__. Journal of Biomedical Informatics, 132:104137, 2022. doi: https://doi.org/10.1016/j.jbi.2022.104137.
 
-:tools: Installation
-~~~~~~~~~~~~
+Installation
+~~~~~~~~~~~~~~~~~~~
 
 To use the current version of BENT it is required: 
 
@@ -30,6 +30,7 @@ To use the current version of BENT it is required:
 * Required space between 5.5 GB - 10 GB 
    * Dependencies: 2.5 GB 
    * Data: between 3.0 GB (base) or 7.5 GB (if you use all available knowlegde bases for NEL)
+
 
 .. note::
 
@@ -62,6 +63,7 @@ After the pip installation, it is required a further step to install non-Python 
 ::
 
    python -c "from bent.setup_package import setup_package;setup_package([<kb1>, <kb2>, <kb3>])"
+
 
 Available knowledge bases:
 
@@ -112,6 +114,7 @@ You can download more knowledge bases later by:
    * setting the argument 'only_kb_dicts' to True
    * running the same command with these changes:
 
+
 Example:
 
 ::
@@ -123,7 +126,7 @@ Reinitiate the conda environment.
 
 
 Get started
-~~~~~~~~~~~~
+~~~~~~~~~~~
 
 To apply the complete pipeline of entity extraction (NER+NEL) set the arguments:
 
@@ -132,6 +135,7 @@ To apply the complete pipeline of entity extraction (NER+NEL) set the arguments:
 * **types**: entity types to recognize and the respective target knowledge bases.
 * **in_dir**: directory path containing the text files to be annotated (the directory must contain text files exclusively)
 * **out_dir**: the output directory that will contain the annotation files
+
 
 Example:
 
