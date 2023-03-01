@@ -1,5 +1,5 @@
-:computer: Usage
-=======
+Usage
+======
 
 BENT can be used for: 
 
