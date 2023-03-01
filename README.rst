@@ -13,7 +13,7 @@ BENT can be used for:
 * Named Entity Linking (NEL) 
 * Named Entity Recognition and Linking (NER+NEL)
 
-:closed_book: `Documentation <https://bent.readthedocs.io/en/latest/>`__.
+`Documentation <https://bent.readthedocs.io/en/latest/>`__.
 
 Citation:
 
