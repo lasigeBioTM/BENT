@@ -1,4 +1,4 @@
-:closed_book: Installation
+Installation
 ============
 
 To use the current version of BENT it is required: 
