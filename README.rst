@@ -5,19 +5,19 @@ BENT: Biomedical Entity Annotator
 
 Python Library for Named Entity Recognition (NER) and Linking (NEL) in the biomedical domain.
 
-NER models are based on `PubMedBERT <https://arxiv.org/pdf/2007.15779.pdf>`__ and the NEL model is a graph-based approach based on the Personalized PageRank algorithm and Information content.
-
 BENT can be used for: 
 
 * Named Entity Recogniton (NER)
 * Named Entity Linking (NEL) 
 * Named Entity Recognition and Linking (NER+NEL)
 
-`Documentation <https://bent.readthedocs.io/en/latest/>`__.
+Access the full `documentation <https://bent.readthedocs.io/en/latest/>`__.
 
-Citation:
+Citation::
 
-* Pedro Ruas and Francisco M. Couto. `Nilinker: attention-based approach to nil entity linking <https://www.sciencedirect.com/science/article/pii/S1532046422001526>`__. Journal of Biomedical Informatics, 132:104137, 2022. doi: https://doi.org/10.1016/j.jbi.2022.104137.
+  Pedro Ruas and Francisco M. Couto. `Nilinker: attention-based approach to nil entity linking. 
+  Journal of Biomedical Informatics, 132:104137, 2022. 
+  doi: https://doi.org/10.1016/j.jbi.2022.104137.
 
 Installation
 ~~~~~~~~~~~~~~~~~~~
