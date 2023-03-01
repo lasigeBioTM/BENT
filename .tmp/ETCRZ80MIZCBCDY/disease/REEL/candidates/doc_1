@@ -1,0 +1,15 @@
+ENTITY	text:Parkinson disease	normalName:parkinson disease	predictedType:disease	q:true	qid:Q2	docId:doc_1	origText:Parkinson disease	url:unknown
+CANDIDATE	id:437553	inCount:2	outCount:29	links:	url:MESH_D010300	name:Parkinson disease	normalName:parkinson disease	normalWikiTitle:parkinson disease	    predictedType:disease
+ENTITY	text:degenerative disorder	normalName:degenerative disorder	predictedType:disease	q:true	qid:Q2	docId:doc_1	origText:degenerative disorder	url:unknown
+CANDIDATE	id:542108	inCount:1	outCount:7	links:	url:MESH_D003866	name:Depressive Disorder	normalName:depressive disorder	normalWikiTitle:depressive disorder	    predictedType:disease
+CANDIDATE	id:91065	inCount:1	outCount:0	links:	url:MESH_D047728	name:Myopia, Degenerative	normalName:myopia, degenerative	normalWikiTitle:myopia, degenerative	    predictedType:disease
+CANDIDATE	id:310747	inCount:1	outCount:0	links:	url:MESH_D012183	name:Retrograde Degeneration	normalName:retrograde degeneration	normalWikiTitle:retrograde degeneration	    predictedType:disease
+CANDIDATE	id:335814	inCount:1	outCount:6	links:	url:MESH_D009410	name:Nerve Degeneration	normalName:nerve degeneration	normalWikiTitle:nerve degeneration	    predictedType:disease
+CANDIDATE	id:277297	inCount:1	outCount:0	links:	url:MESH_C565842	name:Brittle Bone Disorder	normalName:brittle bone disorder	normalWikiTitle:brittle bone disorder	    predictedType:disease
+CANDIDATE	id:371241	inCount:2	outCount:5	links:	url:MESH_D003680	name:Deglutition Disorders	normalName:deglutition disorders	normalWikiTitle:deglutition disorders	    predictedType:disease
+CANDIDATE	id:215151	inCount:1	outCount:2	links:	url:MESH_D003865	name:Depressive Disorder, Major	normalName:depressive disorder, major	normalWikiTitle:depressive disorder, major	    predictedType:disease
+CANDIDATE	id:251595	inCount:1	outCount:1	links:	url:MESH_D003291	name:Conversion Disorder	normalName:conversion disorder	normalWikiTitle:conversion disorder	    predictedType:disease
+CANDIDATE	id:824744	inCount:1	outCount:8	links:	url:MESH_D003072	name:Cognition Disorders	normalName:cognition disorders	normalWikiTitle:cognition disorders	    predictedType:disease
+CANDIDATE	id:802796	inCount:1	outCount:1	links:	url:MESH_D055959	name:Intervertebral Disc Degeneration	normalName:intervertebral disc degeneration	normalWikiTitle:intervertebral disc degeneration	    predictedType:disease
+CANDIDATE	id:470601	inCount:1	outCount:24	links:	url:MESH_D019636	name:Degenerative Neurologic Disorder	normalName:degenerative neurologic disorder	normalWikiTitle:degenerative neurologic disorder	    predictedType:disease
+CANDIDATE	id:470601	inCount:1	outCount:24	links:	url:MESH_D019636	name:Neurologic Disorder, Degenerative	normalName:neurologic disorder, degenerative	normalWikiTitle:neurologic disorder, degenerative	    predictedType:disease

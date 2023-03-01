@@ -1,0 +1,12 @@
+ENTITY	text:A2058 melanoma cells	normalName:a2058 melanoma cells	predictedType:cell_line	q:true	qid:Q1	docId:doc_2	origText:A2058 melanoma cells	url:unknown
+CANDIDATE	id:930839	inCount:1	outCount:0	links:	url:CVCL_4612	name:B16 melanoma 4A5	normalName:b16 melanoma 4a5	normalWikiTitle:b16 melanoma 4a5	    predictedType:cell_line
+CANDIDATE	id:296084	inCount:0	outCount:0	links:	url:CVCL_C666	name:ME [Human melanoma]	normalName:me [human melanoma]	normalWikiTitle:me [human melanoma]	    predictedType:cell_line
+CANDIDATE	id:574728	inCount:0	outCount:0	links:	url:CVCL_5V13	name:CAL-23 [Human melanoma]	normalName:cal-23 [human melanoma]	normalWikiTitle:cal-23 [human melanoma]	    predictedType:cell_line
+CANDIDATE	id:170979	inCount:0	outCount:0	links:	url:CVCL_UM85	name:528 [Human melanoma]	normalName:528 [human melanoma]	normalWikiTitle:528 [human melanoma]	    predictedType:cell_line
+CANDIDATE	id:616217	inCount:0	outCount:0	links:	url:CVCL_DI51	name:M20 [Human melanoma]	normalName:m20 [human melanoma]	normalWikiTitle:m20 [human melanoma]	    predictedType:cell_line
+CANDIDATE	id:121215	inCount:0	outCount:0	links:	url:CVCL_W878	name:A15 [Human melanoma]	normalName:a15 [human melanoma]	normalWikiTitle:a15 [human melanoma]	    predictedType:cell_line
+CANDIDATE	id:218814	inCount:0	outCount:0	links:	url:CVCL_6001	name:MEL-CLS-2	normalName:mel-cls-2	normalWikiTitle:mel-cls-2	    predictedType:cell_line
+CANDIDATE	id:396478	inCount:0	outCount:0	links:	url:CVCL_L919	name:ME17 [Human melanoma]	normalName:me17 [human melanoma]	normalWikiTitle:me17 [human melanoma]	    predictedType:cell_line
+CANDIDATE	id:192303	inCount:0	outCount:0	links:	url:CVCL_JB73	name:ME 1 [Human melanoma]	normalName:me 1 [human melanoma]	normalWikiTitle:me 1 [human melanoma]	    predictedType:cell_line
+CANDIDATE	id:950061	inCount:0	outCount:0	links:	url:CVCL_G085	name:CAL-1 [Human melanoma]	normalName:cal-1 [human melanoma]	normalWikiTitle:cal-1 [human melanoma]	    predictedType:cell_line
+CANDIDATE	id:280729	inCount:0	outCount:0	links:	url:CVCL_F877	name:Duke Melanoma 208	normalName:duke melanoma 208	normalWikiTitle:duke melanoma 208	    predictedType:cell_line

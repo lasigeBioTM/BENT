@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: bent
-Version: 0.0.13
+Version: 0.0.14
 Summary: BENT: Biomedical Entity Annotator
 Home-page: https://github.com/lasigeBioTM/bent
 Author: Pedro Ruas
@@ -233,8 +233,7 @@ BENT: Biomedical Entity Annotator
 
 Python Library for Named Entity Recognition (NER) and Linking (NEL) in the biomedical domain.
 
-NER models are based on `PubMedBERT <https://arxiv.org/pdf/2007.15779.pdf>`__ and a post-processing rule-based module.
-the NEL model is a graph-based approach based on the Personalized PageRank algorithm and Information content.
+NER models are based on `PubMedBERT <https://arxiv.org/pdf/2007.15779.pdf>`__ and the NEL model is a graph-based approach based on the Personalized PageRank algorithm and Information content.
 
 BENT can be used for: 
 
@@ -242,13 +241,13 @@ BENT can be used for:
 * Named Entity Linking (NEL) 
 * Named Entity Recognition and Linking (NER+NEL)
 
-Access the full documentation `here <https://bent.readthedocs.io/en/latest/>`__.
+:closed_book: `Documentation <https://bent.readthedocs.io/en/latest/>`__.
 
 Citation:
 
 * Pedro Ruas and Francisco M. Couto. `Nilinker: attention-based approach to nil entity linking <https://www.sciencedirect.com/science/article/pii/S1532046422001526>`__. Journal of Biomedical Informatics, 132:104137, 2022. doi: https://doi.org/10.1016/j.jbi.2022.104137.
 
-Installation
+:tools: Installation
 ~~~~~~~~~~~~
 
 To use the current version of BENT it is required: 
@@ -320,25 +319,70 @@ Available knowledge bases:
 
 * cellosaurus’ (`Cellosaurus <https://www.cellosaurus.org/>`__)
 
-Example to download only the MEDIC vocabulary:
+
+Example to download **only** the MEDIC vocabulary:
 
 ::
 
    python -c "from bent.setup_package import setup_package;setup_package(['medic'])"
 
 
-If you want to download all knowledge bases, choose the option 'all':
+If you want to download **all** knowledge bases, choose the option 'all':
 
 ::
 
    python -c "from bent.setup_package import setup_package;setup_package(['all'])"
 
 
-You can download more knowledge bases later by running the same command and specifying the desired knolwedge bases among the ones that are available and setting the argument ' only_kb_dicts' to True:
+You can download more knowledge bases later by:
+   
+   * specifying the desired knolwedge bases 
+   * setting the argument 'only_kb_dicts' to True
+   * running the same command with these changes:
+
+Example:
 
 ::
 
-   python -c "from bent.setup_package import setup_package;setup_package([<kb>],  only_kb_dicts=True)"
+   python -c "from bent.setup_package import setup_package;setup_package(['chebi'], only_kb_dicts=True)"
 
 
 Reinitiate the conda environment.
+
+
+Get started
+~~~~~~~~~~~~
+
+To apply the complete pipeline of entity extraction (NER+NEL) set the arguments:
+
+* **recognize**: indicate that the NER module will be applied ('True')
+* **link**: indicate that the NEL module will be applied ('True')
+* **types**: entity types to recognize and the respective target knowledge bases.
+* **in_dir**: directory path containing the text files to be annotated (the directory must contain text files exclusively)
+* **out_dir**: the output directory that will contain the annotation files
+
+Example:
+
+::
+
+   import bent.annotate as bt
+
+   bt.annotate(
+           recognize=True,
+           link=True,
+           types={
+            'disease': 'medic'
+            'chemical': 'chebi',
+            'gene': 'ncbi_gene',
+            'anatomical': 'uberon',
+            'cell_line': 'cellosaurus',
+            'bioprocess': 'go_bp'
+            },
+           in_dir='input/txt/',
+           out_dir='output/nel/'
+   )
+
+
+It is also possible to apply the pipeline (NER+NEL) to a string or a list or strings instantiated in the execution script.
+
+To see more usage examples, access the `documentation <https://bent.readthedocs.io/en/latest/usage.html>`__.

@@ -10,7 +10,9 @@ from bent.src.nel import nel
 from bent.src.classes import Dataset
 
 
-def recognizer(in_dir, input_text, entity_types, out_dir, ner_model, run_id):
+def recognizer(
+        in_dir, entity_types, out_dir, ner_model, run_id, 
+        return_dataset=False, input_tmp=False):
     """Pipeline to perform Named Entity Recognition. For each input 
     document/text it outputs either an annotations file (BRAT format) or a 
     Dataset object including all documents and respective annotations.
@@ -18,9 +20,6 @@ def recognizer(in_dir, input_text, entity_types, out_dir, ner_model, run_id):
     :param in_dir: path to directory containing text files to be annotated, 
         defaults to None
     :type in_dir: _type_, optional
-    :param input_text: text string or list of text strings (each element 
-        represinting a different document) to be annotated, defaults to None
-    :type input_text: str or list, optional
     :param types: the entity types that will be recognized 
         :type types: list
     :param out_dir: path to directory where the output of the pipeline will be
@@ -30,6 +29,8 @@ def recognizer(in_dir, input_text, entity_types, out_dir, ner_model, run_id):
     :param ner_model: the Named Entity Recognition model that will be used, 
         defaults to 'pubmedbert'
     :type ner_model: str, optional
+    :param input_tmp: indicates if the input is composed of temporary text files. 
+    :type input_tmp: bool
     :return: dataset (an object including all the input texts along with the 
         annotations) if 'out_dir' is None; an annotation file for each inputed
         text if 'out_dir' is different that None
@@ -46,58 +47,39 @@ def recognizer(in_dir, input_text, entity_types, out_dir, ner_model, run_id):
     # Load the NER models that will be used
     recognizer = ner(ner_model, entity_types, stopwords)
 
-    # Wether the input is a directory with text files or not
-    filename_mode = False 
-
+    # Whether the input is a directory with text files or not
     dataset = Dataset()
 
-    if out_dir == None:
-        # In this case a dataset object will be outputted and the 
-        # temporary annotation files will be stored in 'tmp/NER/' directory
-        tmp_out_dir = '.tmp/{}/'.format(run_id)
-        os.mkdir(tmp_out_dir)
+    assert in_dir != None, 'Invalid "in_dir"!'
 
     if recognizer.model_type == "bert":  
-        input_files = None
-
-        if in_dir != None:
-            filename_mode = True
-            input_files = [
-                in_dir + filename for filename in os.listdir(in_dir)]
-            
-        elif input_text != None:
-            
-            if type(input_text) == str:
-                input_files = [input_text]
-            
-            elif type(input_text) == list:
-                input_files = input_text
+        input_files = [
+            '{}{}'.format(in_dir, filename) for filename in os.listdir(in_dir)]    
 
         # Recognize entities in each document
         pbar = tqdm(total=len(input_files), colour= 'green', 
             desc='Recognizing entities (documents)')
         
-        for i, filename in enumerate(input_files):
+        for i, filename in enumerate(input_files, start=1):
             doc_id = ''
-            text = ''
-            
-            if filename_mode:
-                doc_id = filename.strip(in_dir).strip('.txt')
-               
-                with open(filename, 'r') as input_file:
-                    text = input_file.read()
-                    input_file.close()
-            
+
+            if input_tmp:
+                doc_id = 'doc_{}'.format(str(i))
+                
             else:
-                text = filename
-                doc_id = str(i)
+                doc_id = filename.strip(in_dir).strip('.txt')
+
+            text = ''
+
+            with open(filename, 'r') as input_file:
+                text = input_file.read()
+                input_file.close()
             
             # Sentence segmentation
             doc_sentences = utils.sentence_splitter(text, lang_model)
             
             # Objectify input
-            doc_obj = utils.objectify_ner_input(
-                doc_id, text, doc_sentences)
+            doc_obj = utils.objectify_ner_input(doc_id, text, doc_sentences)
             
             # Apply NER models to input text
             doc_entities = recognizer.apply(doc_obj)
@@ -106,16 +88,8 @@ def recognizer(in_dir, input_text, entity_types, out_dir, ner_model, run_id):
             # Prepare output string with annotations
             doc_annots = utils.prepare_output_from_objects(
                 doc_entities, only_ner=True)
-
-            out_filename = ''
-
-            if out_dir == None:
-                out_filename = '{}{}.ann'.format(tmp_out_dir, doc_id)                
-                # Add Document object to Dataset object
-                dataset.add_doc(doc_entities)
-
-            else:
-                out_filename = out_dir + doc_id + '.ann'
+       
+            out_filename = '{}{}.ann'.format(out_dir, doc_id)
 
             with open(out_filename, 'w') as out_file:
                 out_file.write(doc_annots[:-1])
@@ -138,13 +112,13 @@ def recognizer(in_dir, input_text, entity_types, out_dir, ner_model, run_id):
     del stopwords
     utils.garbage_collect()
 
-    if out_dir == None:
+    if return_dataset:
         return dataset
 
 
 def linker(
             recognize, types, nel_model, run_id, out_format=None, 
-            ner_dir=None, out_dir=None, dataset=None):
+            ner_dir=None, out_dir=None, dataset=None, return_dataset=False):
     """Pipeline to perform Named Entity Linking. For each input 
     annotation files with recognized entities it outputs an updated 
     annotations file (BRAT format) with knowledge base identifiers for each
@@ -187,7 +161,7 @@ def linker(
     """
     
     # Link the recognized/inputted entities to the specified KBs
-    linker = nel(nel_model)
+    linker = nel(nel_model, run_id)
     target_kbs = {}
     
     for ent_type in types.keys():
@@ -196,13 +170,7 @@ def linker(
             target_kbs[ent_type] = types[ent_type]
     
     if recognize:
-        
-        if out_dir == None:
-            ner_dir = '.tmp/{}/'.format(run_id)
-        
-        else:
-            # The output of the previous NER step is locacted in the out_dir
-            ner_dir = out_dir
+        ner_dir = out_dir
     
     else:
 
@@ -214,7 +182,7 @@ def linker(
     
     del linker
     
-    if out_dir == None:
+    if return_dataset:
         return utils.update_dataset_with_nel_output(dataset, nel_run_ids)
     
     else:
@@ -289,6 +257,7 @@ def annotate(recognize=False, link=False, types={}, input_text=None,
         input_text, in_dir, ner_dir, out_dir, ner_model, nel_model)
 
     if ner_dir != None:
+        # There are already files with NER annotations in the 'ner_dir'
         in_dir = ner_dir
     
     if out_dir != None:
@@ -299,12 +268,23 @@ def annotate(recognize=False, link=False, types={}, input_text=None,
     #--------------------------------------------------------------------------
     #                   CONVERT INPUT TO THE BRAT FORMAT
     #-------------------------------------------------------------------------- 
+    input_tmp = False
+
     if input_text!= None:
-        # The inputs is a string or a list of strings
-        #TODO: create in_dir with txt files in_idr = '.tmp
-        utils.convert_input_files(input_format, input_text=input_text, recognize=recognize)
+        # The input is either a string or a list of strings, so there is no 
+        # 'in_dir'.
+        # A temporary directory to store the text files will be created
+        in_dir = '.tmp/{}/'.format(run_id)
+        os.mkdir(in_dir)
         
-        in_dir += 'brat/'
+        in_dir += 'txt/'
+        os.mkdir(in_dir)
+        
+        utils.convert_input_files(
+            input_format, in_dir=in_dir, input_text=input_text, 
+            recognize=recognize)
+
+        input_tmp = True
         
     #--------------------------------------------------------------------------
     #                           NER
@@ -314,25 +294,40 @@ def annotate(recognize=False, link=False, types={}, input_text=None,
 
         if out_dir != None:
             recognizer(
-                in_dir, input_text, entity_types, out_dir, ner_model, run_id)
+                in_dir, entity_types, out_dir, ner_model, run_id, input_tmp=input_tmp)
         
-        else:
+        
+        elif out_dir == None:
+            # In this case a dataset object will be outputted and the 
+            # temporary annotation files will be stored in 'tmp/NER/' directory
+            tmp_out_dir = '.tmp/{}/ann/'.format(run_id)
+            os.mkdir(tmp_out_dir)
+            
             dataset = recognizer(
-                in_dir, input_text, entity_types, out_dir, ner_model, run_id)
+                in_dir, entity_types, tmp_out_dir, ner_model, 
+                run_id, return_dataset=True, input_tmp=input_tmp)
+
+            if link:
+                # The input dir for the NEL module now is the directory 
+                # containing the annotation files outputted by the NER module
+                in_dir = tmp_out_dir
+    
     #--------------------------------------------------------------------------
     #                           NEL
     #--------------------------------------------------------------------------
     if link:
 
         if out_dir != None:
+            # Annotation files with NER+NEL output will be created in 'out_dir'
             linker(
                 recognize, types, nel_model, run_id, out_format=out_format,
-                    ner_dir=in_dir, 
-                out_dir=out_dir)
+                    ner_dir=in_dir, out_dir=out_dir)
 
         else:
+            # A Dataset object will be returned containing NER+NEL output
             dataset = linker(
                 recognize, types, nel_model, run_id, out_format=out_format, 
-                ner_dir=in_dir, dataset=dataset, out_dir=out_dir)
+                ner_dir=in_dir, dataset=dataset, out_dir=tmp_out_dir,
+                return_dataset=True)
             
             return dataset

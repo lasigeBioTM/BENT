@@ -45,6 +45,7 @@ class ner():
                 model_name = "pruas/BENT-PubMedBERT-NER-Disease"
                 self.models['disease'] = ner.load_transformer_model(model_name)
                 dict_filename = '{}data/overlapping_entities/disease.json'.format(module_root_path)
+                
                 if len(types) > 1:
                     self.disease_prob = ner.load_probabilities_file(dict_filename)
                 
@@ -52,6 +53,7 @@ class ner():
                 model_name = "pruas/BENT-PubMedBERT-NER-Chemical"
                 self.models['chemical'] = ner.load_transformer_model(model_name)
                 dict_filename = '{}data/overlapping_entities/chemical.json'.format(module_root_path)
+                
                 if len(types) > 1:
                     self.chemical_prob = ner.load_probabilities_file(dict_filename)
            
@@ -59,6 +61,7 @@ class ner():
                 model_name = "pruas/BENT-PubMedBERT-NER-Gene"
                 self.models['gene'] = ner.load_transformer_model(model_name)
                 dict_filename = '{}/data/overlapping_entities/gene.json'.format(module_root_path)
+                
                 if len(types) > 1:
                     self.gene_prob = ner.load_probabilities_file(dict_filename)
 
@@ -66,6 +69,7 @@ class ner():
                 model_name = "pruas/BENT-PubMedBERT-NER-Organism"
                 self.models['organism'] = ner.load_transformer_model(model_name)
                 dict_filename = '{}data/overlapping_entities/organism.json'.format(module_root_path)
+                
                 if len(types) > 1:    
                     self.organism_prob = ner.load_probabilities_file(dict_filename)
 
@@ -73,6 +77,7 @@ class ner():
                 model_name = "pruas/BENT-PubMedBERT-NER-Bioprocess"
                 self.models['bioprocess'] = ner.load_transformer_model(model_name)   
                 dict_filename = '{}data/overlapping_entities/bioprocess.json'.format(module_root_path)
+                
                 if len(types) > 1:    
                     self.bioprocess_prob = ner.load_probabilities_file(dict_filename)
 
@@ -80,6 +85,7 @@ class ner():
                 model_name = "pruas/BENT-PubMedBERT-NER-Anatomical"
                 self.models['anatomical'] = ner.load_transformer_model(model_name)   
                 dict_filename = '{}data/overlapping_entities/anatomical.json'.format(module_root_path)
+                
                 if len(types) > 1:    
                     self.anatomical_prob = ner.load_probabilities_file(dict_filename)
             
@@ -87,6 +93,7 @@ class ner():
                 model_name = "pruas/BENT-PubMedBERT-NER-Cell-Component"
                 self.models['cell_component'] = ner.load_transformer_model(model_name)   
                 dict_filename = '{}data/overlapping_entities/cell_component.json'.format(module_root_path)
+                
                 if len(types) > 1:    
                     self.cell_component_prob = ner.load_probabilities_file(dict_filename)
             
@@ -94,6 +101,7 @@ class ner():
                 model_name = "pruas/BENT-PubMedBERT-NER-Cell-Line"
                 self.models['cell_line'] = ner.load_transformer_model(model_name)   
                 dict_filename = '{}data/overlapping_entities/cell_line.json'.format(module_root_path)
+                
                 if len(types) > 1:    
                     self.cell_line_prob = ner.load_probabilities_file(dict_filename)
             
@@ -101,6 +109,7 @@ class ner():
                 model_name = "pruas/BENT-PubMedBERT-NER-Cell-Type"
                 self.models['cell_type'] = ner.load_transformer_model(model_name)   
                 dict_filename = '{}data/overlapping_entities/cell_type.json'.format(module_root_path)
+                
                 if len(types) > 1:    
                     self.cell_type_prob = ner.load_probabilities_file(dict_filename)
 
@@ -108,6 +117,7 @@ class ner():
                 model_name = "pruas/BENT-PubMedBERT-NER-Variant"
                 self.models['variant'] = ner.load_transformer_model(model_name)   
                 dict_filename = '{}data/overlapping_entities/variant.json'.format(module_root_path)
+                
                 if len(types) > 1:    
                     self.variant_prob = ner.load_probabilities_file(dict_filename)  
         
@@ -133,9 +143,7 @@ class ner():
         loaded_model = TokenClassificationPipeline(task='ner', 
                         model=model, 
                         tokenizer=tokenizer_1,
-                        aggregation_strategy='simple')#, 
-                        #grouped_entities=True)#,
-                        #aggregation_strategy='simple')
+                        aggregation_strategy='simple')
         
         return loaded_model
     

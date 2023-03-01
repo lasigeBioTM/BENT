@@ -8,7 +8,7 @@ from bent.src.REEL.pre_process import pre_process
 from bent.src.REEL.post_process import process_results
 
 
-def run(ner_dir, kb, entity_type, abbreviations):
+def run(run_id, ner_dir, kb, entity_type, abbreviations):
     """Apply the REEL model (preprocess, candidate scoring with PPR, 
     postprocess) to the entities present in files in ner_dir.
 
@@ -28,9 +28,7 @@ def run(ner_dir, kb, entity_type, abbreviations):
     :rtype: str
     """
 
-    nel_run_id = ''.join(random.choices(string.ascii_uppercase + string.digits, 
-        k=15))
-    nel_run_name = nel_run_id + '_' + entity_type
+    nel_run_name = '{}/{}'.format(run_id, entity_type)
 
     # Use relations extracted from external corpora and relations described in 
     # the targer knowledge base

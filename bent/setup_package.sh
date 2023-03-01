@@ -50,6 +50,9 @@ cd ../../
 #           Eliminate annoying messages during Tensorflow execution
 # ---------------------------------------------------------------------------
 conda env config vars set TF_CPP_MIN_LOG_LEVEL='3'
+export TF_CPP_MIN_LOG_LEVEL=3
 conda env config vars set AUTOGRAPH_VERBOSITY='0'
+export AUTOGRAPH_VERBOSITY=0
+
 #source ~/$1/etc/profile.d/conda.sh
 #conda activate $CONDA_DEFAULT_ENV

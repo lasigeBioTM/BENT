@@ -34,7 +34,7 @@ def check_input_types(types):
             
             if ent_type != '':
                 assert ent_type in available_types, \
-                    '{} is an invalid entity type! Options:\
+                    '{} is an invalid entity type to recognize! Options:\
                     "disease", "chemical", "gene", "organism", "bioprocess", \
                     "bioprocess", "anatomical", "cell_component", "cell_line",\
                     "cell_type", "variant"'.format(ent_type)
@@ -42,7 +42,7 @@ def check_input_types(types):
 
 def check_input_args(recognize, link, types, input_format, input_text, 
         in_dir, ner_dir, out_dir, ner_model, nel_model):
-    """Verify if the input arguments are valid"""
+    """Verify if the input arguments are valid."""
 
     available_formats = ['brat', 'bioc_xml', 'bioc_json', 'pubtator'] 
 
@@ -54,41 +54,50 @@ def check_input_args(recognize, link, types, input_format, input_text,
     # Verify the inputed entity types and respective target KBs
     check_input_types(types)
 
-    # Verify input format and dir
+    # Verify input format and directory arguments
     if recognize:
 
         if input_text == None and in_dir == None:
-            raise ValueError('It is necessary to input either a text \
-                ("input_text") OR a directory containing file(s) with text \
-                to annotate ("text_dir").') 
+            raise ValueError('It is necessary to input either a text or a \
+                list of texts (by setting the argument "input_text") \
+                OR a directory containing file(s) with texts to annotate \
+                (by setting the argument "text_dir").') 
         
         if input_format == 'bioc_json' or input_format == 'bioc_xml' \
                 or input_format == 'pubtator':
 
                 assert in_dir != None or ner_dir != None, \
-                    'For input formats "bioc_json"\
-                    , "bioc_xml"and "pubtator" it is necessary to specify\
-                    the input directory "in_dir"'
+                    'For input formats "bioc_json", "bioc_xml"and "pubtator" \
+                    it is necessary to specify the input directory by setting \
+                    the argument "in_dir"'
 
     if link:
 
         if not recognize:
 
-            assert ner_dir != None, 'It is necessary to specfiy the directory \
-                containing the ouput from the NER stage ("ner_dir").' 
+            assert ner_dir != None, 'No NER will be performed, only NEL: \
+                it is necessary to specfiy the directory containing \
+                NER annotations (by setting the argument "ner_dir").' 
 
-    #Check directories paths
+    # Check directory paths
+
     if in_dir != None:
-        assert in_dir[-1:] == '/', 'Invalid "in_dir". Last character in \
-            directory name must be "/"'
+        assert in_dir[-1:] == '/', 'Invalid argument "in_dir": the last \
+            character in the directory path must be "/"\n. Examples: \
+            "dataset/txt" -> INVALID directory path \
+            "dataset/txt/" -> VALID directory path'
 
     if ner_dir != None:
-        assert ner_dir[-1:] == '/', 'Invalid "ner_dir". Last character in \
-            directory name must be "/"'
+        assert ner_dir[-1:] == '/', 'Invalid argument "ner_dir": the last \
+            character in the directory path must be "/"\n. Examples: \
+            "dataset/ann" -> INVALID directory path \
+            "dataset/ann/" -> VALID directory path'
 
     if out_dir != None:
-        assert out_dir[-1:] == '/', 'Invalid "out_dir". Last character in \
-            directory name must be "/"'
+        assert out_dir[-1:] == '/', 'Invalid argument "out_dir": the last \
+            character in the directory path must be "/"\n. Examples: \
+            "dataset/ann" -> INVALID directory path \
+            "dataset/ann/" -> VALID directory path'
         
 
 #------------------------------------------------------------------------------
@@ -120,7 +129,6 @@ def parse_bioc_json_file(filename, include_text=True):
 
                 for annot in passage['annotations']:
                     ent_type = annot['infons']['type']
-                    #kb_id = annot['infons']['identifier']
                     text = annot['text']
 
                     begin = annot['locations'][0]['offset']
@@ -160,7 +168,6 @@ def output_parsed_docs(parsed_data, out_dir, recognize=False):
         if not recognize:
             # In this case only the NEL step will be performed
             # Make annotations file
-        
             annotations = parsed_data[doc_id][1]
             annot_str = ''
 
@@ -173,8 +180,8 @@ def output_parsed_docs(parsed_data, out_dir, recognize=False):
                 ann_file.close()
         
 
-def convert_input_files(format, input_text=None, recognize=False):
-    """Convert input file(s) into brat/standoof format"""
+def convert_input_files(format, in_dir=None, input_text=None, recognize=False):
+    """Convert input file(s) into brat/standoff format"""
     
     if input_text != None:
 
@@ -185,19 +192,19 @@ def convert_input_files(format, input_text=None, recognize=False):
             input_files = input_text
 
         # Create a txt file for later use in the NEL module.
-        for i, text in enumerate(input_files):
-            doc_id = str(i)
+        for i, text in enumerate(input_files, start=1):
+            doc_id = 'doc_{}'.format(str(i))
             
-            with open(in_dir + doc_id + '.txt', 'w') as txt_file:
+            with open('{}{}.txt'.format(in_dir, doc_id), 'w') as txt_file:
                 txt_file.write(text)
                 txt_file.close()
     
+    """
     else:
 
         assert format == 'bioc_xml' or format == 'bioc_json' \
             or format == 'pubtator',  'Invalid format. Options: "brat", \
             "bioc_xml", "bioc_json", "pubtator"'
-        
         
         filenames = [in_dir + filename for filename in os.listdir(in_dir)]
         out_dir = in_dir + 'brat/'
@@ -223,7 +230,7 @@ def convert_input_files(format, input_text=None, recognize=False):
                     os.mkdir(out_dir)
                 
                 output_parsed_docs(parsed_data, out_dir, recognize=recognize)
-        
+    """
 
 #------------------------------------------------------------------------------
 #                       TEXT PARSING AND OBJECTIFICATION 
@@ -429,12 +436,12 @@ def import_reel_results(doc_id, nel_run_ids):
     """
     
     linked_entities = {}
-
+    
     for run_id in nel_run_ids:
         results_dir = '{}{}/REEL/results/'.format(cfg.tmp_dir, run_id)
         results_files = os.listdir(results_dir)
         linked_entities_type = {}       
-        ent_type = run_id.split('_')[1] 
+        ent_type = run_id.split('/')[1] 
         target_filename = doc_id + '.json'
 
         if target_filename in results_files:

@@ -6,9 +6,10 @@ from tqdm import tqdm
 
 class nel():
     """Represent a Named Entity Linking (NEL) pipeline"""
-    __slots__ = ['model']
-    def __init__(self, model):
+    __slots__ = ['model', 'run_id']
+    def __init__(self, model, run_id):
         self.model = model
+        self.run_id = run_id
     
     def apply(self, target_kbs, ner_dir=None):
         """Link or normalise input entities to target knwoledge bases using 
@@ -48,7 +49,7 @@ class nel():
                 kb = target_kbs[ent_type]
                 
                 # Run REEL
-                nel_run_name = run(ner_dir, kb, ent_type, abbreviations)
+                nel_run_name = run(self.run_id, ner_dir, kb, ent_type, abbreviations)
                 nel_runs.append(nel_run_name)
                 
                 pbar.update(1)

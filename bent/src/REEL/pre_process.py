@@ -64,9 +64,8 @@ def build_entity_candidate_dict(
     kb_cache_up = None
     names = set(name_to_id.keys())
     synonyms = set(synonym_to_id.keys())
-
     ner_out_docs = os.listdir(ner_dir)
-    
+
     for doc in ner_out_docs:
         ner_annots = None
         doc_id = doc.strip('.ann')
