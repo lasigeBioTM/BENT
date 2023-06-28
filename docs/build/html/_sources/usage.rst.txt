@@ -1,5 +1,5 @@
 Usage
-=======
+======
 
 BENT can be used for: 
 
@@ -10,7 +10,7 @@ BENT can be used for:
 |:arrow_right:| Named Entity Recognition and Linking (NER+NEL)
 
 Contents 
----------
+~~~~~~~~~
 
 - `Usage <#usage>`__ 
    - `Named Entity Recogniton (NER) <#named-entity-recogniton-ner>`__ 
@@ -24,7 +24,7 @@ Contents
 
 
 Named Entity Recogniton (NER)
------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 BENT includes 10 NER models. Each model corresponds to `PubMedBERT <https://huggingface.co/microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext>`__ fine-tuned on specific datasets.
 
@@ -54,10 +54,18 @@ The models and the description of the training datasets are stored in `Hugging F
    In the current version, the ouput of both NER and NEL is only available for the `BRAT standoff format <https://brat.nlplab.org/standoff.html>`__.
 
 
-Text files as input
-~~~~~~~~~~~~~~~~~~~
+Text files as input (only NER)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To recognize disease entities in text files placed under the directory ‘input/’ set the argument ‘types’:
+To recognize disease entities in text (NER) files placed under the directory ‘input/’ set the arguments:
+
+
+* **recognize**: indicate that the NER module will be applied ('True')
+* **types**: the entity types to be recognized in the text.
+* **in_dir**: directory path containing the text files to be annotated (the directory must contain text files exclusively)
+* **out_dir**: the output directory that will contain the annotation files
+
+Example:
 
 ::
 
@@ -76,10 +84,18 @@ The annotations files (‘.ann’) will be under the directory ‘output/ner/’
    Ensure that the only files in the ‘input_dir/txt/’ are the text files that you want to annotate.
 
 
-List of texts as input
-~~~~~~~~~~~~~~~~~~~~~~
+List of texts as input (only NER)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To recognize disease, chemical, gene, anatomical, cell line and bioprocess entities in texts provided in an input list:
+To recognize entities in texts (NER) provided in an input list set the arguments: 
+
+
+* **recognize**: indicate that the NER module will be applied ('True')
+* **types**: the entity types to be recognized in the text.
+* **input_text**: the text to be annotated (list of strings - each string is a separate document) 
+* **out_dir**: the output directory that will contain the annotation files
+
+Example:
 
 ::
 
@@ -132,16 +148,24 @@ doc2.ann:
    T5  disease 122 139 Parkinson disease   
 
 
-Single text as input
-~~~~~~~~~~~~~~~~~~~~
+Single text as input (only NER)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To recognize disease entities in a text provided as a string and to output the annotations as a ‘dataset’ object ommiting the ‘out_dir’ argument:
+To recognize entities in a text (NER) provided as a string and to output the annotations as a ‘dataset’ object set the arguments:
+
+* **recognize**: indicate that the NER module will be applied ('True')
+* **types**: the entity types to be recognized in the text.
+* **input_text**: the text to be annotated (string) 
+
+Note that in this case, the argument 'out_dir' is ommitted, as we want a 'dataset' object to be returned.
+
+Example:
 
 ::
 
    import bent.annotate as bt
 
-   txt1 = 'Reed's Sindrome has several manifestations and symptoms.'
+   txt1 = "Reed's syndrome has several manifestations and symptoms."
 
    dataset = bt.annotate(
            recognize=True,
@@ -150,7 +174,7 @@ To recognize disease entities in a text provided as a string and to output the a
    )
 
 
-It is possible to access the ‘dataset’ object:
+It is possible to access the resulting ‘dataset’ object:
 
 ::
 
@@ -167,11 +191,16 @@ Which will output:
 ::
 
    disease 
-   Reed's Sindrome     
+   Reed's syndrome     
+
+
+.. note::
+
+   In cases where the input is a string or a list of strings instantiated in the execution script set the argument 'input_text'. Instead, if the input is text present in external files set the argument 'in_dir'.
 
 
 Named Entity Linking (NEL)
---------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 BENT includes pre-process dictionaries that allow the linking of recognized entities of different types to entries of the following knowledge bases/graphs/ontologies:
 
@@ -194,10 +223,18 @@ BENT includes pre-process dictionaries that allow the linking of recognized enti
 * ‘cell_line’ |:arrow_right:| ‘cellosaurus’ (`Cellosaurus <https://www.cellosaurus.org/>`__)
 
 
-Link entities in annotation files
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Link entities in annotation files (only NEL)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Considering the annotation files outputted before, in this case we also want to link the already recognized entities to entries of several target knowlege bases:
+Consider the case where the NER module was already applied.
+
+To perform NEL set the arguments:
+
+* **link**: indicate that the NEL module will be applied ('True')
+* **types**: for each entity type to link to the KBs indicate the respective KBs.
+* **ner_dir**: directory path containing the NER annotations files
+
+Example:
 
 ::
 
@@ -217,9 +254,6 @@ Considering the annotation files outputted before, in this case we also want to 
            out_dir='output/nel/'
    )
 
-
-The annotations files (‘.ann’) will be under the directory ‘output/nel/’, but will now include the normalized identifiers for each recognized entity.
-
 .. note::
 
    In this case, where we already have the annotations files from the NER stage, it is required to set the argument ‘ner_dir’ instead of ‘in_dir’.
@@ -228,7 +262,11 @@ The annotations files (‘.ann’) will be under the directory ‘output/nel/’
 
    Ensure that the entity types present in the annotation file match the entity types available in BENT.
    Check for differences in capitalization. 
-   Example: if each annotation in a annotation file has "Disease" as the respective entity type this will conflict with the available entity type "disease". In this case you will need to change "Disease" to "disease" in the annotations file.
+   Example: the annotation 'T1  Chemical 0 7    Caffeine' has type 'Chemical' instead of 'chemical', which will cause a ValueError.
+   
+
+The resulting annotations files (‘.ann’) will be under the directory ‘output/nel/’.
+
 
 The updated output in the BRAT format will be:
 
@@ -270,9 +308,17 @@ In the current version, it is not possible yet to provide a dictionary of texts 
 
 
 Named Entity Recognition and Linking (NER+NEL)
------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To apply the complete pipeline of entity extraction to a set of files placed in the input directory set the arguments ‘recognize’ and ‘link’ to True:
+To apply the complete pipeline of entity extraction (NER+NEL) set the arguments:
+
+* **recognize**: indicate that the NER module will be applied ('True')
+* **link**: indicate that the NEL module will be applied ('True')
+* **types**: entity types to recognize and the respective target knowledge bases.
+* **in_dir**: directory path containing the text files to be annotated (the directory must contain text files exclusively)
+* **out_dir**: the output directory that will contain the annotation files
+
+Example:
 
 ::
 
@@ -294,8 +340,11 @@ To apply the complete pipeline of entity extraction to a set of files placed in 
    )
 
 
+It is also possible to apply the pipeline (NER+NEL) to a string or a list or strings, as described above in the sections *Single text as input (only NER)* and *List of texts as input (only NER)*. The only extra step: set the argument **link** to 'True'. 
+
+
 Upload custom knowledge base/graph/ontology
---------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you want to use a custom knowledge base that is not included in the availabe options, it is necessary to have two text files: **terms.txt** and **edges.txt**.
 
@@ -320,7 +369,7 @@ entries of the **terms.txt** file:
    In both files, elements in each line are separated by a tab ('\\t').
 
 Run the following code to generate the files for the custom knowledge
-base, indicating the filenames and the desired name:
+base, indicating the filenames (**terms_filename** and **edges_filename**) and the desired name (**kb_name**):
 
 ::
 
@@ -334,8 +383,7 @@ base, indicating the filenames and the desired name:
            input_format='txt' 
    )
 
-After this step, you can apply the above pipelines using the newly
-generated knowledge base by setting the dictionary 'types':
+After this step, you can apply the above pipelines using the newly generated knowledge base by setting the dictionary 'types':
 
 ::
 

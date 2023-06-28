@@ -10,7 +10,7 @@ BENT can be used for:
 |:arrow_right:| Named Entity Recognition and Linking (NER+NEL)
 
 Contents 
----------
+~~~~~~~~~
 
 - `Usage <#usage>`__ 
    - `Named Entity Recogniton (NER) <#named-entity-recogniton-ner>`__ 
@@ -24,7 +24,7 @@ Contents
 
 
 Named Entity Recogniton (NER)
------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 BENT includes 10 NER models. Each model corresponds to `PubMedBERT <https://huggingface.co/microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext>`__ fine-tuned on specific datasets.
 
@@ -55,7 +55,7 @@ The models and the description of the training datasets are stored in `Hugging F
 
 
 Text files as input (only NER)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To recognize disease entities in text (NER) files placed under the directory ‘input/’ set the arguments:
 
@@ -85,7 +85,7 @@ The annotations files (‘.ann’) will be under the directory ‘output/ner/’
 
 
 List of texts as input (only NER)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To recognize entities in texts (NER) provided in an input list set the arguments: 
 
@@ -149,7 +149,7 @@ doc2.ann:
 
 
 Single text as input (only NER)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To recognize entities in a text (NER) provided as a string and to output the annotations as a ‘dataset’ object set the arguments:
 
@@ -200,7 +200,7 @@ Which will output:
 
 
 Named Entity Linking (NEL)
---------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 BENT includes pre-process dictionaries that allow the linking of recognized entities of different types to entries of the following knowledge bases/graphs/ontologies:
 
@@ -224,7 +224,7 @@ BENT includes pre-process dictionaries that allow the linking of recognized enti
 
 
 Link entities in annotation files (only NEL)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Consider the case where the NER module was already applied.
 
@@ -308,7 +308,7 @@ In the current version, it is not possible yet to provide a dictionary of texts 
 
 
 Named Entity Recognition and Linking (NER+NEL)
------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To apply the complete pipeline of entity extraction (NER+NEL) set the arguments:
 
@@ -344,7 +344,7 @@ It is also possible to apply the pipeline (NER+NEL) to a string or a list or str
 
 
 Upload custom knowledge base/graph/ontology
---------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you want to use a custom knowledge base that is not included in the availabe options, it is necessary to have two text files: **terms.txt** and **edges.txt**.
 

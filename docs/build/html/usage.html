@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Usage &mdash; BENT 0.1.0 documentation</title>
@@ -12,10 +12,9 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
         <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"></script>
@@ -32,11 +31,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> BENT
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            BENT
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -62,7 +65,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Usage</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/usage.rst.txt" rel="nofollow"> View page source</a>
@@ -128,9 +131,17 @@
 <p class="admonition-title">Note</p>
 <p>In the current version, the ouput of both NER and NEL is only available for the <a class="reference external" href="https://brat.nlplab.org/standoff.html">BRAT standoff format</a>.</p>
 </div>
-<section id="text-files-as-input">
-<h3>Text files as input<a class="headerlink" href="#text-files-as-input" title="Permalink to this heading"></a></h3>
-<p>To recognize disease entities in text files placed under the directory ‘input/’ set the argument ‘types’:</p>
+</section>
+<section id="text-files-as-input-only-ner">
+<h2>Text files as input (only NER)<a class="headerlink" href="#text-files-as-input-only-ner" title="Permalink to this heading"></a></h2>
+<p>To recognize disease entities in text (NER) files placed under the directory ‘input/’ set the arguments:</p>
+<ul class="simple">
+<li><p><strong>recognize</strong>: indicate that the NER module will be applied (‘True’)</p></li>
+<li><p><strong>types</strong>: the entity types to be recognized in the text.</p></li>
+<li><p><strong>in_dir</strong>: directory path containing the text files to be annotated (the directory must contain text files exclusively)</p></li>
+<li><p><strong>out_dir</strong>: the output directory that will contain the annotation files</p></li>
+</ul>
+<p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bent.annotate</span> <span class="k">as</span> <span class="nn">bt</span>
 
 <span class="n">bt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
@@ -147,9 +158,16 @@
 <p>Ensure that the only files in the ‘input_dir/txt/’ are the text files that you want to annotate.</p>
 </div>
 </section>
-<section id="list-of-texts-as-input">
-<h3>List of texts as input<a class="headerlink" href="#list-of-texts-as-input" title="Permalink to this heading"></a></h3>
-<p>To recognize disease, chemical, gene, anatomical, cell line and bioprocess entities in texts provided in an input list:</p>
+<section id="list-of-texts-as-input-only-ner">
+<h2>List of texts as input (only NER)<a class="headerlink" href="#list-of-texts-as-input-only-ner" title="Permalink to this heading"></a></h2>
+<p>To recognize entities in texts (NER) provided in an input list set the arguments:</p>
+<ul class="simple">
+<li><p><strong>recognize</strong>: indicate that the NER module will be applied (‘True’)</p></li>
+<li><p><strong>types</strong>: the entity types to be recognized in the text.</p></li>
+<li><p><strong>input_text</strong>: the text to be annotated (list of strings - each string is a separate document)</p></li>
+<li><p><strong>out_dir</strong>: the output directory that will contain the annotation files</p></li>
+</ul>
+<p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bent.annotate</span> <span class="k">as</span> <span class="nn">bt</span>
 
 <span class="c1"># Each element of the list corresponds to a different document text</span>
@@ -193,12 +211,19 @@
 </pre></div>
 </div>
 </section>
-<section id="single-text-as-input">
-<h3>Single text as input<a class="headerlink" href="#single-text-as-input" title="Permalink to this heading"></a></h3>
-<p>To recognize disease entities in a text provided as a string and to output the annotations as a ‘dataset’ object ommiting the ‘out_dir’ argument:</p>
+<section id="single-text-as-input-only-ner">
+<h2>Single text as input (only NER)<a class="headerlink" href="#single-text-as-input-only-ner" title="Permalink to this heading"></a></h2>
+<p>To recognize entities in a text (NER) provided as a string and to output the annotations as a ‘dataset’ object set the arguments:</p>
+<ul class="simple">
+<li><p><strong>recognize</strong>: indicate that the NER module will be applied (‘True’)</p></li>
+<li><p><strong>types</strong>: the entity types to be recognized in the text.</p></li>
+<li><p><strong>input_text</strong>: the text to be annotated (string)</p></li>
+</ul>
+<p>Note that in this case, the argument ‘out_dir’ is ommitted, as we want a ‘dataset’ object to be returned.</p>
+<p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bent.annotate</span> <span class="k">as</span> <span class="nn">bt</span>
 
-<span class="n">txt1</span> <span class="o">=</span> <span class="s1">&#39;Reed&#39;</span><span class="n">s</span> <span class="n">Sindrome</span> <span class="n">has</span> <span class="n">several</span> <span class="n">manifestations</span> <span class="ow">and</span> <span class="n">symptoms</span><span class="o">.</span><span class="s1">&#39;</span>
+<span class="n">txt1</span> <span class="o">=</span> <span class="s2">&quot;Reed&#39;s syndrome has several manifestations and symptoms.&quot;</span>
 
 <span class="n">dataset</span> <span class="o">=</span> <span class="n">bt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
         <span class="n">recognize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -207,7 +232,7 @@
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>It is possible to access the ‘dataset’ object:</p>
+<p>It is possible to access the resulting ‘dataset’ object:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">documents</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 
@@ -218,10 +243,13 @@
 </div>
 <p>Which will output:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">disease</span>
-<span class="n">Reed</span><span class="s1">&#39;s Sindrome</span>
+<span class="n">Reed</span><span class="s1">&#39;s syndrome</span>
 </pre></div>
 </div>
-</section>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In cases where the input is a string or a list of strings instantiated in the execution script set the argument ‘input_text’. Instead, if the input is text present in external files set the argument ‘in_dir’.</p>
+</div>
 </section>
 <section id="named-entity-linking-nel">
 <h2>Named Entity Linking (NEL)<a class="headerlink" href="#named-entity-linking-nel" title="Permalink to this heading"></a></h2>
@@ -237,9 +265,17 @@
 <li><p>‘cell_type’ ➡️ ‘cell_ontology’ (<a class="reference external" href="https://cell-ontology.github.io/">Cell Ontology</a>)</p></li>
 <li><p>‘cell_line’ ➡️ ‘cellosaurus’ (<a class="reference external" href="https://www.cellosaurus.org/">Cellosaurus</a>)</p></li>
 </ul>
-<section id="link-entities-in-annotation-files">
-<h3>Link entities in annotation files<a class="headerlink" href="#link-entities-in-annotation-files" title="Permalink to this heading"></a></h3>
-<p>Considering the annotation files outputted before, in this case we also want to link the already recognized entities to entries of several target knowlege bases:</p>
+</section>
+<section id="link-entities-in-annotation-files-only-nel">
+<h2>Link entities in annotation files (only NEL)<a class="headerlink" href="#link-entities-in-annotation-files-only-nel" title="Permalink to this heading"></a></h2>
+<p>Consider the case where the NER module was already applied.</p>
+<p>To perform NEL set the arguments:</p>
+<ul class="simple">
+<li><p><strong>link</strong>: indicate that the NEL module will be applied (‘True’)</p></li>
+<li><p><strong>types</strong>: for each entity type to link to the KBs indicate the respective KBs.</p></li>
+<li><p><strong>ner_dir</strong>: directory path containing the NER annotations files</p></li>
+</ul>
+<p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bent.annotate</span> <span class="k">as</span> <span class="nn">bt</span>
 
 <span class="n">bt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
@@ -257,7 +293,6 @@
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>The annotations files (‘.ann’) will be under the directory ‘output/nel/’, but will now include the normalized identifiers for each recognized entity.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>In this case, where we already have the annotations files from the NER stage, it is required to set the argument ‘ner_dir’ instead of ‘in_dir’.</p>
@@ -266,8 +301,9 @@
 <p class="admonition-title">Note</p>
 <p>Ensure that the entity types present in the annotation file match the entity types available in BENT.
 Check for differences in capitalization.
-Example: if each annotation in a annotation file has “Disease” as the respective entity type this will conflict with the available entity type “disease”. In this case you will need to change “Disease” to “disease” in the annotations file.</p>
+Example: the annotation ‘T1  Chemical 0 7    Caffeine’ has type ‘Chemical’ instead of ‘chemical’, which will cause a ValueError.</p>
 </div>
+<p>The resulting annotations files (‘.ann’) will be under the directory ‘output/nel/’.</p>
 <p>The updated output in the BRAT format will be:</p>
 <p>doc1.ann:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">T1</span>  <span class="n">chemical</span> <span class="mi">0</span> <span class="mi">7</span>    <span class="n">Caffeine</span>
@@ -299,10 +335,17 @@ Example: if each annotation in a annotation file has “Disease” as the respec
 </div>
 <p>In the current version, it is not possible yet to provide a dictionary of texts and NER annotations as input to the NEL pipeline.</p>
 </section>
-</section>
 <section id="named-entity-recognition-and-linking-ner-nel">
 <h2>Named Entity Recognition and Linking (NER+NEL)<a class="headerlink" href="#named-entity-recognition-and-linking-ner-nel" title="Permalink to this heading"></a></h2>
-<p>To apply the complete pipeline of entity extraction to a set of files placed in the input directory set the arguments ‘recognize’ and ‘link’ to True:</p>
+<p>To apply the complete pipeline of entity extraction (NER+NEL) set the arguments:</p>
+<ul class="simple">
+<li><p><strong>recognize</strong>: indicate that the NER module will be applied (‘True’)</p></li>
+<li><p><strong>link</strong>: indicate that the NEL module will be applied (‘True’)</p></li>
+<li><p><strong>types</strong>: entity types to recognize and the respective target knowledge bases.</p></li>
+<li><p><strong>in_dir</strong>: directory path containing the text files to be annotated (the directory must contain text files exclusively)</p></li>
+<li><p><strong>out_dir</strong>: the output directory that will contain the annotation files</p></li>
+</ul>
+<p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bent.annotate</span> <span class="k">as</span> <span class="nn">bt</span>
 
 <span class="n">bt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
@@ -321,6 +364,7 @@ Example: if each annotation in a annotation file has “Disease” as the respec
 <span class="p">)</span>
 </pre></div>
 </div>
+<p>It is also possible to apply the pipeline (NER+NEL) to a string or a list or strings, as described above in the sections <em>Single text as input (only NER)</em> and <em>List of texts as input (only NER)</em>. The only extra step: set the argument <strong>link</strong> to ‘True’.</p>
 </section>
 <section id="upload-custom-knowledge-base-graph-ontology">
 <h2>Upload custom knowledge base/graph/ontology<a class="headerlink" href="#upload-custom-knowledge-base-graph-ontology" title="Permalink to this heading"></a></h2>
@@ -342,8 +386,8 @@ entries of the <strong>terms.txt</strong> file:</p>
 <p>In both files, elements in each line are separated by a tab (’\t’).</p>
 </div>
 <p>Run the following code to generate the files for the custom knowledge
-base, indicating the filenames and the desired name:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span>  <span class="nn">bent.src.setup.kb.generate_dicts</span>  <span class="k">as</span>  <span class="nn">bkb</span>
+base, indicating the filenames (<strong>terms_filename</strong> and <strong>edges_filename</strong>) and the desired name (<strong>kb_name</strong>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span>  <span class="nn">bent.src.build.kb.generate_dicts</span>  <span class="k">as</span>  <span class="nn">bkb</span>
 
 <span class="n">bkb</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span>
         <span class="n">custom</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -354,8 +398,7 @@ base, indicating the filenames and the desired name:</p>
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>After this step, you can apply the above pipelines using the newly
-generated knowledge base by setting the dictionary ‘types’:</p>
+<p>After this step, you can apply the above pipelines using the newly generated knowledge base by setting the dictionary ‘types’:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bent.annotate</span> <span class="k">as</span> <span class="nn">bt</span>
 
 <span class="n">bt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>

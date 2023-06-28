@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>annotate &mdash; BENT 0.1.0 documentation</title>
@@ -12,10 +12,9 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
         <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"></script>
@@ -31,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> BENT
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            BENT
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -64,7 +67,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="documentation.html">Documentation</a></li>
       <li class="breadcrumb-item active">annotate</li>
       <li class="wy-breadcrumbs-aside">
@@ -84,7 +87,7 @@
 <dd><p>Pipeline to annotate text(s) with recognized entities (Named Entity and
 Recognition) to link them to knowledge base concepts (Named Entity Linking).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>recognize</strong> (<em>bool</em><em>, </em><em>optional</em>) – specifies wether the pipeline performs Named Entity
 Recognition, defaults to False</p></li>
@@ -124,18 +127,18 @@ defaults to ‘pubmedbert’</p></li>
 defaults to ‘reel_nilinker’</p></li>
 </ul>
 </dd>
-<dt class="field-even">Raises</dt>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>ValueError</strong> – if both ‘input_text’ and ‘in_dir’ are None</p></li>
 <li><p><strong>ValueError</strong> – if both ‘recognize’ and ‘link’ are None</p></li>
 </ul>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>dataset (an object including all the input texts along with the
 annotations) if ‘out_dir’ is None; an annotation file for each inputed
 text if ‘out_dir’ is different that None</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>Dataset object, text file(s)</p>
 </dd>
 </dl>
@@ -143,13 +146,13 @@ text if ‘out_dir’ is different that None</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="bent.annotate.linker">
-<span class="sig-prename descclassname"><span class="pre">bent.annotate.</span></span><span class="sig-name descname"><span class="pre">linker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">recognize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">types</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nel_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ner_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bent.annotate.linker" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">bent.annotate.</span></span><span class="sig-name descname"><span class="pre">linker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">recognize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">types</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nel_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ner_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_dataset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bent.annotate.linker" title="Permalink to this definition"></a></dt>
 <dd><p>Pipeline to perform Named Entity Linking. For each input
 annotation files with recognized entities it outputs an updated
 annotations file (BRAT format) with knowledge base identifiers for each
 entity.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>recognize</strong> (<em>bool</em><em>, </em><em>optional</em>) – specifies wether the pipeline performs Named Entity
 Recognition, defaults to False</p></li>
@@ -178,7 +181,7 @@ including all documents and respective annotations will be returned</p></li>
 the annotations from the NER stage), defaults to None</p></li>
 </ul>
 </dd>
-<dt class="field-even">Raises</dt>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ValueError</strong> – if ‘ner_dir’==None and recognize==False, which means
 that if the NER stage was not performed it is necessary nevertheless
 indicate the directory containing annotation files corresponding to
@@ -189,17 +192,15 @@ the NER output</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="bent.annotate.recognizer">
-<span class="sig-prename descclassname"><span class="pre">bent.annotate.</span></span><span class="sig-name descname"><span class="pre">recognizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_types</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ner_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bent.annotate.recognizer" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">bent.annotate.</span></span><span class="sig-name descname"><span class="pre">recognizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_types</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ner_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_dataset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_tmp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bent.annotate.recognizer" title="Permalink to this definition"></a></dt>
 <dd><p>Pipeline to perform Named Entity Recognition. For each input
 document/text it outputs either an annotations file (BRAT format) or a
 Dataset object including all documents and respective annotations.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>in_dir</strong> (<em>_type_</em><em>, </em><em>optional</em>) – path to directory containing text files to be annotated,
 defaults to None</p></li>
-<li><p><strong>input_text</strong> (<em>str</em><em> or </em><em>list</em><em>, </em><em>optional</em>) – text string or list of text strings (each element
-represinting a different document) to be annotated, defaults to None</p></li>
 <li><p><strong>types</strong> – the entity types that will be recognized
 :type types: list</p></li>
 <li><p><strong>out_dir</strong> (<em>str</em><em>, </em><em>defaults to None</em>) – path to directory where the output of the pipeline will be
@@ -207,14 +208,15 @@ located, optional. If ‘out_dir’ == None (deafult) a Dataset object
 including all documents and respective annotations will be returned</p></li>
 <li><p><strong>ner_model</strong> (<em>str</em><em>, </em><em>optional</em>) – the Named Entity Recognition model that will be used,
 defaults to ‘pubmedbert’</p></li>
+<li><p><strong>input_tmp</strong> (<em>bool</em>) – indicates if the input is composed of temporary text files.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>dataset (an object including all the input texts along with the
 annotations) if ‘out_dir’ is None; an annotation file for each inputed
 text if ‘out_dir’ is different that None</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Dataset object, text file(s)</p>
 </dd>
 </dl>
