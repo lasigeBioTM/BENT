@@ -3,32 +3,14 @@ Installation
 
 To use the current version of BENT it is required: 
 
-|:arrow_right:|  OS based on Ubuntu/Debian 
+|:arrow_right:|  OS: Ubuntu/Debian 
 
-|:arrow_right:|  Conda environment (using `Miniconda <https://docs.conda.io/en/latest/miniconda.html>`__ or `Anaconda <https://docs.conda.io/en/latest/>`__ )
-
-|:arrow_right:|  Python>=3.7
+|:arrow_right:|  Python 3.7, 3.8 or 3.9
 
 |:arrow_right:|  Required space between 5.5 GB - 10 GB 
    * Dependencies: 2.5 GB 
-   * Data: between 3.0 GB (base) or 7.5 GB (if you use all available knowlegde bases for NEL)
+   * Data: between 3.0 GB (base) or 7.5 GB (if you use all available knowlegde bases for Named Entity Linking)
 
-
-.. note::
-   Please ensure that you have the appropriate version of Conda installed.
-
-
-Create a Conda environment (adapt for the name of your project):
-
-::
-   
-   conda create --name annotation_project python=3.7
-
-Activate the environment:
-
-::
-
-   conda activate annotation_project
 
 Install the BENT package using pip:
 
@@ -37,13 +19,7 @@ Install the BENT package using pip:
    pip install bent
 
 
-After the pip installation, it is required a further step to install non-Python dependencies and to download the necessary data. Specify the knowledge bases that will be used:
-
-::
-
-   python -c "from bent.setup_package import setup_package;setup_package([<kb1>, <kb2>, <kb3>])"
-
-Available knowledge bases:
+The following knowledge bases can be configured:
 
 * 'medic' (`MEDIC <http://ctdbase.org/>`__)
 
@@ -71,25 +47,26 @@ Available knowledge bases:
 
 * 'cellosaurus' (`Cellosaurus <https://www.cellosaurus.org/>`__)
 
-Example to download only the MEDIC vocabulary:
+
+After the pip installation, it is required a further step to install non-Python dependencies and to download the necessary data. Run in the command line:
 
 ::
 
-   python -c "from bent.setup_package import setup_package;setup_package(['medic'])"
+   bent_setup
 
 
-If you want to download all knowledge bases, choose the option 'all':
-
-::
-
-   python -c "from bent.setup_package import setup_package;setup_package(['all'])"
+Only the default knowledge bases 'medic' and 'chebi' will be available at this point.
 
 
-You can download more knowledge bases later by running the same command and specifying the desired knolwedge bases among the ones that are available and setting the argument ' only_kb_dicts' to True:
+To disable annoyng messages in the terminal run:
 
 ::
 
-   python -c "from bent.setup_package import setup_package;setup_package([<kb>],  only_kb_dicts=True)"
+   export TF_CPP_MIN_LOG_LEVEL='3'
 
 
-Reinitiate the conda environment.
+You can download more knowledge bases later by specifying the desired knowledge bases among the ones that are available:
+
+::
+
+   python -c "from bent.get_kbs import get_additional_kbs;get_additional_kbs([<kb1>, <kb2>])"

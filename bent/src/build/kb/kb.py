@@ -7,7 +7,7 @@ import networkx as nx
 import obonet
 import bent.src.cfg as cfg
 
-data_dir = cfg.root_path + 'data/kbs/original_files/'
+data_dir = cfg.root_path + '/data/kbs/original_files/'
 
 
 class KnowledgeBase:

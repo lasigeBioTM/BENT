@@ -69,7 +69,7 @@ def run_Ab3P(input_dir):
 
     # change to Ab3P directory
     cwd = os.getcwd()
-    os.chdir(cfg.root_path + 'scripts/abbreviation_detector/Ab3P/')
+    os.chdir(cfg.root_path + '/abbreviation_detector/Ab3P/')
 
     if not os.path.exists('tmp/'):
         os.mkdir('tmp/')

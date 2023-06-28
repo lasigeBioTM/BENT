@@ -1,9 +1,12 @@
 #!/usr/bin/env python
-import os
+import pkg_resources
 
-# The root path for the CONDA project installation
-#root_path = str(os.path.dirname(bent.__file__)).replace('lib/python3.7/site-packages/bota', '')
-root_path = os.environ["CONDA_PREFIX"] + '/'
+def get_package_root(package_name):
+    package = pkg_resources.get_distribution(package_name)
+    return package.location
+
+package_name = 'bent'
+root_path = get_package_root(package_name) + '/bent'
 
 data_dir = '{}data/'.format(root_path)
 

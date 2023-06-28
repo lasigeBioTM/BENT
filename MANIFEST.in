@@ -1,0 +1,6 @@
+include bent/src/REEL/ppr_for_ned_all.class 
+include bent/src/REEL/ppr_for_ned_all.java 
+include bent/setup_package.sh
+include bent/get_kb_dicts.sh
+include bent/get_data.sh
+include bent/requirements.txt

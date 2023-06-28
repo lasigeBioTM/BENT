@@ -3,10 +3,10 @@
 # Build dictionaries of extracted relations to further inclusion in the NEL module
 import bent.src.cfg as cfg
 import json
-import pandas as pd
+#import pandas as pd
 
-datasets_dir = cfg.root_path + 'data/datasets/'
-relations_dir = cfg.root_path + 'data/relations/'
+datasets_dir = cfg.root_path + '/data/datasets/'
+relations_dir = cfg.root_path + '/data/relations/'
 
 
 def update_dict(id1, id2, relations):

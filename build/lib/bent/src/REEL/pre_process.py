@@ -259,7 +259,7 @@ def pre_process(
     # Load preprocessed dicts
     name_to_id = {}
     synonym_to_id = {}
-    kb_dicts_dir = '{}data/kbs/dicts/{}/'.format(cfg.root_path, kb) 
+    kb_dicts_dir = '{}/data/kbs/dicts/{}/'.format(cfg.root_path, kb) 
     
     with open(kb_dicts_dir + 'name_to_id.json', 'r') as dict_file:
         name_to_id = json.loads(dict_file.read())
@@ -315,7 +315,7 @@ def pre_process(
     extracted_relations = {}
     
     if link_mode == 'corpus' or link_mode == 'kb_corpus': 
-        relations_dir = '{}data/relations/'.format(cfg.root_path)
+        relations_dir = '{}/data/relations/'.format(cfg.root_path)
         rel_filenames = os.listdir(relations_dir)    
         rel_filename = '{}_{}_relations.json'.format(entity_type, kb)
 

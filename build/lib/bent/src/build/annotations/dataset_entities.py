@@ -348,8 +348,8 @@ def build_annotations_dict(corpora_dir, dicts_dir, kb):
 
 
 def generate_annotation_dicts():
-    corpora_dir = cfg.root_path + 'data/datasets/'
-    dicts_dir = cfg.root_path + 'data/kbs/dicts/'
+    corpora_dir = cfg.root_path + '/data/datasets/'
+    dicts_dir = cfg.root_path + '/data/kbs/dicts/'
 
     kbs = ['ncbi_taxon', 'medic', 'ctd_chem', 'chebi', 'go_bp', 'ncbi_gene',
         'go_cc', 'cl', 'uberon']

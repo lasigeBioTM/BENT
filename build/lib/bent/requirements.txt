@@ -1,0 +1,13 @@
+obonet==0.3.0
+tensorflow-gpu==2.5.1
+transformers==4.9.0
+datasets==1.10.0
+torch==1.9.1
+networkx==2.5.1
+gdown==4.6.0
+rapidfuzz==2.0.2
+tqdm==4.62.2
+spacy==3.0.1
+scispacy==0.4.0
+seqeval==1.2.2
+orjson==3.8.5

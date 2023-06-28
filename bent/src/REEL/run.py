@@ -2,8 +2,6 @@
 
 import bent.src.cfg as cfg
 import os
-import random
-import string
 from bent.src.REEL.pre_process import pre_process
 from bent.src.REEL.post_process import process_results
 
@@ -59,9 +57,9 @@ def run(run_id, ner_dir, kb, entity_type, abbreviations):
     #         and ranks each candidate.                                           
     #------------------------------------------------------------------------#
     if kb != 'ncbi_gene':
-        ppr_filepath = '{}scripts/'.format(cfg.root_path)
+        ppr_dir = '{}/src/REEL/'.format(cfg.root_path)
         comm = 'java -classpath :{} ppr_for_ned_all {} ppr_ic'.\
-            format(ppr_filepath, nel_run_name)
+            format(ppr_dir, nel_run_name)
         os.system(comm)
 
     #------------------------------------------------------------------------#

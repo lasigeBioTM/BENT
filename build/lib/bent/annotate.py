@@ -8,6 +8,7 @@ import bent.src.utils as utils
 from bent.src.ner import ner
 from bent.src.nel import nel
 from bent.src.classes import Dataset
+import bent.src.cfg as cfg
 
 
 def recognizer(
@@ -251,6 +252,8 @@ def annotate(recognize=False, link=False, types={}, input_text=None,
     """
     run_id = ''.join(random.choices(string.ascii_uppercase + string.digits, 
         k=15)) 
+    
+    os.mkdir(cfg.tmp_dir + run_id)
 
     # Check if input arguments are valid
     utils.check_input_args(recognize, link, types, input_format,
@@ -265,6 +268,8 @@ def annotate(recognize=False, link=False, types={}, input_text=None,
         if not os.path.exists(out_dir):
             os.mkdir(out_dir)
     
+    
+
     #--------------------------------------------------------------------------
     #                   CONVERT INPUT TO THE BRAT FORMAT
     #-------------------------------------------------------------------------- 
@@ -273,12 +278,21 @@ def annotate(recognize=False, link=False, types={}, input_text=None,
     if input_text!= None:
         # The input is either a string or a list of strings, so there is no 
         # 'in_dir'.
-        # A temporary directory to store the text files will be created
+        # A temporary directory to store the text files will be created        
+        in_dir = '.tmp/'
+    
+        if not os.path.exists(in_dir):
+            os.mkdir(in_dir)
+
         in_dir = '.tmp/{}/'.format(run_id)
-        os.mkdir(in_dir)
+
+        if not os.path.exists(in_dir):
+            os.mkdir(in_dir)
+
+        in_dir = '{}txt/'.format(in_dir)
         
-        in_dir += 'txt/'
-        os.mkdir(in_dir)
+        if not os.path.exists(in_dir):
+            os.mkdir(in_dir)
         
         utils.convert_input_files(
             input_format, in_dir=in_dir, input_text=input_text, 
@@ -300,8 +314,10 @@ def annotate(recognize=False, link=False, types={}, input_text=None,
         elif out_dir == None:
             # In this case a dataset object will be outputted and the 
             # temporary annotation files will be stored in 'tmp/NER/' directory
-            tmp_out_dir = '.tmp/{}/ann/'.format(run_id)
-            os.mkdir(tmp_out_dir)
+            tmp_out_dir = '{}ann/'.format(in_dir)
+            
+            if not os.path.exists(tmp_out_dir):
+                os.mkdir(tmp_out_dir)
             
             dataset = recognizer(
                 in_dir, entity_types, tmp_out_dir, ner_model, 

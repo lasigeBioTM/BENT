@@ -18,7 +18,7 @@ class WordConcept:
     def __init__(self, partition):
     
         self.partition = partition
-        self.filepath = "{}data/NILINKER/word_concept/wc_{}.json".format(cfg.root_path, partition)
+        self.filepath = "{}/data/NILINKER/word_concept/wc_{}.json".format(cfg.root_path, partition)
         self.word2candidates = None
         self.word2id = None
         self.id2word = None
@@ -35,7 +35,7 @@ class WordConcept:
 
         # Load node_id_to_int
         with open(
-                "{}data/NILINKER/embeddings/{}/node_id_to_int_{}.json"\
+                "{}/data/NILINKER/embeddings/{}/node_id_to_int_{}.json"\
                 .format(cfg.root_path, self.partition, self.partition)) as in_file:
             node_id_to_int = json.loads(in_file.read())
 
@@ -252,7 +252,7 @@ def get_wc_embeds(partition):
     :rtype: Numpy array, Numpy array, WordConcept object
     """
 
-    embeds_dir = "{}data/NILINKER/embeddings/{}/".format(cfg.root_path, partition)
+    embeds_dir = "{}/data/NILINKER/embeddings/{}/".format(cfg.root_path, partition)
     word_embeds_filepath = embeds_dir 
     candidates_embeds_filepath = embeds_dir + partition + ".emb"
 
@@ -378,10 +378,10 @@ def get_kb_data(partition):
     :rtype: KnowledgeBase object
     """
 
-    source_filename = '{}data/kbs/dicts/{}/id_to_name.json'.format(cfg.root_path, partition)
+    source_filename = '{}/data/kbs/dicts/{}/id_to_name.json'.format(cfg.root_path, partition)
 
     if partition == 'chebi':
-        source_filename = '{}data/kbs/dicts/chebi/id_to_name_nilinker.json'.format(cfg.root_path)
+        source_filename = '{}/data/kbs/dicts/chebi/id_to_name_nilinker.json'.format(cfg.root_path)
 
     with open(source_filename, 'r') as in_file:
         id_to_name = json.loads(in_file.read()) 

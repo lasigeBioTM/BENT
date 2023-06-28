@@ -1,0 +1,2 @@
+[console_scripts]
+bent_setup = bent.setup_package_wrapper:main
