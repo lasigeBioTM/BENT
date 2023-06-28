@@ -3,11 +3,11 @@ Installation
 
 To use the current version of BENT it is required: 
 
-|:arrow_right:|  OS: Ubuntu/Debian 
+*  OS: Ubuntu/Debian 
 
-|:arrow_right:|  Python 3.7, 3.8 or 3.9
+*  Python 3.7, 3.8 or 3.9
 
-|:arrow_right:|  Required space between 5.5 GB - 10 GB 
+*  Required space between 5.5 GB - 10 GB 
    * Dependencies: 2.5 GB 
    * Data: between 3.0 GB (base) or 7.5 GB (if you use all available knowlegde bases for Named Entity Linking)
 
