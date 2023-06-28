@@ -23,9 +23,8 @@ setup(
     entry_points={
         "console_scripts": [
             "bent_setup = bent.setup_package_wrapper:main",
-        ],
-   },
-
+        ] },
+   
     classifiers = [
         # How mature is this project? 
         #   3 - Alpha

@@ -306,6 +306,12 @@ After the pip installation, it is required a further step to install non-Python 
 
 Only the default knowledge bases 'medic' and 'chebi' will be available at this point.
 
+To disable annoyng messages in the terminal run:
+
+::
+
+   export TF_CPP_MIN_LOG_LEVEL='3'
+
 
 You can download more knowledge bases later by specifying the desired knowledge bases among the ones that are available:
 
