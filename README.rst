@@ -60,6 +60,8 @@ The following knowledge bases can be configured:
 
 * 'ctd_anat' (`CTD-Anatomy <http://ctdbase.org/>`__)
 
+* 'fma' (`Foundation model of Anatomy <http://sig.biostr.washington.edu/projects/fm/AboutFM.html>`__)
+
 * 'uberon' (`UBERON ontology <http://obophenotype.github.io/uberon/>`__)
 
 * 'go_cc' (`Gene Ontology-Cellular Component <http://geneontology.org/>`__)

@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: bent
-Version: 0.0.15
+Version: 0.0.16
 Summary: BENT: Biomedical Entity Annotator
 Home-page: https://github.com/lasigeBioTM/bent
 Author: Pedro Ruas
@@ -287,6 +287,8 @@ The following knowledge bases can be configured:
 * 'go_bp' (`Gene Ontology-Biological Process <http://geneontology.org/>`__)
 
 * 'ctd_anat' (`CTD-Anatomy <http://ctdbase.org/>`__)
+
+* 'fma' (`Foundation model of Anatomy <http://sig.biostr.washington.edu/projects/fm/AboutFM.html>`__)
 
 * 'uberon' (`UBERON ontology <http://obophenotype.github.io/uberon/>`__)
 

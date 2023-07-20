@@ -214,7 +214,7 @@ BENT includes pre-process dictionaries that allow the linking of recognized enti
 
 * ‘bioprocess’ |:arrow_right:| ‘go_bp’ (`Gene Ontology-Biological Process <http://geneontology.org/>`__)
 
-* ‘anatomy’ |:arrow_right:| ‘ctd_anat’ (`CTD-Anatomy <http://ctdbase.org/>`__), ‘uberon’ (`UBERON ontology <http://obophenotype.github.io/uberon/>`__)
+* ‘anatomy’ |:arrow_right:| ‘ctd_anat’ (`CTD-Anatomy <http://ctdbase.org/>`__), ‘uberon’ (`UBERON ontology <http://obophenotype.github.io/uberon/>`__, ‘fma’ (`Foundation model of Anatomy <http://sig.biostr.washington.edu/projects/fm/AboutFM.html>`__))
 
 * ‘cell_component’ |:arrow_right:| ‘go_cc’ (`Gene Ontology-Cellular Component <http://geneontology.org/>`__)
 
@@ -348,14 +348,15 @@ Upload custom knowledge base/graph/ontology
 
 If you want to use a custom knowledge base that is not included in the availabe options, it is necessary to have two text files: **terms.txt** and **edges.txt**.
 
-The file **terms.txt** is a list of the entries of the custm knowledge base with the format:
+The file **terms.txt** is a list of the entries of the custom knowledge base with the format:
 
 ::
 
-   ID:1 Entry 1
-   ID:2 Entry 2
-   ID:3 entry 3
+   ID:1  Entry 1  Synonym1;Synonym2;Synonym3
+   ID:2  Entry 2
+   ID:3  Entry 3  Synonym1;
 
+Where the first colum corresponds to the identifier defined in knowledge base, the second column corresponds to the text associated with the entry/concept, and the third columns corresponds to the text of the synonym(s) associated with the entry.
 
 **edges.txt** is a list of *is-a* (child-parent) relations between the
 entries of the **terms.txt** file:
@@ -369,7 +370,7 @@ entries of the **terms.txt** file:
    In both files, elements in each line are separated by a tab ('\\t').
 
 Run the following code to generate the files for the custom knowledge
-base, indicating the filenames (**terms_filename** and **edges_filename**) and the desired name (**kb_name**):
+base, indicating the filenames (**terms_filename** and **edges_filename**) and the desired name (**kb_name**), which in this example is 'disease_KG':
 
 ::
 
