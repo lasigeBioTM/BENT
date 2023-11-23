@@ -30,7 +30,9 @@ To use the current version of BENT it is required:
 
 *  Required space between 5.5 GB - 10 GB 
    * Dependencies: 2.5 GB 
-   * Data: between 3.0 GB (base) or 7.5 GB (if you use all available knowlegde bases for Named Entity Linking)
+   * Data: between 3.0 GB (base) or 7.5 GB (if you use all available knowledge bases for Named Entity Linking)
+
+**NOTE**: Python Docker images (3.7 to 3.9) in `Docker Hub <https://hub.docker.com/_/python>`__ have Debian 11 as the base OS.
 
 
 Install the BENT package using pip:
