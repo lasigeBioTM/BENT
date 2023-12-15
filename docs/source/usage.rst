@@ -243,7 +243,7 @@ Example:
    bt.annotate(
            link=True,
            types={
-               'disease': 'medic'
+               'disease': 'medic',
                'chemical': 'chebi',
                'gene': 'ncbi_gene',
                'anatomical': 'uberon',
