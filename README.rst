@@ -24,7 +24,7 @@ Installation
 
 To use the current version of BENT it is required: 
 
-*  OS: Debian 
+*  OS: Debian>=11/Ubuntu>=20.04
 
 *  Python 3.7, 3.8 or 3.9
 
