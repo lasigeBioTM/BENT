@@ -214,7 +214,7 @@ BENT includes pre-process dictionaries that allow the linking of recognized enti
 
 * ‘bioprocess’ |:arrow_right:| ‘go_bp’ (`Gene Ontology-Biological Process <http://geneontology.org/>`__)
 
-* ‘anatomy’ |:arrow_right:| ‘ctd_anat’ (`CTD-Anatomy <http://ctdbase.org/>`__), ‘uberon’ (`UBERON ontology <http://obophenotype.github.io/uberon/>`__, ‘fma’ (`Foundation model of Anatomy <http://sig.biostr.washington.edu/projects/fm/AboutFM.html>`__))
+* ‘anatomy’ |:arrow_right:| ‘ctd_anat’ (`CTD-Anatomy <http://ctdbase.org/>`__), ‘uberon’ (`UBERON ontology <http://obophenotype.github.io/uberon/>`__), ‘fma’ (`Foundation model of Anatomy <http://sig.biostr.washington.edu/projects/fm/AboutFM.html>`__))
 
 * ‘cell_component’ |:arrow_right:| ‘go_cc’ (`Gene Ontology-Cellular Component <http://geneontology.org/>`__)
 

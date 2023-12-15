@@ -152,11 +152,9 @@ def parse_bioc_json_file(filename, include_text=True):
 def output_parsed_docs(parsed_data, out_dir, recognize=False):
 
     # Output parsed documents to out_dir in the BRAT format
-    if not os.path.exists(out_dir + 'txt/'):
-        os.mkdir(out_dir + 'txt/')
+    os.makedirs(f"{out_dir}txt/", exist_ok=True)
     
-    if not os.path.exists(out_dir + 'ann/'):
-        os.mkdir(out_dir + 'ann/')
+    os.makedirs(f"{out_dir}ann/", exist_ok=True)
 
     for doc_id in parsed_data:
         doc_text = parsed_data[doc_id][0]
@@ -226,8 +224,7 @@ def convert_input_files(format, in_dir=None, input_text=None, recognize=False):
 
             if output:
 
-                if not os.path.exists(out_dir):
-                    os.mkdir(out_dir)
+                os.makedirs(out_dir, exist_ok=True)
                 
                 output_parsed_docs(parsed_data, out_dir, recognize=recognize)
     """
@@ -557,9 +554,7 @@ def update_ner_file_with_nel_output(ner_dir, nel_run_ids, out_dir=None):
 
         if out_dir != None:
             out_filepath = out_dir + filename
-
-            if not os.path.exists(out_dir):
-                os.mkdir(out_dir)
+            os.makedirs(out_dir, exist_ok=True)
 
         with open(out_filepath, 'w' ) as out_file:
             out_file.write(final_output)   

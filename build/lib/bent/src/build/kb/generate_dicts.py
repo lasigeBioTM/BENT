@@ -13,8 +13,7 @@ def generate_dicts_4_kb(kb=None, mode='reel', terms_filename=None,
     
     out_dir = dict_dir + kb 
 
-    if not os.path.exists(out_dir):
-        os.mkdir(out_dir)
+    os.makedirs(out_dir, exist_ok=True)
 
     kb_obj = KnowledgeBase(kb, mode, terms_filename=terms_filename, 
         edges_filename=edges_filename, input_format=input_format)

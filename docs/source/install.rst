@@ -3,13 +3,15 @@ Installation
 
 To use the current version of BENT it is required: 
 
-*  OS: Ubuntu/Debian 
+*  OS: Debian 
 
 *  Python 3.7, 3.8 or 3.9
 
 *  Required space between 5.5 GB - 10 GB 
    * Dependencies: 2.5 GB 
    * Data: between 3.0 GB (base) or 7.5 GB (if you use all available knowlegde bases for Named Entity Linking)
+
+**NOTE**: Python Docker images (3.7 to 3.9) in `Docker Hub <https://hub.docker.com/_/python>`__ have Debian 11 as the base OS.
 
 
 Install the BENT package using pip:
@@ -38,6 +40,8 @@ The following knowledge bases can be configured:
 * 'go_bp' (`Gene Ontology-Biological Process <http://geneontology.org/>`__)
 
 * 'ctd_anat' (`CTD-Anatomy <http://ctdbase.org/>`__)
+
+* 'fma' (`Foundation model of Anatomy <http://sig.biostr.washington.edu/projects/fm/AboutFM.html>`__)
 
 * 'uberon' (`UBERON ontology <http://obophenotype.github.io/uberon/>`__)
 
@@ -70,3 +74,8 @@ You can download more knowledge bases later by specifying the desired knowledge 
 ::
 
    python -c "from bent.get_kbs import get_additional_kbs;get_additional_kbs([<kb1>, <kb2>])"
+
+Example: to download the NCBI Taxonomy and the NCBI Gene run: 
+
+::
+      python -c "from bent.get_kbs import get_additional_kbs;get_additional_kbs(['ncbi_taxon', 'ncbi_gene'])"

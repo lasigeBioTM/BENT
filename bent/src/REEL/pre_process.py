@@ -236,21 +236,17 @@ def pre_process(
     #-------------------------------------------------------------------------
     #                          Create directories
     #-------------------------------------------------------------------------
-    if not os.path.exists(cfg.tmp_dir):
-        os.mkdir(cfg.tmp_dir)
+    os.makedirs(cfg.tmp_dir, exist_ok=True)
 
-    if not os.path.exists(cfg.tmp_dir + run_id):
-        os.mkdir(cfg.tmp_dir + run_id)
+    os.makedirs(f"{cfg.tmp_dir}{run_id}", exist_ok=True)
 
-    if not os.path.exists(cfg.tmp_dir + 'REEL/'):
-        os.mkdir(cfg.tmp_dir + 'REEL/')
+    os.makedirs(f"{cfg.tmp_dir}REEL/", exist_ok=True)
 
-    if not os.path.exists(cfg.tmp_dir + 'REEL/cache/'):
-        os.mkdir(cfg.tmp_dir + 'REEL/cache/')
+    os.makedirs(f"{cfg.tmp_dir}REEL/cache/", exist_ok=True)
 
-    os.mkdir('{}{}/REEL/'.format(cfg.tmp_dir, run_id))
-    os.mkdir('{}{}/REEL/candidates'.format(cfg.tmp_dir, run_id))
-    os.mkdir('{}{}/REEL/results/'.format(cfg.tmp_dir, run_id))
+    os.makedirs(f"{cfg.tmp_dir}{run_id}/REEL/", exist_ok=True)
+    os.makedirs(f"{cfg.tmp_dir}{run_id}/REEL/candidates", exist_ok=True)
+    os.makedirs(f"{cfg.tmp_dir}{run_id}/REEL/results/", exist_ok=True)
     
     #-------------------------------------------------------------------------
     #                            Import KB info
@@ -259,7 +255,7 @@ def pre_process(
     # Load preprocessed dicts
     name_to_id = {}
     synonym_to_id = {}
-    kb_dicts_dir = '{}/data/kbs/dicts/{}/'.format(cfg.root_path, kb) 
+    kb_dicts_dir = f"{cfg.root_path}/data/kbs/dicts/{kb}/"
     
     with open(kb_dicts_dir + 'name_to_id.json', 'r') as dict_file:
         name_to_id = json.loads(dict_file.read())

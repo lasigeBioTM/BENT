@@ -70,9 +70,7 @@ def run_Ab3P(input_dir):
     # change to Ab3P directory
     cwd = os.getcwd()
     os.chdir(cfg.root_path + '/abbreviation_detector/Ab3P/')
-
-    if not os.path.exists('tmp/'):
-        os.mkdir('tmp/')
+    os.makedirs('tmp/', exist_ok=True)
 
     # Run Ab3P for each text file
     for filepath in filepaths:

@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: bent
-Version: 0.0.19
+Version: 0.0.25
 Summary: BENT: Biomedical Entity Annotator
 Home-page: https://github.com/lasigeBioTM/bent
 Author: Pedro Ruas
@@ -225,6 +225,19 @@ Classifier: Operating System :: POSIX :: Linux
 Classifier: License :: OSI Approved :: Apache Software License
 Requires-Python: >=3.7, <3.10
 License-File: LICENSE.txt
+Requires-Dist: obonet==0.3.0
+Requires-Dist: tensorflow-gpu==2.5.1
+Requires-Dist: transformers==4.9.0
+Requires-Dist: datasets==1.10.0
+Requires-Dist: torch==1.9.1
+Requires-Dist: networkx==2.5.1
+Requires-Dist: gdown==4.6.0
+Requires-Dist: rapidfuzz==2.0.2
+Requires-Dist: tqdm==4.62.2
+Requires-Dist: spacy==3.0.1
+Requires-Dist: scispacy==0.4.0
+Requires-Dist: seqeval==1.2.2
+Requires-Dist: orjson==3.8.5
 
 
 
@@ -252,13 +265,15 @@ Installation
 
 To use the current version of BENT it is required: 
 
-*  OS: Ubuntu/Debian 
+*  OS: Debian 
 
 *  Python 3.7, 3.8 or 3.9
 
 *  Required space between 5.5 GB - 10 GB 
    * Dependencies: 2.5 GB 
-   * Data: between 3.0 GB (base) or 7.5 GB (if you use all available knowlegde bases for Named Entity Linking)
+   * Data: between 3.0 GB (base) or 7.5 GB (if you use all available knowledge bases for Named Entity Linking)
+
+**NOTE**: Python Docker images (3.7 to 3.9) in `Docker Hub <https://hub.docker.com/_/python>`__ have Debian 11 as the base OS.
 
 
 Install the BENT package using pip:
@@ -320,6 +335,12 @@ You can download more knowledge bases later by specifying the desired knowledge 
 ::
 
    python -c "from bent.get_kbs import get_additional_kbs;get_additional_kbs([<kb1>, <kb2>])"
+
+
+Example: to download the NCBI Taxonomy and the NCBI Gene run: 
+
+::
+      python -c "from bent.get_kbs import get_additional_kbs;get_additional_kbs(['ncbi_taxon', 'ncbi_gene'])"
 
 
 Get started

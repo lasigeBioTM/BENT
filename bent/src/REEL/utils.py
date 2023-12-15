@@ -20,8 +20,7 @@ def check_if_candidates_dir(run_id):
     candidates_dir = '.tmp/{}/REEL/candidates/'.format(run_id) 
 
     # Create directories for candidates files
-    if not os.path.exists(candidates_dir):
-        os.mkdir(candidates_dir)
+    os.makedirs(candidates_dir, exist_ok=True)
 
     cand_files = os.listdir(candidates_dir)
     

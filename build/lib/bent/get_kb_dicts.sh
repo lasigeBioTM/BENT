@@ -65,6 +65,10 @@ elif [ $target_kb = 'ncbi_gene' ]
 then
     download_url='https://drive.google.com/uc?id=1dVJbSZYzTtkE6_v6eAQ4UNzQLtVWITLE'
 
+elif [ $target_kb = 'fma' ]
+then
+    download_url='https://drive.google.com/uc?id=1v_Kyi7mFg9hD8thaawd6ASNpwQSiix0N'
+
 fi
 
 gdown $download_url

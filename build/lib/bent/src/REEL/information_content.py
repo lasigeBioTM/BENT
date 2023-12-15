@@ -90,8 +90,7 @@ def generate_ic_file(run_id, candidates_dir, id_to_info):
     # in candidates file
     out_dir = ".tmp/{}/REEL/".format(run_id)
 
-    if not os.path.exists(out_dir):
-        os.mkdir(out_dir)
+    os.makedirs(out_dirkb_filename)
 
     output_file_name = out_dir + "ic" 
 

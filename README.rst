@@ -24,7 +24,7 @@ Installation
 
 To use the current version of BENT it is required: 
 
-*  OS: Ubuntu/Debian 
+*  OS: Debian 
 
 *  Python 3.7, 3.8 or 3.9
 
@@ -94,6 +94,12 @@ You can download more knowledge bases later by specifying the desired knowledge 
 ::
 
    python -c "from bent.get_kbs import get_additional_kbs;get_additional_kbs([<kb1>, <kb2>])"
+
+
+Example: to download the NCBI Taxonomy and the NCBI Gene run: 
+
+::
+      python -c "from bent.get_kbs import get_additional_kbs;get_additional_kbs(['ncbi_taxon', 'ncbi_gene'])"
 
 
 Get started

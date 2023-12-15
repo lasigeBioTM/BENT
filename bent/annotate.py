@@ -4,6 +4,7 @@ import random
 import string
 import spacy
 from tqdm import tqdm
+from pathlib import Path
 import bent.src.utils as utils
 from bent.src.ner import ner
 from bent.src.nel import nel
@@ -253,7 +254,7 @@ def annotate(recognize=False, link=False, types={}, input_text=None,
     run_id = ''.join(random.choices(string.ascii_uppercase + string.digits, 
         k=15)) 
     
-    os.mkdir(cfg.tmp_dir + run_id)
+    os.makedirs(cfg.tmp_dir + run_id, exist_ok=True)
 
     # Check if input arguments are valid
     utils.check_input_args(recognize, link, types, input_format,
@@ -266,7 +267,7 @@ def annotate(recognize=False, link=False, types={}, input_text=None,
     if out_dir != None:
         
         if not os.path.exists(out_dir):
-            os.mkdir(out_dir)
+            os.makedirs(out_dir, exist_ok=True)
     
     
 
@@ -282,17 +283,17 @@ def annotate(recognize=False, link=False, types={}, input_text=None,
         in_dir = '.tmp/'
     
         if not os.path.exists(in_dir):
-            os.mkdir(in_dir)
+            os.makedirs(in_dir, exist_ok=True)
 
         in_dir = '.tmp/{}/'.format(run_id)
 
         if not os.path.exists(in_dir):
-            os.mkdir(in_dir)
+            os.makedirs(in_dir, exist_ok=True)
 
         in_dir = '{}txt/'.format(in_dir)
         
         if not os.path.exists(in_dir):
-            os.mkdir(in_dir)
+            os.makedirs(in_dir, exist_ok=True)
         
         utils.convert_input_files(
             input_format, in_dir=in_dir, input_text=input_text, 
@@ -317,7 +318,7 @@ def annotate(recognize=False, link=False, types={}, input_text=None,
             tmp_out_dir = '{}ann/'.format(in_dir)
             
             if not os.path.exists(tmp_out_dir):
-                os.mkdir(tmp_out_dir)
+                os.makedirs(tmp_out_dir, exist_ok=True)
             
             dataset = recognizer(
                 in_dir, entity_types, tmp_out_dir, ner_model, 

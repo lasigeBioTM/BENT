@@ -8,9 +8,7 @@ import subprocess
 def get_additional_kbs(target_kbs):
 
     cwd = os.getcwd()
-
-    scripts_path = cfg.root_path
-    os.chdir(scripts_path)
+    os.chdir(cfg.root_path)
     
     #-------------------------------------------------------------------------
     #                           Download kb dicts
@@ -19,7 +17,7 @@ def get_additional_kbs(target_kbs):
     os.chmod('get_kb_dicts.sh', 0o755)
     
     kb_dicts_dir = cfg.root_path + '/data/kbs/dicts/'
-    kb_script = scripts_path + 'get_kb_dicts.sh'
+    kb_script = cfg.root_path + '/get_kb_dicts.sh'
 
     if len(target_kbs) >= 1:
         
