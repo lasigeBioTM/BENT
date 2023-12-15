@@ -18,7 +18,7 @@ def get_additional_kbs(target_kbs):
     
     os.chmod('get_kb_dicts.sh', 0o755)
     
-    kb_dicts_dir = cfg.root_path + 'data/kbs/dicts/'
+    kb_dicts_dir = cfg.root_path + '/data/kbs/dicts/'
     kb_script = scripts_path + 'get_kb_dicts.sh'
 
     if len(target_kbs) >= 1:
