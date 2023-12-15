@@ -84,15 +84,15 @@ def generate_ic_file(run_id, candidates_dir, id_to_info):
     out_string = str()
 
     for term in ic.keys():
-        out_string += term +'\t' + str(ic[term]) + '\n'
+        out_string += f"{term}\t{str(ic[term])}\n"
 
     # Create file ontology_pop with information content for all entities 
     # in candidates file
-    out_dir = ".tmp/{}/REEL/".format(run_id)
+    out_dir = f".tmp/{run_id}/REEL/"
 
-    os.makedirs(out_dirkb_filename)
+    os.makedirs(out_dir)
 
-    output_file_name = out_dir + "ic" 
+    output_file_name = f"{out_dir}ic" 
 
     with open(output_file_name, 'w') as ic_file:
         ic_file.write(out_string)

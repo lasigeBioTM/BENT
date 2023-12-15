@@ -18,7 +18,7 @@ class WordConcept:
     def __init__(self, partition):
     
         self.partition = partition
-        self.filepath = "{}/data/NILINKER/word_concept/wc_{}.json".format(cfg.root_path, partition)
+        self.filepath = f"{cfg.root_path}/data/NILINKER/word_concept/wc_{partition}.json"
         self.word2candidates = None
         self.word2id = None
         self.id2word = None
@@ -35,8 +35,7 @@ class WordConcept:
 
         # Load node_id_to_int
         with open(
-                "{}/data/NILINKER/embeddings/{}/node_id_to_int_{}.json"\
-                .format(cfg.root_path, self.partition, self.partition)) as in_file:
+                f"{cfg.root_path}/data/NILINKER/embeddings/{self.partition}/node_id_to_int_{self.partition}.json") as in_file:
             node_id_to_int = json.loads(in_file.read())
 
         # Create candidate2id and id2candidate
@@ -61,7 +60,7 @@ class WordConcept:
         word2candidates = {}
         
         # Load word-concept file into dict
-        with open(self.filepath, 'r', encoding='utf-8') as wc: 
+        with open(self.filepath, 'r', encoding='utf-8') as wc:
             word2candidates = json.loads(wc.read())
         
         # Create word2candidates with candidates int
@@ -116,7 +115,7 @@ def load_word_embeds(embeds_dir):
 
     embeds, vocabulary = [], []
 
-    with open(embeds_dir + 'word_embeddings.txt', 'r', encoding='utf-8') \
+    with open(f"{embeds_dir}word_embeddings.txt", 'r', encoding='utf-8') \
             as embed_file:
         
         for line in embed_file.readlines():
@@ -131,7 +130,7 @@ def load_word_embeds(embeds_dir):
 
     embeds_word2id = {}
     
-    with open(embeds_dir + 'word2id.json', 'r') as word2id_file:
+    with open(f"{embeds_dir}word2id.json", 'r') as word2id_file:
         embeds_word2id = json.loads(word2id_file.read())
         word2id_file.close()
  
@@ -252,7 +251,7 @@ def get_wc_embeds(partition):
     :rtype: Numpy array, Numpy array, WordConcept object
     """
 
-    embeds_dir = "{}/data/NILINKER/embeddings/{}/".format(cfg.root_path, partition)
+    embeds_dir = f"{cfg.root_path}/data/NILINKER/embeddings/{partition}/"
     word_embeds_filepath = embeds_dir 
     candidates_embeds_filepath = embeds_dir + partition + ".emb"
 
@@ -378,10 +377,10 @@ def get_kb_data(partition):
     :rtype: KnowledgeBase object
     """
 
-    source_filename = '{}/data/kbs/dicts/{}/id_to_name.json'.format(cfg.root_path, partition)
+    source_filename = f"{cfg.root_path}/data/kbs/dicts/{partition}/id_to_name.json"
 
     if partition == 'chebi':
-        source_filename = '{}/data/kbs/dicts/chebi/id_to_name_nilinker.json'.format(cfg.root_path)
+        source_filename = f"{cfg.root_path}/data/kbs/dicts/chebi/id_to_name_nilinker.json"
 
     with open(source_filename, 'r') as in_file:
         id_to_name = json.loads(in_file.read()) 

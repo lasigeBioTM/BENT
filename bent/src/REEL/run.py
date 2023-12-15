@@ -26,7 +26,7 @@ def run(run_id, ner_dir, kb, entity_type, abbreviations):
     :rtype: str
     """
 
-    nel_run_name = '{}/{}'.format(run_id, entity_type)
+    nel_run_name = f"{run_id}/{entity_type}"
 
     # Use relations extracted from external corpora and relations described in 
     # the targer knowledge base
@@ -57,14 +57,13 @@ def run(run_id, ner_dir, kb, entity_type, abbreviations):
     #         and ranks each candidate.                                           
     #------------------------------------------------------------------------#
     if kb != 'ncbi_gene':
-        ppr_dir = '{}/src/REEL/'.format(cfg.root_path)
-        comm = 'java -classpath :{} ppr_for_ned_all {} ppr_ic'.\
-            format(ppr_dir, nel_run_name)
+        ppr_dir = f"{cfg.root_path}/src/REEL/"
+        comm = f"java -classpath :{ppr_dir} ppr_for_ned_all {nel_run_name} ppr_ic"
         os.system(comm)
 
     #------------------------------------------------------------------------#
     #                         REEL: Post-processing                                                                      
     #------------------------------------------------------------------------# 
     process_results(nel_run_name, entity_type, kb)
-    
+
     return nel_run_name
