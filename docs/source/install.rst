@@ -3,9 +3,9 @@ Installation
 
 To use the current version of BENT it is required: 
 
-*  OS: Debian 
+*  OS: Debian>=11/Ubuntu>=20.04
 
-*  Python 3.7, 3.8 or 3.9
+*  *  Python >=3.7, <=3.10.13
 
 *  Required space between 5.5 GB - 10 GB 
    * Dependencies: 2.5 GB 
