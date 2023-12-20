@@ -17,7 +17,7 @@ candidate_string += "url:{4}\tname:{5}\tnormalName:{6}\tnormalWikiTitle:{7}\t\
 
 def check_if_candidates_dir(run_id):
 
-    candidates_dir = '.tmp/{}/REEL/candidates/'.format(run_id) 
+    candidates_dir = f".tmp/{run_id}/REEL/candidates/"
 
     # Create directories for candidates files
     os.makedirs(candidates_dir, exist_ok=True)

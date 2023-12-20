@@ -3,13 +3,13 @@ from setuptools import setup, find_packages
 
 setup(
     name="bent",
-    version="0.0.27",
+    version="0.0.31",
     description = "BENT: Biomedical Entity Annotator",
     long_description=open("README.rst").read(),
     author = "Pedro Ruas",
     author_email = "pedrosimruas@gmail.com",
     packages = find_packages(),
-    python_requires=">=3.7, <3.10",
+    python_requires=">=3.7, <=3.10.13",
     license = open("LICENSE.txt").read(),
     url="https://github.com/lasigeBioTM/bent",
     keywords=["text mining", "natural language processing", "entity extraction",

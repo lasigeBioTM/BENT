@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: bent
-Version: 0.0.25
+Version: 0.0.31
 Summary: BENT: Biomedical Entity Annotator
 Home-page: https://github.com/lasigeBioTM/bent
 Author: Pedro Ruas
@@ -223,21 +223,24 @@ Classifier: Programming Language :: Unix Shell
 Classifier: Programming Language :: Java
 Classifier: Operating System :: POSIX :: Linux
 Classifier: License :: OSI Approved :: Apache Software License
-Requires-Python: >=3.7, <3.10
+Requires-Python: >=3.7, <=3.10.13
 License-File: LICENSE.txt
 Requires-Dist: obonet==0.3.0
-Requires-Dist: tensorflow-gpu==2.5.1
-Requires-Dist: transformers==4.9.0
-Requires-Dist: datasets==1.10.0
-Requires-Dist: torch==1.9.1
+Requires-Dist: tensorflow-gpu==2.5.1; python_version < "3.10"
+Requires-Dist: tensorflow==2.13.1; python_version == "3.10"
+Requires-Dist: transformers==4.9.0; python_version < "3.10"
+Requires-Dist: transformers==4.35.2; python_version == "3.10"
+Requires-Dist: torch==1.9.1; python_version < "3.10"
+Requires-Dist: torch==2.0; python_version == "3.10"
 Requires-Dist: networkx==2.5.1
 Requires-Dist: gdown==4.6.0
 Requires-Dist: rapidfuzz==2.0.2
-Requires-Dist: tqdm==4.62.2
-Requires-Dist: spacy==3.0.1
-Requires-Dist: scispacy==0.4.0
+Requires-Dist: tqdm==4.66
+Requires-Dist: spacy==3.0.1; python_version < "3.10"
+Requires-Dist: spacy==3.7.2; python_version == "3.10"
 Requires-Dist: seqeval==1.2.2
 Requires-Dist: orjson==3.8.5
+Requires-Dist: psutil
 
 
 
@@ -265,7 +268,7 @@ Installation
 
 To use the current version of BENT it is required: 
 
-*  OS: Debian 
+*  OS: Debian>=11/Ubuntu>=20.04
 
 *  Python 3.7, 3.8 or 3.9
 
@@ -339,8 +342,9 @@ You can download more knowledge bases later by specifying the desired knowledge 
 
 Example: to download the NCBI Taxonomy and the NCBI Gene run: 
 
-::
-      python -c "from bent.get_kbs import get_additional_kbs;get_additional_kbs(['ncbi_taxon', 'ncbi_gene'])"
+::    
+
+    python -c "from bent.get_kbs import get_additional_kbs;get_additional_kbs(['ncbi_taxon', 'ncbi_gene'])"
 
 
 Get started

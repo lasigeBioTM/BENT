@@ -10,13 +10,11 @@ def process_results(run_id, entity_type, kb):
     output a JSON file in the directory 'tmp/REEL/results/<run_id>/."""
 
     if kb != 'ncbi_gene':
-        results_filepath = '{}{}/REEL/results/candidate_scores'.format(
-            cfg.tmp_dir, run_id)
+        results_filepath = f"{cfg.tmp_dir}{run_id}/REEL/results/candidate_scores"
 
         # Import PPR output
         with open(results_filepath, 'r') as results:
             data = results.readlines()
-            results.close
     
         linked_entities = {}
         doc_id = ''
@@ -40,7 +38,7 @@ def process_results(run_id, entity_type, kb):
                         linked_entities[doc_id] = {entity: (answer, entity_type)}
     
     elif kb == 'ncbi_gene':
-        results_filepath = cfg.tmp_dir + run_id + '/REEL/candidates/'
+        results_filepath = f"{cfg.tmp_dir}{run_id}/REEL/candidates/"
         results_files = os.listdir(results_filepath)
         linked_entities = {}
         found_entity = False
@@ -74,7 +72,7 @@ def process_results(run_id, entity_type, kb):
                             entity = line.split('\t')[1].strip('text:')
                             found_entity = True
     
-    out_dir = '{}{}/REEL/results/'.format(cfg.tmp_dir, run_id)
+    out_dir = f"{cfg.tmp_dir}{run_id}/REEL/results/"
     
     for doc in linked_entities.keys():
         doc_results = linked_entities[doc]

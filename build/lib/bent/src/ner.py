@@ -467,7 +467,7 @@ class ner():
                 
                 for model in self.models:
                     raw_annots = self.models[model](
-                        sent.text, padding=True, truncation=True)
+                        sent.text)#truncation=True, padding=True) 
                     annots_up = ner.correct_tokens(
                         sent, raw_annots, model, self.stopwords)
 

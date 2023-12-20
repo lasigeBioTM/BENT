@@ -70,7 +70,7 @@ def build_entity_candidate_dict(
         ner_annots = None
         doc_id = doc.strip('.ann')
 
-        with open(ner_dir + doc, 'r') as ner_doc:
+        with open(f"{ner_dir}{doc}", 'r') as ner_doc:
             ner_annots = ner_doc.readlines()
             ner_doc.close()
         
@@ -261,10 +261,10 @@ def pre_process(
         name_to_id = json.loads(dict_file.read())
         dict_file.close()
 
-    synonyms_filepath = kb_dicts_dir + 'synonym_to_id_full.json'
+    synonyms_filepath = f"{kb_dicts_dir}synonym_to_id_full.json"
 
     if 'synonym_to_id_full.json' not in os.listdir(kb_dicts_dir):
-        synonyms_filepath = kb_dicts_dir + 'synonym_to_id.json'
+        synonyms_filepath = f"{kb_dicts_dir}synonym_to_id.json"
     
     with open(synonyms_filepath, 'r') as dict_file2:
         synonym_to_id = json.loads(dict_file2.read())
@@ -273,7 +273,7 @@ def pre_process(
     id_to_info = None
     
     if kb != 'ncbi_gene':
-        id_to_info_filepath = kb_dicts_dir + 'id_to_info.json'
+        id_to_info_filepath = f"{kb_dicts_dir}id_to_info.json"
 
         with open(id_to_info_filepath, 'r') as dict_file3:
             id_to_info = json.loads(dict_file3.read())
@@ -282,7 +282,7 @@ def pre_process(
     #-------------------------------------------------------------------------
     #                  Import cache file (if available)
     #-------------------------------------------------------------------------
-    kb_cache_filename = '{}/REEL/cache/{}.json'.format(cfg.tmp_dir, kb)
+    kb_cache_filename = f"{cfg.tmp_dir}/REEL/cache/{kb}.json"
     kb_cache = {}
 
     if os.path.exists(kb_cache_filename):
@@ -311,13 +311,13 @@ def pre_process(
     extracted_relations = {}
     
     if link_mode == 'corpus' or link_mode == 'kb_corpus': 
-        relations_dir = '{}/data/relations/'.format(cfg.root_path)
+        relations_dir = f"{cfg.root_path}/data/relations/"
         rel_filenames = os.listdir(relations_dir)    
-        rel_filename = '{}_{}_relations.json'.format(entity_type, kb)
+        rel_filename = f"{entity_type}_{kb}_relations.json"
 
         if rel_filename in rel_filenames:
 
-            with open(relations_dir + rel_filename, 'r') as rel_file:
+            with open(f"{relations_dir}{rel_filename}", 'r') as rel_file:
                 extracted_relations = json.loads(rel_file.read())
                 rel_file.close()
   
@@ -326,11 +326,11 @@ def pre_process(
     kb_edges = []
     
     if kb != 'ncbi_gene':
-        edges_filepath = kb_dicts_dir + 'node_to_node.json'
+        edges_filepath = f"{kb_dicts_dir}node_to_node.json"
         
         with open(edges_filepath, 'r') as dict_file4:
             kb_edges = json.loads(dict_file4.read())
-            dict_file4.close() 
+            dict_file4.close()
 
     #-------------------------------------------------------------------------
     #                   Build candidates lists for the entities
@@ -343,9 +343,9 @@ def pre_process(
     # Prepare dataset for candidate generation
     changed_cache_final, \
             kb_cache_up = build_entity_candidate_dict(
-                            ner_dir, candidates_dir, 
-                            kb, id_to_info, name_to_id, 
-                            synonym_to_id, 
+                            ner_dir, candidates_dir,
+                            kb, id_to_info, name_to_id,
+                            synonym_to_id,
                             kb_edges, link_mode, extracted_relations,
                             kb_cache, entity_type, abbreviations, 
                             min_match_score, nil_model_name=nil_mode,

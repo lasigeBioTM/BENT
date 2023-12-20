@@ -31,9 +31,16 @@ apt-get update && apt-get install -y default-jdk && apt-get autoclean -y
 #    Retrieve Spacy model files
 # ---------------------------------------------------------------------------
 echo 'Retrieving Spacy model files...'
+python_version=$(python -c 'import sys; print(sys.version_info[1])')
 
-pip install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.4.0/en_core_sci_lg-0.4.0.tar.gz
+if [ "$python_version" -lt 10 ];then
+    pip install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.4.0/en_core_sci_lg-0.4.0.tar.gz
 
+
+elif [ "$python_version" -ge 10 ];then
+    pip install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.3/en_core_sci_lg-0.5.3.tar.gz
+
+fi
 # ---------------------------------------------------------------------------
 #            Download and prepare abbreviation detector AB3P
 # ---------------------------------------------------------------------------
