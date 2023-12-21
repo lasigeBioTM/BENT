@@ -78,4 +78,5 @@ You can download more knowledge bases later by specifying the desired knowledge 
 Example: to download the NCBI Taxonomy and the NCBI Gene run: 
 
 ::
+
       python -c "from bent.get_kbs import get_additional_kbs;get_additional_kbs(['ncbi_taxon', 'ncbi_gene'])"
