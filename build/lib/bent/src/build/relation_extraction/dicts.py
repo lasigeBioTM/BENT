@@ -210,7 +210,7 @@ def buid_dict(entity_type, kb):
 
     filenames = []
     
-    if entity_type == 'chemical':
+    if entity_type == 'chemical': #or entity_type == 'NILChem': Is this also needed?
 
         if kb == 'chebi':
             filenames = ['CHR']
@@ -218,7 +218,7 @@ def buid_dict(entity_type, kb):
         elif kb == 'ctd_chem':
             filenames = ['BC5CDR_train', 'BC5CDR_dev']
 
-    elif entity_type == 'disease':
+    elif entity_type == 'disease': #or entity_type == 'NILDis': or this?
         
         if kb == 'medic':
             filenames = ['BC5CDR_train', 'BC5CDR_dev']
@@ -226,7 +226,7 @@ def buid_dict(entity_type, kb):
     elif entity_type == 'bioprocess':
         pass
 
-    elif entity_type == 'gene':
+    elif entity_type == 'gene': #or entity_type == 'NILGene': and this?
         
         if kb == 'ncbi_gene':
             filenames = ['phenotype_to_genes.txt']
