@@ -48,7 +48,11 @@ class ner():
                 
                 if len(types) > 1:
                     self.disease_prob = ner.load_probabilities_file(dict_filename)
-                
+            
+            if 'NILDis' in types:
+                model_name = "pruas/BENT-PubMedBERT-NER-Disease"
+                self.models['NILDis'] = ner.load_transformer_model(model_name)
+
             if 'chemical' in types:
                 model_name = "pruas/BENT-PubMedBERT-NER-Chemical"
                 self.models['chemical'] = ner.load_transformer_model(model_name)
@@ -56,6 +60,10 @@ class ner():
                 
                 if len(types) > 1:
                     self.chemical_prob = ner.load_probabilities_file(dict_filename)
+            
+            if 'NILChem' in types:
+                model_name = "pruas/BENT-PubMedBERT-NER-Chemical"
+                self.models['NILChem'] = ner.load_transformer_model(model_name)
            
             if 'gene' in types:
                 model_name = "pruas/BENT-PubMedBERT-NER-Gene"
@@ -64,6 +72,10 @@ class ner():
                 
                 if len(types) > 1:
                     self.gene_prob = ner.load_probabilities_file(dict_filename)
+            
+            if 'NILGene' in types:
+                model_name = "pruas/BENT-PubMedBERT-NER-Gene"
+                self.models['NILGene'] = ner.load_transformer_model(model_name)
 
             if 'organism' in types:
                 model_name = "pruas/BENT-PubMedBERT-NER-Organism"

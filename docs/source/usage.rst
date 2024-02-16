@@ -30,11 +30,11 @@ BENT includes 10 NER models. Each model corresponds to `PubMedBERT <https://hugg
 
 The models and the description of the training datasets are stored in `Hugging Face <https://huggingface.co/>`__. The available models are:
 
-* ‘disease’: disease entities.
+* ‘disease’ or ‘NILDis’: disease entities.
 
-* ‘chemical’: chemical entities.
+* ‘chemical’ or ‘NILChem’: chemical entities.
 
-* ‘gene’: gene and protein entities.
+* ‘gene’ or ‘NILGene’: gene and protein entities.
 
 * ‘organism’: organism (species, genus, …) entities.
 

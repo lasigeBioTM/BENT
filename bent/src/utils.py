@@ -28,7 +28,7 @@ def check_input_types(types):
         available_types = [
             'disease', 'chemical', 'gene', 'organism', 'bioprocess', 
             'anatomical', 'cell_component', 'cell_line', 'cell_type', 
-            'variant']
+            'variant', 'NILDis', 'NILChem', 'NILGene']
        
         for ent_type in types:
             
@@ -37,7 +37,7 @@ def check_input_types(types):
                     '{} is an invalid entity type to recognize! Options:\
                     "disease", "chemical", "gene", "organism", "bioprocess", \
                     "bioprocess", "anatomical", "cell_component", "cell_line",\
-                    "cell_type", "variant"'.format(ent_type)
+                    "cell_type", "variant", "NILDis", "NILChem", "NILGene"'.format(ent_type)
                         
 
 def check_input_args(recognize, link, types, input_format, input_text, 

@@ -110,7 +110,7 @@ def import_hpo_annotations(entity_type):
             if entity_type == 'phenotype':
                 relations_temp = update_dict(gene_id, hp_id, relations_temp)
 
-            elif entity_type == 'gene':
+            elif entity_type == 'gene' or entity_type == 'NILGene':
                 relations_temp = update_dict(hp_id, gene_id, relations_temp)
 
         line_count += 1
@@ -179,12 +179,12 @@ def parse_bc5cd5_relations(entity_type, subset):
                     chemical_id = 'MESH_' + line_data[2]
                     disease_id = 'MESH_' + line_data[3].strip("\n")
 
-                    if entity_type == "disease":
+                    if entity_type == "disease" or entity_type == "NILDis":
                         # Get the disease-disease relations
                         relations_temp = update_dict(
                             chemical_id, disease_id, relations_temp)
                     
-                    elif entity_type == "chemical":
+                    elif entity_type == "chemical" or entity_type == "NILChem":
                         # Get the chemical-chemical relations
                         
                         relations_temp = update_dict(
@@ -210,7 +210,7 @@ def buid_dict(entity_type, kb):
 
     filenames = []
     
-    if entity_type == 'chemical':
+    if entity_type == 'chemical' or entity_type == 'NILChem':
 
         if kb == 'chebi':
             filenames = ['CHR']
@@ -218,7 +218,7 @@ def buid_dict(entity_type, kb):
         elif kb == 'ctd_chem':
             filenames = ['BC5CDR_train', 'BC5CDR_dev']
 
-    elif entity_type == 'disease':
+    elif entity_type == 'disease' or entity_type == 'NILDis':
         
         if kb == 'medic':
             filenames = ['BC5CDR_train', 'BC5CDR_dev']
@@ -226,7 +226,7 @@ def buid_dict(entity_type, kb):
     elif entity_type == 'bioprocess':
         pass
 
-    elif entity_type == 'gene':
+    elif entity_type == 'gene' or entity_type == 'NILGene':
         
         if kb == 'ncbi_gene':
             filenames = ['phenotype_to_genes.txt']
@@ -264,8 +264,11 @@ def buid_dict(entity_type, kb):
 
 def build_relations_dicts():
       
-    pairs = [('disease', 'medic'), ('chemical', 'chebi'), 
-        ('bioprocess', 'go_bp'), ('gene', 'ncbi_gene'), ('chemical', 'ctd_chem')]
+    pairs = [('disease', 'medic'), ('NILDis', 'medic'), 
+             ('chemical', 'chebi'), ('NILChem', 'chebi'), 
+             ('bioprocess', 'go_bp'), ('gene', 'ncbi_gene'), 
+             ('NILGene', 'ncbi_gene'), ('chemical', 'ctd_chem'),
+             ('NILChem', 'ctd_chem')]
    
     for pair in pairs:
         buid_dict(pair[0], pair[1])
