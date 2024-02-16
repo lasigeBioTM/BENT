@@ -48,6 +48,15 @@ class ner():
                 
                 if len(types) > 1:
                     self.disease_prob = ner.load_probabilities_file(dict_filename)
+
+            #I don't know if this part is needed, but adding it here
+            """if 'NILDis' in types:
+                model_name = "pruas/BENT-PubMedBERT-NER-Disease"
+                self.models['NILDis'] = ner.load_transformer_model(model_name)
+                dict_filename = '{}data/overlapping_entities/disease.json'.format(module_root_path)
+                #If it is, does the disease/gene/chem_prob need to be changed/added a new prob to __slots__?
+                if len(types) > 1:
+                    self.disease_prob = ner.load_probabilities_file(dict_filename)"""
                 
             if 'chemical' in types:
                 model_name = "pruas/BENT-PubMedBERT-NER-Chemical"
@@ -56,6 +65,15 @@ class ner():
                 
                 if len(types) > 1:
                     self.chemical_prob = ner.load_probabilities_file(dict_filename)
+
+            #Same here
+            """if 'NILChem' in types:
+                model_name = "pruas/BENT-PubMedBERT-NER-Chemical"
+                self.models['NILChem'] = ner.load_transformer_model(model_name)
+                dict_filename = '{}data/overlapping_entities/chemical.json'.format(module_root_path)
+                
+                if len(types) > 1:
+                    self.chemical_prob = ner.load_probabilities_file(dict_filename)"""
            
             if 'gene' in types:
                 model_name = "pruas/BENT-PubMedBERT-NER-Gene"
@@ -64,6 +82,15 @@ class ner():
                 
                 if len(types) > 1:
                     self.gene_prob = ner.load_probabilities_file(dict_filename)
+
+            #And Here
+            """if 'NILGene' in types:
+                model_name = "pruas/BENT-PubMedBERT-NER-Gene"
+                self.models['NILGene'] = ner.load_transformer_model(model_name)
+                dict_filename = '{}/data/overlapping_entities/gene.json'.format(module_root_path)
+                
+                if len(types) > 1:
+                    self.gene_prob = ner.load_probabilities_file(dict_filename)"""
 
             if 'organism' in types:
                 model_name = "pruas/BENT-PubMedBERT-NER-Organism"
@@ -313,10 +340,21 @@ class ner():
         if ent_type == 'disease':
             target_dict = self.disease_prob
 
+        #Or is adding this enought to distinguish between NIL and non-NIL?
+        #I supposed the _prob also need to be changed here if in the code before they need to be changed? 
+        if ent_type == 'NILDis':
+            target_dict = self.disease_prob
+
         if ent_type == 'chemical':
             target_dict = self.chemical_prob
 
+        if ent_type == 'NILChem':
+            target_dict = self.chemical_prob
+
         if ent_type == 'gene':
+            target_dict = self.gene_prob
+
+        if ent_type == 'NILGene':
             target_dict = self.gene_prob
 
         if ent_type == 'organism':
