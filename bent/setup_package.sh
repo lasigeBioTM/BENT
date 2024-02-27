@@ -61,7 +61,8 @@ cd ../../
 ## 2. Install Ab3P
 git clone https://github.com/ncbi-nlp/Ab3P.git
 cd Ab3P
-sed -i 's/** location of NCBITextLib **/../NCBITextLib/' Makefile
+sed -i "s/\*\* location of NCBITextLib \*\*/..\/NCBITextLib/" Makefile
+sed -i "s/\*\* location of NCBITextLib \*\*/..\/NCBITextLib/" lib/Makefile
 make
 
 cd $cwd
