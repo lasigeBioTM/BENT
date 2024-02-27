@@ -62,7 +62,7 @@ cd ../../
 git clone https://github.com/ncbi-nlp/Ab3P.git
 cd Ab3P
 sed -i "s/\*\* location of NCBITextLib \*\*/..\/NCBITextLib/" Makefile
-sed -i "s/\*\* location of NCBITextLib \*\*/..\/NCBITextLib/" lib/Makefile
+sed -i "s/\*\* location of NCBITextLib \*\*/..\/..\/NCBITextLib/" lib/Makefile
 make
 
 cd $cwd
