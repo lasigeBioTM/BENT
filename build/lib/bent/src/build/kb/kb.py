@@ -71,9 +71,7 @@ class KnowledgeBase:
                     
             elif self.kb == 'ncbi_taxon':
                 self.load_ncbi_taxon()
-            #elif self.kb in self.csv_file or self.input_format == 'csv':
-            #    self.load_csv()
-            
+     
             elif self.kb == 'ncbi_gene':
                 self.load_ncbi_gene()
             
@@ -102,11 +100,11 @@ class KnowledgeBase:
                         'uberon': 'uberon-basic'
                         }
 
-        if self.kb in filepaths.keys():
+        if self.kb in filepaths:
             filepath += filepaths[self.kb] + '.obo' 
        
         else:
-            filepath += + self.kb_filename
+            filepath += self.kb_filename
         
         name_to_id = {}
         id_to_name = {}
@@ -122,13 +120,13 @@ class KnowledgeBase:
         for node in  graph.nodes(data=True):
             add_node = False
             
-            if "name" in node[1].keys():
+            if "name" in node[1]:
                 node_id, node_name = node[0], node[1]["name"]
 
                 if self.mode == 'reel':
                     node_id = node_id.replace(':', '_')
                 
-                if self.kb == "go_bp": 
+                if self.kb == "go_bp":
                     # For go_bp, ensure that only Biological Process 
                     # concepts are considered
                     
@@ -165,14 +163,14 @@ class KnowledgeBase:
                         alt_id_to_id[alt_id.replace(':', '_')] = node_id
 
                 if 'is_obsolete' in node[1].keys() and \
-                        node[1]['is_obsolete'] == True:
+                        node[1]['is_obsolete'] is True:
                     add_node = False
                     del name_to_id[node_name]
                     del id_to_name[node_id]
                 
                 # Check parents for this node
-                if 'is_a' in node[1].keys() and add_node: 
-                    # The root node of the ontology does not 
+                if 'is_a' in node[1].keys() and add_node:
+                    # The root node of the ontology does not
                     # have is_a relationships
 
                     if len(node[1]['is_a']) == 1: 
@@ -205,18 +203,18 @@ class KnowledgeBase:
 
                 if "xref" in node[1].keys() and add_node:
 
-                    if self.kb == "hp": 
+                    if self.kb == "hp":
                         # Map UMLS concepts to HPO concepts
                         for xref in node[1]['xref']:
                             if xref[:4] == "UMLS":
                                 umls_id = xref.strip("UMLS:")
                                 umls_to_hp[umls_id] =  node_id 
         
-        if self.kb in self.root_dict.keys():
+        if self.kb in self.root_dict:
             root_concept_name = self.root_dict[self.kb][1]
-            root_id = str()
+            root_id = ""
         
-            if root_concept_name not in name_to_id.keys():
+            if root_concept_name not in name_to_id:
                 root_id = self.root_dict[self.kb][0]
                 name_to_id[root_concept_name] = root_id
                 id_to_name[root_id] = root_concept_name
@@ -241,7 +239,7 @@ class KnowledgeBase:
             num_descendants = len(nx.descendants(kb_graph, node))
 
             id_to_info[node] = (
-                kb_graph.out_degree(node), kb_graph.in_degree(node), 
+                kb_graph.out_degree(node), kb_graph.in_degree(node),
                 num_descendants)
 
         node_to_node = {}
@@ -494,7 +492,7 @@ class KnowledgeBase:
         edges = []
 
         # import concept names
-        with open(self.terms_filename, 'r') as in_file:
+        with open(self.terms_filename, 'r', encoding="utf-8") as in_file:
             data = in_file.readlines()
 
             for line in data:
@@ -515,7 +513,7 @@ class KnowledgeBase:
         # import relations between concepts
         edges = []
 
-        with open(self.edges_filename, 'r') as in_file:
+        with open(self.edges_filename, 'r', encoding="utf-8") as in_file:
             data = in_file.readlines()
 
             for line in data:
@@ -574,7 +572,7 @@ class KnowledgeBase:
         ancestors_count = {}
 
         edges = [] 
-        terms_to_include = [],
+        terms_to_include = []
 
         # Import relations between ChEBI concepts
         with open(kb_dir + 'relation_3star.tsv') as relations_file:
@@ -594,7 +592,7 @@ class KnowledgeBase:
                     if term2 not in terms_to_include:
                         terms_to_include.append(term2)
 
-                    if term1 in ancestors_count.keys():
+                    if term1 in ancestors_count:
                         added = ancestors_count[term1]
                         added += 1
                         ancestors_count[term1] = added
@@ -652,7 +650,7 @@ class KnowledgeBase:
             child = edge[0]
             parent = edge[1]
 
-            if child in ancestors_count.keys() and ancestors_count[child] == 1:
+            if child in ancestors_count and ancestors_count[child] == 1:
                 # The term has only 1 direct ancestor
                 child_to_parent[child] = parent
 

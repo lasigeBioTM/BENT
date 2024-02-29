@@ -50,6 +50,8 @@ cwd=$(pwd)
 mkdir "${package_path}/abbreviation_detector/"
 cd "${package_path}/abbreviation_detector/"
 
+apt-get install g++
+
 git clone https://github.com/ncbi-nlp/NCBITextLib.git
 
 # 1. Install NCBITextLib
@@ -61,7 +63,8 @@ cd ../../
 ## 2. Install Ab3P
 git clone https://github.com/ncbi-nlp/Ab3P.git
 cd Ab3P
-sed -i 's/** location of NCBITextLib **/../NCBITextLib/' Makefile
+sed -i "s#\*\* location of NCBITextLib \*\*#../NCBITextLib#" Makefile
+sed -i "s#\*\* location of NCBITextLib \*\*#../NCBITextLib#" lib/Makefile
 make
 
 cd $cwd

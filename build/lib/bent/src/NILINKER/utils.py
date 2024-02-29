@@ -7,18 +7,29 @@ from rapidfuzz import process, fuzz
 
 
 class WordConcept:
-    """Class representing a word-concept (WC) dictionary object associated with 
-    a given KB. It includes mappings between words and WC int ids, words and 
+    """Class representing a word-concept (WC) dictionary object associated with
+    a given KB. It includes mappings between words and WC int ids, words and
     candidates, etc.
     """
-    
-    __slots__ = ['partition', 'filepath', 'word2candidates', 'word2id',
-        'id2word', 'candidate_num', 'candidate2id', 'id2candidate', 
-        'root_concept_int' ]
+
+    __slots__ = [
+        "partition",
+        "filepath",
+        "word2candidates",
+        "word2id",
+        "id2word",
+        "candidate_num",
+        "candidate2id",
+        "id2candidate",
+        "root_concept_int",
+    ]
+
     def __init__(self, partition):
-    
+
         self.partition = partition
-        self.filepath = f"{cfg.root_path}/data/NILINKER/word_concept/wc_{partition}.json"
+        self.filepath = (
+            f"{cfg.root_path}/data/NILINKER/word_concept/wc_{partition}.json"
+        )
         self.word2candidates = None
         self.word2id = None
         self.id2word = None
@@ -26,46 +37,49 @@ class WordConcept:
         self.candidate2id = None
         self.id2candidate = None
         self.root_concept_int = None
-        
+
     def build(self):
-        """Fill a WordConcept object with info about words belonging to 
-        the considered Word-Concept (WC) dict, and candidates and respectives 
-        int ids. (*note: Candidate int ids are distinct from WC words ids). 
+        """Fill a WordConcept object with info about words belonging to
+        the considered Word-Concept (WC) dict, and candidates and respectives
+        int ids. (*note: Candidate int ids are distinct from WC words ids).
         """
 
         # Load node_id_to_int
         with open(
-                f"{cfg.root_path}/data/NILINKER/embeddings/{self.partition}/node_id_to_int_{self.partition}.json") as in_file:
+            f"{cfg.root_path}/data/NILINKER/embeddings/{self.partition}/node_id_to_int_{self.partition}.json"
+        ) as in_file:
             node_id_to_int = json.loads(in_file.read())
 
         # Create candidate2id and id2candidate
         id2candidate, candidate2id = {}, {}
-        
+
         for concept in node_id_to_int.keys():
             candidate_int = node_id_to_int[concept]
-            candidate2id[concept] = candidate_int 
+            candidate2id[concept] = candidate_int
             id2candidate[candidate_int] = concept
 
         # Add int for the root concept to wc
-        root_dict = {"go_bp": ("GO:0008150", "biological_process"), 
-                    "chebi": ("CHEBI:00", "root"), 
-                    "hp": ("HP:0000001", "All"), 
-                    "medic": ("MESH:C", "Diseases"), 
-                    "ctd_anat": ("MESH:A", "Anatomy"), 
-                    "ctd_chem": ("MESH:D", "Chemicals")}
-        root_concept_kb_id= root_dict[self.partition][0]
+        root_dict = {
+            "go_bp": ("GO:0008150", "biological_process"),
+            "chebi": ("CHEBI:00", "root"),
+            "hp": ("HP:0000001", "All"),
+            "medic": ("MESH:C", "Diseases"),
+            "ctd_anat": ("MESH:A", "Anatomy"),
+            "ctd_chem": ("MESH:D", "Chemicals"),
+        }
+        root_concept_kb_id = root_dict[self.partition][0]
         root_concept_int = candidate2id[root_concept_kb_id]
         self.root_concept_int = root_concept_int
 
         word2candidates = {}
-        
+
         # Load word-concept file into dict
-        with open(self.filepath, 'r', encoding='utf-8') as wc:
+        with open(self.filepath, "r", encoding="utf-8") as wc:
             word2candidates = json.loads(wc.read())
-        
+
         # Create word2candidates with candidates int
         vocab_size = len(node_id_to_int.keys())
-        
+
         word2candidates_up, wc_word2id, id2word = {}, {}, {}
         word_count = 0
 
@@ -76,7 +90,7 @@ class WordConcept:
 
             candidates = word2candidates[word]
             candidates_int = []
-            
+
             for candidate in candidates:
                 # Convert concept ID in int
                 candidate_int = node_id_to_int[candidate]
@@ -87,24 +101,24 @@ class WordConcept:
 
                 else:
                     candidate_int_up = candidate_int
-                
+
                 candidates_int.append(candidate_int_up)
 
             word2candidates_up[word] = candidates_int
-            
+
         self.word2candidates = word2candidates_up
-        self.word2id = wc_word2id 
+        self.word2id = wc_word2id
         self.id2word = id2word
         self.candidate2id = candidate2id
         self.id2candidate = id2candidate
         self.candidate_num = len(candidate2id.keys())
-        root_concept_kb_id= root_dict[self.partition][0]
+        root_concept_kb_id = root_dict[self.partition][0]
         root_concept_int = candidate2id[root_concept_kb_id]
         self.root_concept_int = root_concept_int
-        
-    
+
+
 def load_word_embeds(embeds_dir):
-    """Load word embeddings from file into a Numpy array and generate dicts 
+    """Load word embeddings from file into a Numpy array and generate dicts
     with information about each word and respective int ID.
 
     :param embeds_filepath: path for the file containing word embeddings
@@ -115,35 +129,34 @@ def load_word_embeds(embeds_dir):
 
     embeds, vocabulary = [], []
 
-    with open(f"{embeds_dir}word_embeddings.txt", 'r', encoding='utf-8') \
-            as embed_file:
-        
+    with open(f"{embeds_dir}word_embeddings.txt", "r", encoding="utf-8") as embed_file:
+
         for line in embed_file.readlines():
             word = line.split()[0]
             embed = [float(item) for item in line.split()[1:]]
             embeds.append(embed)
             vocabulary.append(word)
-        
+
         embed_file.close()
-    
-    assert (len(embeds) == len(vocabulary))
+
+    assert len(embeds) == len(vocabulary)
 
     embeds_word2id = {}
-    
-    with open(f"{embeds_dir}word2id.json", 'r') as word2id_file:
+
+    with open(f"{embeds_dir}word2id.json", "r") as word2id_file:
         embeds_word2id = json.loads(word2id_file.read())
         word2id_file.close()
- 
-    embeds = np.array(embeds)#s.astype('float32')
+
+    embeds = np.array(embeds)  # s.astype('float32')
     embeds = embeds / np.sqrt(np.sum(embeds * embeds, axis=1, keepdims=True))
-   
+
     return embeds, embeds_word2id
 
 
 def load_candidate_embeds(embeds_filepath, candidate2id):
     """Load candidate embeddings from file into a Numpy array.
 
-    :param embeds_filepath: path for the file containing candidate 
+    :param embeds_filepath: path for the file containing candidate
         (i.e. KB concepts) embeddings
     :type embeds_filepath: str
     :param candidate2id: info about candidates and respective internal ID
@@ -153,42 +166,41 @@ def load_candidate_embeds(embeds_filepath, candidate2id):
     """
 
     embed_dict = {}
-    
-    with open(embeds_filepath, 'r', encoding='utf-8') as embed_file:
-        
+
+    with open(embeds_filepath, "r", encoding="utf-8") as embed_file:
+
         for line in embed_file.readlines():
             word = line.split()[0]
             embedding = [float(item) for item in line.split()[1:]]
             embed_dict[word] = embedding
 
     embeds = []
-    
-    for candidate in candidate2id.keys(): 
+
+    for candidate in candidate2id.keys():
         candidate_id = candidate2id[candidate]
         embeds.append(embed_dict[str(candidate_id)])
-    
+
     embeds = np.array(embeds)
     embeds = embeds / np.sqrt(np.sum(embeds * embeds, axis=1, keepdims=True))
-    
+
     return embeds
 
 
-def get_candidates_4_word(
-        wc_2idword, word2candidates, word_str='', wc_word_id=-1):
-    """Retrieve KB candidate concepts for given word (either WC word id or 
-    string) or for the most similar word in the WC if the word is not present 
+def get_candidates_4_word(wc_2idword, word2candidates, word_str="", wc_word_id=-1):
+    """Retrieve KB candidate concepts for given word (either WC word id or
+    string) or for the most similar word in the WC if the word is not present
     in the WC.
 
     :param wc_2idword: mappings between WC word ids and WC words
     :type wc_2idword: dict
-    :param word2candidates: mappings between WC words and KB 
+    :param word2candidates: mappings between WC words and KB
         candidate concepts
     :type word2candidates: dict
     :param word_str: string of the target word
     :type word_str = str
-    :param wc_word_id: the WC word id for the target word 
+    :param wc_word_id: the WC word id for the target word
     :type wc_word_id: int or numpy.int64
-    :raises ValueError: if given input is invalid, input must be either a 
+    :raises ValueError: if given input is invalid, input must be either a
         string or a valid WC word id
     :return: candidates_ids
     :rtype: Numpy array
@@ -206,22 +218,22 @@ def get_candidates_4_word(
     ValuError: 'Input not valid! Must be either a word string or a WC word id'
     """
 
-    word = ''
-    
-    if wc_word_id != -1 and \
-            (type(wc_word_id) == np.int64 or type(wc_word_id) == int):
-        
+    word = ""
+
+    if wc_word_id != -1 and (isinstance(wc_word_id, np.int64) or isinstance(wc_word_id, int)):
+
         word = wc_2idword[wc_word_id]
-        
+
     else:
 
-        if word_str != '':
+        if word_str != "":
             word = word_str
-        
+
         else:
             raise ValueError(
-               'Input not valid! Must be either a word string or a WC word id')
-    
+                "Input not valid! Must be either a word string or a WC word id"
+            )
+
     candidates = []
 
     if word in word2candidates.keys():
@@ -229,22 +241,21 @@ def get_candidates_4_word(
 
     else:
         top_match = process.extract(
-                        word, word2candidates.keys(), 
-                        scorer=fuzz.token_sort_ratio, 
-                        limit=1)
+            word, word2candidates.keys(), scorer=fuzz.token_sort_ratio, limit=1
+        )
         most_similar_word = top_match[0][0]
         candidates = word2candidates[most_similar_word]
 
     candidates_ids = np.array(candidates)
-    
+
     return candidates_ids
 
-   
+
 def get_wc_embeds(partition):
-    """Create and populate WordConcept object and get Numpy arrays with 
+    """Create and populate WordConcept object and get Numpy arrays with
     candidate and word embeddings.
 
-    :param partition: has value 'medic', 'ctd_chem', 'hp', 'chebi', 'go_bp', 
+    :param partition: has value 'medic', 'ctd_chem', 'hp', 'chebi', 'go_bp',
         'ctd_anat'
     :type partition: str
     :return: word_embeds, candidate_embeds, wc
@@ -252,48 +263,47 @@ def get_wc_embeds(partition):
     """
 
     embeds_dir = f"{cfg.root_path}/data/NILINKER/embeddings/{partition}/"
-    word_embeds_filepath = embeds_dir 
+    word_embeds_filepath = embeds_dir
     candidates_embeds_filepath = embeds_dir + partition + ".emb"
 
     wc = WordConcept(partition)
     wc.build()
 
     word_embeds, embeds_word2id = load_word_embeds(word_embeds_filepath)
-    
+
     candidate_embeds = load_candidate_embeds(
-                            candidates_embeds_filepath, 
-                            wc.candidate2id)
+        candidates_embeds_filepath, wc.candidate2id
+    )
 
     return word_embeds, candidate_embeds, wc, embeds_word2id
 
 
 def get_tokens_4_entity(entity_str):
-    
+
     tokens = []
-    
-    if type(entity_str) == str: 
+
+    if isinstance(entity_str, str):
         tokens = entity_str.split(" ")
-    
+
     else:
-        raise TypeError('Entity type is not <str>')
+        raise TypeError("Entity type is not <str>")
 
     if len(tokens) == 1:
-        # If the entity has only 1 word, we assume that 
+        # If the entity has only 1 word, we assume that
         # it has two repeated words
         tokens = [tokens[0], tokens[0]]
 
     return tokens
 
 
-def get_words_ids_4_entity(
-        entity_str, wc_word2id={}, embeds_word2id={}, mode=''):
+def get_words_ids_4_entity(entity_str, wc_word2id={}, embeds_word2id={}, mode=""):
     """Tokenize given entity string and, according with the selected mode,
-    return the ids of the words that are part of the entity. If mode 'wc' it 
-    returns the WC word ids for left and right words, if mode 'embeds' it 
-    returns the embeddings word ids for left and right words. If a given word 
-    is not present in the given dictionary, it finds the most similar word in 
+    return the ids of the words that are part of the entity. If mode 'wc' it
+    returns the WC word ids for left and right words, if mode 'embeds' it
+    returns the embeddings word ids for left and right words. If a given word
+    is not present in the given dictionary, it finds the most similar word in
     the dict according with the Levenshtein distance.
-    
+
     :param entity_str: the target entity string
     :type entity_str: str
     :param wc_word2id: mappings between each word in the WC and the
@@ -312,34 +322,36 @@ def get_words_ids_4_entity(
     >>> wc_word2id = {'palpitation':1663,'arrythmic':1629,'hematoma':1353}
     >>> get_words_ids_4_entity(entity, wc_word2id=wc_word2id, mode='wc')
     1629, 1663
-    
+
     >>> entity = 'arrythmic palpitations'
     >>> embeds_word2id = {'palpitation':1,'arrythmic':2,'hematoma':3}
     >>> mode = 'embeds'
     >>> get_words_ids_4_entity(entity,embeds_word2id=embeds_word2id,mode=mode)
     2, 1
     """
-    
+
     ids = {}
 
-    if mode == 'wc':
+    if mode == "wc":
         ids = wc_word2id
-    
-    elif mode == 'embeds':
+
+    elif mode == "embeds":
         ids = embeds_word2id
 
     else:
-        raise ValueError('Invalid mode! Choose either "wc" (to get the \
+        raise ValueError(
+            'Invalid mode! Choose either "wc" (to get the \
                           word ids from Word-Concept) or "embeds" mode \
-                         (to get words ids from the embeddings vocabulary)')
+                         (to get words ids from the embeddings vocabulary)'
+        )
 
     tokens = get_tokens_4_entity(entity_str)
 
     word_l_id, word_r_id, token_count = 0, 0, 1
-    
+
     for token in tokens[:2]:
         # Only consider the first two words of the entity
-        
+
         if token in ids.keys():
 
             if token_count == 1:
@@ -350,27 +362,27 @@ def get_words_ids_4_entity(
 
         else:
             top_match = process.extract(
-                token, ids.keys(), scorer=fuzz.token_sort_ratio, 
-                limit=1)
-           
+                token, ids.keys(), scorer=fuzz.token_sort_ratio, limit=1
+            )
+
             most_similar_word = ids[top_match[0][0]]
-            
+
             if token_count == 1:
                 word_l_id = most_similar_word
 
             elif token_count == 2:
                 word_r_id = most_similar_word
-        
+
         token_count += 1
-    
+
     return word_l_id, word_r_id
 
 
 def get_kb_data(partition):
-    """Load KB data (concept names, synonyms, IDs, etc) associated with given 
+    """Load KB data (concept names, synonyms, IDs, etc) associated with given
     partition into a KnowledgeBase object.
 
-    :param partition: has value 'medic', 'ctd_chem', 'hp', 'chebi', 
+    :param partition: has value 'medic', 'ctd_chem', 'hp', 'chebi',
         'go_bp' or 'ctd_anat'
     :type partition: str
     :return: kb_data representing the given KB
@@ -379,18 +391,20 @@ def get_kb_data(partition):
 
     source_filename = f"{cfg.root_path}/data/kbs/dicts/{partition}/id_to_name.json"
 
-    if partition == 'chebi':
-        source_filename = f"{cfg.root_path}/data/kbs/dicts/chebi/id_to_name_nilinker.json"
+    if partition == "chebi":
+        source_filename = (
+            f"{cfg.root_path}/data/kbs/dicts/chebi/id_to_name_nilinker.json"
+        )
 
-    with open(source_filename, 'r') as in_file:
-        id_to_name = json.loads(in_file.read()) 
+    with open(source_filename, "r") as in_file:
+        id_to_name = json.loads(in_file.read())
         in_file.close()
 
     # Format the KB identifiers (MESH:D019967 passa a MESH_D019967)
     id_to_name_up = {}
 
     for kb_id in id_to_name.keys():
-        kb_id_up = kb_id.replace('_', ':')
+        kb_id_up = kb_id.replace("_", ":")
         id_to_name_up[kb_id_up] = id_to_name[kb_id]
 
     return id_to_name_up
