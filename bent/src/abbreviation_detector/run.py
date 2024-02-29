@@ -15,40 +15,40 @@ def parse_Ab3P_output(filepaths, initial_dir):
     """
 
     abbreviations = {}
-    doc_id = ''
-    
+    doc_id = ""
+
     for filepath in filepaths:
         doc_abbrvs = {}
-       
-        if '.txt' in filepath or '.ann' in filepath:
+
+        if ".txt" in filepath or ".ann" in filepath:
             doc_id = filepath[:-4]
-        
+
         else:
             doc_id = filepath
 
-        filepath_up = 'tmp/{}_abbrvs'.format(doc_id)
-        
-        with open(filepath_up, 'r') as out_file:
+        filepath_up = f"tmp/{doc_id}_abbrvs"
+
+        with open(filepath_up, "r", encoding="utf-8") as out_file:
             data = out_file.readlines()
             out_file.close()
-            
+
             for line in data:
 
-                if line[0] == ' ': 
-                    line_data = line.split('|')
-                    
+                if line[0] == " ":
+                    line_data = line.split("|")
+
                     if len(line_data) == 3:
                         score = float(line_data[2])
 
                         if score >= 0.90:
-                            doc_abbrvs[line_data[0].strip(' ')] = line_data[1]
+                            doc_abbrvs[line_data[0].strip(" ")] = line_data[1]
 
         # Remove the generated txt files
-        comm1 = 'rm {}'.format(filepath_up)
+        comm1 = f"rm {filepath_up}"
         os.system(comm1)
-        
+
         abbreviations[doc_id] = doc_abbrvs
-    
+
     # Return to the original dir
     os.chdir(initial_dir)
 
@@ -56,9 +56,9 @@ def parse_Ab3P_output(filepaths, initial_dir):
 
 
 def run_Ab3P(input_dir):
-    """Apply the abbreviation detector Ab3P in the texts located in input_dir. 
+    """Apply the abbreviation detector Ab3P in the texts located in input_dir.
 
-    :param input_dir: path to the directory including the texts of the 
+    :param input_dir: path to the directory including the texts of the
         documents where the entities were recognized
     :type input_dir: str
     :return: abbreviations with format: {'doc_id': {'abbv1': 'long_form'}]
@@ -69,24 +69,23 @@ def run_Ab3P(input_dir):
 
     # change to Ab3P directory
     cwd = os.getcwd()
-    os.chdir(cfg.root_path + '/abbreviation_detector/Ab3P/')
-    os.makedirs('tmp/', exist_ok=True)
+    os.chdir(cfg.root_path + "/abbreviation_detector/Ab3P/")
+    os.makedirs("tmp/", exist_ok=True)
 
     # Run Ab3P for each text file
     for filepath in filepaths:
-        doc_id = ''
+        doc_id = ""
 
-        if '.txt' in filepath or '.ann' in filepath:
+        if ".txt" in filepath or ".ann" in filepath:
             doc_id = filepath[:-4]
-        
+
         else:
             doc_id = filepath
 
-        comm = './identify_abbr ../../../{}{} 2> /dev/null >> tmp/{}_abbrvs'.format(
-            input_dir, filepath, doc_id)
+        comm = f"./identify_abbr ../../../{input_dir}{filepath} 2> /dev/null >> tmp/{doc_id}_abbrvs"
         os.system(comm)
-    
-    # Return to the original dir
-    #os.chdir('../../../')
 
-    return parse_Ab3P_output(filepaths, cwd) 
+    # Return to the original dir
+    # os.chdir('../../../')
+
+    return parse_Ab3P_output(filepaths, cwd)

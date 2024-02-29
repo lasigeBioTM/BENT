@@ -257,7 +257,7 @@ def annotate(recognize=False, link=False, types={}, input_text=None,
     os.makedirs(cfg.tmp_dir + run_id, exist_ok=True)
 
     # Check if input arguments are valid
-    utils.check_input_args(recognize, link, types, input_format,
+    utils._check_input_args(recognize, link, types, input_format,
         input_text, in_dir, ner_dir, out_dir, ner_model, nel_model)
 
     if ner_dir != None:

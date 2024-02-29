@@ -43,7 +43,7 @@ def get_annotations_from_brat(filename, ent_type):
 
     brat_annots = {}
 
-    with open(filename, 'r') as ann_file:
+    with open(filename, 'r', encoding="utf-8") as ann_file:
         annotations = ann_file.readlines()
         entity_tmp = ''
         found_entity = False
@@ -71,14 +71,14 @@ def get_annotations_from_brat(filename, ent_type):
 
     found_entity = False
 
-    return brat_annots 
+    return brat_annots
 
 
 def get_annotations_from_craft(filename):
 
     craft_annots = {}
 
-    with open(filename, 'r') as ann_file:
+    with open(filename, 'r', encoding="utf-8") as ann_file:
         annotations = ann_file.readlines()
 
         for line in annotations:
@@ -106,7 +106,6 @@ def build_annotations_dict(corpora_dir, dicts_dir, kb):
     # ------------------------------------------------------------------------
     #                       Import useful data from corpora
     # ------------------------------------------------------------------------
-    
     #-------------------------- NCBI TAXON -----------------------------------
     if kb == 'ncbi_taxon':
 
@@ -284,25 +283,25 @@ def build_annotations_dict(corpora_dir, dicts_dir, kb):
     # ------------------------------------------------------------------------
     # Filter out the annotations that have an exact match in the target KB
     # ------------------------------------------------------------------------
-    with open(dicts_dir + '{}/name_to_id.json'.format(kb), 'r') as dictfile1:
+    with open(f"{dicts_dir}{kb}/name_to_id.json", 'r', encoding="utf-8") as dictfile1:
         name_to_id = json.load(dictfile1)
         dictfile1.close()
     
-    with open(dicts_dir + '{}/synonym_to_id.json'.format(kb), 'r') as dictfile2:
+    with open(f"{dicts_dir}{kb}/synonym_to_id.json", 'r', encoding="utf-8") as dictfile2:
         synonym_to_id = json.load(dictfile2)
         dictfile2.close()
 
     alt_id_to_id = {}
 
     if os.path.exists(dicts_dir + '{}/alt_id_to_id.json'):
-        with open(dicts_dir + '{}/alt_id_to_id.json'.format(kb), 'r') as dictfile3:
+        with open(f"{dicts_dir}{kb}/alt_id_to_id.json", 'r', encoding="utf-8") as dictfile3:
             alt_id_to_id = json.load(dictfile3)
             dictfile3.close()
         
     #with open(dicts_dir + '{}/id_to_name.json'.format(kb), 'r') as dictfile4:
     #    id_to_name = json.load(dictfile4)
     #    dictfile4.close()
-    with open(dicts_dir + '{}/id_to_info.json'.format(kb), 'r') as dictfile4:
+    with open(f"{dicts_dir}{kb}/id_to_info.json", 'r', encoding="utf-8") as dictfile4:
         id_to_info = json.load(dictfile4)
         dictfile4.close()
 
@@ -311,8 +310,8 @@ def build_annotations_dict(corpora_dir, dicts_dir, kb):
     for entity in entity_2_kb_id.keys():
 
         if entity in name_to_id or entity in synonym_to_id:
-            to_delete.append(entity) 
-
+            to_delete.append(entity)
+            
         kb_id = entity_2_kb_id[entity]
         
         if kb_id in alt_id_to_id.keys():
@@ -322,7 +321,7 @@ def build_annotations_dict(corpora_dir, dicts_dir, kb):
         if kb_id not in id_to_info.keys() and kb != 'ncbi_taxon':
             to_delete.append(entity)
     
-    to_delete_up = [entity for entity in set(to_delete)]
+    to_delete_up = list(set(to_delete))
     
     for entity in to_delete_up:
         del entity_2_kb_id[entity]
@@ -331,18 +330,18 @@ def build_annotations_dict(corpora_dir, dicts_dir, kb):
     #     Concatenate the generated dict with the respective synonym_to_id
     # ------------------------------------------------------------------------
 
-    synonyms_filepath = dicts_dir + '{}/synonym_to_id.json'.format(kb)
+    synonyms_filepath = f"{dicts_dir}{kb}/synonym_to_id.json"
     
-    with open(synonyms_filepath, 'r') as synonyms_file:
+    with open(synonyms_filepath, "r", encoding="utf-8") as synonyms_file:
         synonym_to_id = json.load(synonyms_file)
         synonyms_file.close()
    
     output_dict = {**synonym_to_id, **entity_2_kb_id}
     
     output = json.dumps(output_dict, indent=4, ensure_ascii=False)
-    out_filename = dicts_dir + '{}/synonym_to_id_full.json'.format(kb)
+    out_filename = f"{dicts_dir}{kb}/synonym_to_id_full.json"
 
-    with open(out_filename, 'w') as out_file:
+    with open(out_filename, "w", encoding="utf-8") as out_file:
         out_file.write(output)
         out_file.close()
 

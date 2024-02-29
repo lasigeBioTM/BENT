@@ -2,7 +2,7 @@
 
 import random
 from rapidfuzz import process, fuzz
-from bent.src.REEL.utils import candidate_string
+from bent.src.REEL.utils import CANDIDATE_STR
 
 
 def map_to_kb(
