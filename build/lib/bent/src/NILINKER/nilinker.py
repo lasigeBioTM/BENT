@@ -54,8 +54,17 @@ class Words2embed(tf.keras.layers.Layer):
             ]
         )
 
-        embed_word_l = tf.nn.embedding_lookup(params=self.word_embeds, ids=input_l)
-        embed_word_r = tf.nn.embedding_lookup(params=self.word_embeds, ids=input_r)
+        try:
+            embed_word_l = tf.nn.embedding_lookup(params=self.word_embeds, ids=input_l)
+        except:
+            input_l = np.array([0])
+            embed_word_l = tf.nn.embedding_lookup(params=self.word_embeds, ids=input_l)
+
+        try:
+            embed_word_r = tf.nn.embedding_lookup(params=self.word_embeds, ids=input_r)
+        except:
+            input_r = np.array([0])
+            embed_word_r = tf.nn.embedding_lookup(params=self.word_embeds, ids=input_r)
 
         return embed_word_l, embed_word_r, embed_candidates_l, embed_candidates_r
 
@@ -286,7 +295,7 @@ class Nilinker(tf.keras.Model):
         input_entity = (wc_word_l_id, wc_word_r_id, embeds_word_l_id, embeds_word_r_id)
 
         # Now apply NILINKER to predict relevant KB concepts
-        top_candidates = self.predict([input_entity])
+        top_candidates = self.predict([input_entity], verbose=0)
 
         output = []
 

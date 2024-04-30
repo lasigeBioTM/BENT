@@ -27,7 +27,7 @@ def build_entity_candidate_dict(
     entity_type,
     abbreviations,
     min_match_score,
-    nil_model_name="none",
+    nil_mode=None,
     nilinker=None,
 ):
     """Build a dictionary including the candidates for all entity mentions in
@@ -115,7 +115,7 @@ def build_entity_candidate_dict(
                 # Repeated instances of the same entity in a document
                 # are not considered
                 check_entity.append(entity_text)
-
+                
                 # Get candidates list for entity
                 candidates_list, changed_cache, kb_cache_up, kb_id_2_id = (
                     generate_candidates_list(
@@ -139,11 +139,11 @@ def build_entity_candidate_dict(
 
                 if len(candidates_list) == 0:
 
-                    if nil_model_name != "none":
+                    if nil_mode is not None:
                         # The model will try to disambiguate the NIL entity
                         top_candidates_up = []
 
-                        if nil_model_name == "NILINKER":
+                        if nil_mode == "NILINKER":
                             # Find top-k candidates with NILINKER and include
                             # them in the candidates file
                             top_candidates = nilinker.prediction(entity_text)
@@ -151,7 +151,7 @@ def build_entity_candidate_dict(
                         for cand in top_candidates:
                             kb_id = cand[0]
 
-                            if nil_model_name == "NILINKER":
+                            if nil_mode == "NILINKER":
                                 kb_id = cand[0].replace(":", "_")
 
                             cand_up = {
@@ -179,7 +179,7 @@ def build_entity_candidate_dict(
                             )
                         )
 
-                    elif nil_model_name == "none":
+                    elif nil_mode is None:
                         # Since nil entities are not disambiguated,
                         # create a dummy candidate
                         candidates_list = [
@@ -209,7 +209,7 @@ def build_entity_candidate_dict(
 
                 del candidates_list
 
-        if not doc_entities_final:
+        if doc_entities_final != []:
             # In this document there is at least 1 entity
             # ------------------------------------------------------------------
             #                        Generate candidates files
@@ -268,13 +268,9 @@ def pre_process(run_id, ner_dir, kb, entity_type, link_mode, nil_mode, abbreviat
     #                          Create directories
     # -------------------------------------------------------------------------
     os.makedirs(cfg.tmp_dir, exist_ok=True)
-
     os.makedirs(f"{cfg.tmp_dir}{run_id}", exist_ok=True)
-
     os.makedirs(f"{cfg.tmp_dir}REEL/", exist_ok=True)
-
     os.makedirs(f"{cfg.tmp_dir}REEL/cache/", exist_ok=True)
-
     os.makedirs(f"{cfg.tmp_dir}{run_id}/REEL/", exist_ok=True)
     os.makedirs(f"{cfg.tmp_dir}{run_id}/REEL/candidates", exist_ok=True)
     os.makedirs(f"{cfg.tmp_dir}{run_id}/REEL/results/", exist_ok=True)
@@ -288,7 +284,7 @@ def pre_process(run_id, ner_dir, kb, entity_type, link_mode, nil_mode, abbreviat
     synonym_to_id = {}
     kb_dicts_dir = f"{cfg.root_path}/data/kbs/dicts/{kb}/"
 
-    with open(kb_dicts_dir + "name_to_id.json", "r", encoding="utf-8") as dict_file:
+    with open(f"{kb_dicts_dir}name_to_id.json", "r", encoding="utf-8") as dict_file:
         name_to_id = json.loads(dict_file.read())
         dict_file.close()
 
@@ -386,7 +382,7 @@ def pre_process(run_id, ner_dir, kb, entity_type, link_mode, nil_mode, abbreviat
         entity_type,
         abbreviations,
         min_match_score,
-        nil_model_name=nil_mode,
+        nil_mode=nil_mode,
         nilinker=nilinker,
     )
 

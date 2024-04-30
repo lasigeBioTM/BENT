@@ -1,23 +1,14 @@
 #!/bin/bash
-
-root_path=$(python - <<END
-import pkg_resources
-package = pkg_resources.get_distribution('bent')
-print(package.location)
-END
-)
-
-package_path="${root_path}/bent"
+package_path=$1
 
 # ---------------------------------------------------------------------------
 #                    Create directories for later use
 # ---------------------------------------------------------------------------
+cwd=$(pwd)
 data_dir="${package_path}/data"
 cd $data_dir
-
-mkdir $data_dir/datasets/
-mkdir $data_dir/NILINKER/
-
+mkdir -p "datasets/"
+mkdir -p "NILINKER/"
 
 #-------------------------------------------------------------------------
 #   Download entity frequency dicts (to resolve overlapping entities)
@@ -36,7 +27,7 @@ rm relations.tar.gz
 #-------------------------------------------------------------------------
 #                       Download NILINKER data
 #-------------------------------------------------------------------------
-cd $data_dir/NILINKER/
+cd "NILINKER/"
 # Word-concept dictionaries
 wget https://zenodo.org/record/6561477/files/word_concept.tar.gz?download=1
 tar -xvf 'word_concept.tar.gz?download=1'
@@ -52,4 +43,4 @@ wget https://zenodo.org/record/6561477/files/embeddings.tar.gz?download=1
 tar -xvf 'embeddings.tar.gz?download=1'
 rm 'embeddings.tar.gz?download=1'
 
-cd ../
+cd $cwd

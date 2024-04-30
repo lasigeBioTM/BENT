@@ -70,8 +70,7 @@ def _check_input_args(
     # Verify selected task(s)
     assert (
         recognize is True or link is True
-    ), "It is available Named Entity Recognition (NER) and/or Named Entity \
-        ensure that either recognize == True and/or link == True"
+    ), "It is available Named Entity Recognition (NER) and/or Named Entity ensure that either recognize == True and/or link == True"
 
     # Verify the inputed entity types and respective target KBs
     _check_input_types(types)
@@ -81,10 +80,7 @@ def _check_input_args(
 
         if input_text is None and in_dir is None:
             raise ValueError(
-                'It is necessary to input either a text or a \
-                list of texts (by setting the argument "input_text") \
-                OR a directory containing file(s) with texts to annotate \
-                (by setting the argument "text_dir").'
+                'It is necessary to input either a text or a list of texts (by setting the argument "input_text") OR a directory containing file(s) with texts to annotate (by setting the argument "text_dir").'
             )
 
         if (
@@ -95,9 +91,7 @@ def _check_input_args(
 
             assert (
                 in_dir is not None or ner_dir is not None
-            ), 'For input formats "bioc_json", "bioc_xml"and "pubtator" \
-                    it is necessary to specify the input directory by setting \
-                    the argument "in_dir"'
+            ), 'For input formats "bioc_json", "bioc_xml"and "pubtator" it is necessary to specify the input directory by setting the argument "in_dir"'
 
     if link:
 
@@ -105,35 +99,24 @@ def _check_input_args(
 
             assert (
                 ner_dir is not None
-            ), 'No NER will be performed, only NEL: \
-                it is necessary to specfiy the directory containing \
-                NER annotations (by setting the argument "ner_dir").'
+            ), 'No NER will be performed, only NEL: it is necessary to specfiy the directory containing NER annotations (by setting the argument "ner_dir").'
 
     # Check directory paths
 
     if in_dir is not None:
         assert (
             in_dir[-1:] == "/"
-        ), 'Invalid argument "in_dir": the last \
-            character in the directory path must be "/"\n. Examples: \
-            "dataset/txt" -> INVALID directory path \
-            "dataset/txt/" -> VALID directory path'
+        ), 'Invalid argument "in_dir": the last character in the directory path must be "/"\n. Examples: "dataset/txt" -> INVALID directory path "dataset/txt/" -> VALID directory path'
 
     if ner_dir is not None:
         assert (
             ner_dir[-1:] == "/"
-        ), 'Invalid argument "ner_dir": the last \
-            character in the directory path must be "/"\n. Examples: \
-            "dataset/ann" -> INVALID directory path \
-            "dataset/ann/" -> VALID directory path'
+        ), 'Invalid argument "ner_dir": the last character in the directory path must be "/"\n. Examples: "dataset/ann" -> INVALID directory path "dataset/ann/" -> VALID directory path'
 
     if out_dir is not None:
         assert (
             out_dir[-1:] == "/"
-        ), 'Invalid argument "out_dir": the last \
-            character in the directory path must be "/"\n. Examples: \
-            "dataset/ann" -> INVALID directory path \
-            "dataset/ann/" -> VALID directory path'
+        ), 'Invalid argument "out_dir": the last character in the directory path must be "/"\n. Examples: "dataset/ann" -> INVALID directory path "dataset/ann/" -> VALID directory path'
 
 
 # ------------------------------------------------------------------------------
@@ -330,7 +313,10 @@ def _objectify_ner_input(doc_id, doc_text, doc_sentences):
 
         # Usually sentences are separated by ' ', so it is added 1 to the
         # current position but in some cases this is not true
-        current_pos += len(sent_text) + 1
+        current_pos += len(sent_text)
+        
+        if i > 0:
+            current_pos += 1
 
     return doc_obj
 
@@ -532,7 +518,7 @@ def _update_ner_file_with_nel_output(ner_dir, nel_run_ids, out_dir=None):
     for filename in ner_filenames:
         doc_id = filename.strip(".ann")
         linked_entities = _import_reel_results(doc_id, nel_run_ids)
-        complete_filepath = ner_dir + filename
+        complete_filepath = f"{ner_dir}{filename}"
 
         with open(complete_filepath, "r", encoding="utf-8") as ner_file:
             ner_output = ner_file.readlines()
@@ -540,7 +526,7 @@ def _update_ner_file_with_nel_output(ner_dir, nel_run_ids, out_dir=None):
 
         # Add the normalization lines to the annotations file
         final_output = ""
-
+        
         for line in ner_output:
 
             if line != "\n":
@@ -552,8 +538,8 @@ def _update_ner_file_with_nel_output(ner_dir, nel_run_ids, out_dir=None):
                 if final_output[-1:] != "\n":
                     final_output += "\n"
 
-                key_name = entity_text + "_" + entity_type
-
+                key_name = f"{entity_text}"
+                
                 if key_name in linked_entities and term_id[0] == "T":
                     kb_id = linked_entities[key_name][0]
                     annot_id = term_id.split("T")[1]
@@ -563,17 +549,17 @@ def _update_ner_file_with_nel_output(ner_dir, nel_run_ids, out_dir=None):
             final_output = final_output[:-1]
 
         if out_dir is not None:
-            out_filepath = out_dir + filename
+            out_filepath = f"{out_dir}{filename}"
             os.makedirs(out_dir, exist_ok=True)
 
-        with open(out_filepath, "w", encoding="utf-8") as out_file:
-            out_file.write(final_output)
-            out_file.close()
+            with open(out_filepath, "w", encoding="utf-8") as out_file:
+                out_file.write(final_output)
+                out_file.close()
 
     # Delete temporary files associated with given run_ids
-    for run_id in nel_run_ids:
-        dir_to_delete = cfg.tmp_dir + run_id
-        shutil.rmtree(dir_to_delete, ignore_errors=True)
+    #for run_id in nel_run_ids:
+    #    dir_to_delete = cfg.tmp_dir + run_id
+    #    shutil.rmtree(dir_to_delete, ignore_errors=True)
 
 
 # ------------------------------------------------------------------------------
@@ -591,3 +577,8 @@ def garbage_collect(threshold=50.0):
 
     if psutil.virtual_memory().percent >= threshold:
         gc.collect()
+
+
+# Function to filter out the specific warning message
+def ignore_spacy_warning(message, category, filename, lineno, file=None, line=None):
+    return "Model 'en_core_sci_lg' (0.5.3) was trained with spaCy v3.6.1" in str(message)

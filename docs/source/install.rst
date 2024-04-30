@@ -11,8 +11,9 @@ To use the current version of BENT it is required:
    * Dependencies: 2.5 GB 
    * Data: between 3.0 GB (base) or 7.5 GB (if you use all available knowlegde bases for Named Entity Linking)
 
-**NOTE**: Python Docker images (3.7 to 3.9) in `Docker Hub <https://hub.docker.com/_/python>`__ have Debian 11 as the base OS.
 
+pip installation
+~~~~~~~~~~~~~~~~
 
 Install the BENT package using pip:
 
@@ -69,14 +70,39 @@ To disable annoyng messages in the terminal run:
    export TF_CPP_MIN_LOG_LEVEL='3'
 
 
+Docker image
+~~~~~~~~~~~~
+
+If Docker is installed, you can pull BENT Docker image (~10 GB) from Docker hub and run a container.
+
+Pull the Docker image:
+
+::
+   docker pull bent
+
+Build the image in your working directory:
+
+::
+   docker build -t bent .
+
+
+Then start a container using the built image. 
+
+
+Get additional knowlegde bases
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 You can download more knowledge bases later by specifying the desired knowledge bases among the ones that are available:
 
 ::
 
    python -c "from bent.get_kbs import get_additional_kbs;get_additional_kbs([<kb1>, <kb2>])"
 
+
 Example: to download the NCBI Taxonomy and the NCBI Gene run: 
 
 ::
 
       python -c "from bent.get_kbs import get_additional_kbs;get_additional_kbs(['ncbi_taxon', 'ncbi_gene'])"
+
+Alternatively, you can add your own knowledge base from text files (see 'Upload custom knowledge base/graph/ontology' in Usage)

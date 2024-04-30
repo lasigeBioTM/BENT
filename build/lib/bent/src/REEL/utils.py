@@ -24,7 +24,7 @@ def check_if_candidates_dir(run_id):
     if len(cand_files) != 0:
 
         for file in cand_files:
-            os.remove(candidates_dir + file)
+            os.remove(f"{candidates_dir}{file}")
 
     return candidates_dir
 

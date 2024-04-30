@@ -10,7 +10,10 @@ from bent.src.ner import ner
 from bent.src.nel import nel
 from bent.src.classes import Dataset
 import bent.src.cfg as cfg
+import warnings
 
+warnings.simplefilter(action='ignore', category=FutureWarning)
+warnings.showwarning = utils.ignore_spacy_warning
 
 def _recognize(
     in_dir,
@@ -288,9 +291,7 @@ def annotate(
         input_text,
         in_dir,
         ner_dir,
-        out_dir,
-        ner_model,
-        nel_model,
+        out_dir
     )
 
     if ner_dir is not None:

@@ -1,20 +1,12 @@
 #!/bin/bash
 
-root_path=$(python - <<END
-import pkg_resources
-package = pkg_resources.get_distribution('bent')
-print(package.location)
-END
-)
-
-package_path="${root_path}/bent"
-
-echo $package_path
-
+package_path=$(find -type d -name "bent" -print -quit)
+echo 'The root package paths is' $package_path
 
 # ---------------------------------------------------------------------------
 #                          Install utilities
 # ---------------------------------------------------------------------------
+echo 'Installing apt utilities...'
 apt-get update && apt-get upgrade
 
 apt install wget
@@ -31,23 +23,40 @@ apt-get update && apt-get install -y default-jdk && apt-get autoclean -y
 #    Retrieve Spacy model files
 # ---------------------------------------------------------------------------
 echo 'Retrieving Spacy model files...'
-python_version=$(python -c 'import sys; print(sys.version_info[1])')
 
-if [ "$python_version" -lt 10 ];then
-    pip install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.4.0/en_core_sci_lg-0.4.0.tar.gz
+#Find the python version installed in the system
+pip_executable="$(which pip3)"
 
-
-elif [ "$python_version" -ge 10 ];then
-    pip install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.3/en_core_sci_lg-0.5.3.tar.gz
-
+if [ -z "$pip_executable" ]; then
+    pip_executable="$(which pip)"
 fi
+
+pip_command="$(basename "$pip_executable")"
+
+for version in {10..7};do
+
+    python_executable=$(which python3.${version})
+
+    if [ -n python_executable ];then
+
+        if [ "$version" -lt 10 ];then
+            $pip_command install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.4.0/en_core_sci_lg-0.4.0.tar.gz
+
+
+        elif [ "$version" -eq 10 ];then
+            $pip_command install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.3/en_core_sci_lg-0.5.3.tar.gz
+        
+        break
+        fi
+    fi
+done
 # ---------------------------------------------------------------------------
 #            Download and prepare abbreviation detector AB3P
 # ---------------------------------------------------------------------------
 echo 'Downloading and preparing abbreviation detector AB3P...'
 
 cwd=$(pwd)
-mkdir "${package_path}/abbreviation_detector/"
+mkdir -p "${package_path}/abbreviation_detector/"
 cd "${package_path}/abbreviation_detector/"
 
 apt-get install g++
@@ -64,16 +73,10 @@ cd ../../
 git clone https://github.com/ncbi-nlp/Ab3P.git
 cd Ab3P
 sed -i "s#\*\* location of NCBITextLib \*\*#../NCBITextLib#" Makefile
-sed -i "s#\*\* location of NCBITextLib \*\*#../NCBITextLib#" lib/Makefile
+sed -i "s#\*\* location of NCBITextLib \*\*#../../NCBITextLib#" lib/Makefile
 make
 
 cd $cwd
-
-# ---------------------------------------------------------------------------
-#           Eliminate annoying messages during Tensorflow execution
-# ---------------------------------------------------------------------------
-export TF_CPP_MIN_LOG_LEVEL='3'
-export AUTOGRAPH_VERBOSITY='0'
 
 # ---------------------------------------------------------------------------
 #                   Download NILINKER and KB data
@@ -81,20 +84,20 @@ export AUTOGRAPH_VERBOSITY='0'
 
 #cd $package_path
 
-mkdir $package_path/data
+mkdir -p "${package_path}/data"
 
 # Download NILINKER, relations and entity frequency data
 echo 'Downloading NILINKER, relations and entity frequency data...'
 nil_script="${package_path}/get_data.sh"
 chmod 755 $nil_script
-bash $nil_script
+bash $nil_script $package_path
 
 
 # Download kb dicts
 echo 'Downloading knowledge base dictionaries...'
-mkdir $package_path/data/kbs/
+mkdir -p "${package_path}/data/kbs/"
 kb_dir="${package_path}/data/kbs/dicts"
-mkdir $kb_dir
+mkdir -p $kb_dir
 
 kb_script="${package_path}/get_kb_dicts.sh"
 chmod 755 $kb_script
@@ -103,5 +106,6 @@ kbs=('medic' 'chebi')
 
 for kb in "${kbs[@]}"
 do
-    bash $kb_script $kb
+    echo "Downloading ${kb} dictionaries..."
+    bash $kb_script $package_path $kb
 done

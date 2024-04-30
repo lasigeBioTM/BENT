@@ -10,6 +10,6 @@ def get_package_root(package_name):
 package_name = "bent"
 root_path = get_package_root(package_name) + "/bent"
 
-data_dir = "{}data/".format(root_path)
+data_dir = f"{root_path}data/"
 
 tmp_dir = ".tmp/"

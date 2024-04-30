@@ -14,15 +14,15 @@ def get_additional_kbs(target_kbs):
 
     cwd = os.getcwd()
     os.chdir(cfg.root_path)
-
+    
     # -------------------------------------------------------------------------
     #                           Download kb dicts
     # -------------------------------------------------------------------------
 
     os.chmod("get_kb_dicts.sh", 0o755)
 
-    kb_dicts_dir = cfg.root_path + "/data/kbs/dicts/"
-    kb_script = cfg.root_path + "/get_kb_dicts.sh"
+    kb_dicts_dir = f"{cfg.root_path}/data/kbs/dicts/"
+    kb_script = f"{cfg.root_path}/get_kb_dicts.sh"
 
     if len(target_kbs) >= 1:
 
@@ -33,7 +33,7 @@ def get_additional_kbs(target_kbs):
                 print(kb, "already downloaded!")
 
             else:
-                subprocess.call([kb_script, kb])
+                subprocess.call([kb_script, kb, kb_dicts_dir])
 
     else:
         raise ValueError("You need to specify at least one target knowledge base!")

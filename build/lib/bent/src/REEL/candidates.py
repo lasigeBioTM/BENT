@@ -85,7 +85,7 @@ def map_to_kb(
 
             else:
                 top_concepts = process.extract(
-                    entity_text, names, limit=10, scorer=fuzz.token_sort_ratio
+                    entity_text, names, limit=5, scorer=fuzz.token_sort_ratio
                 )
 
             if top_concepts[0][1] == 100:
@@ -105,7 +105,7 @@ def map_to_kb(
 
                 else:
                     top_synonyms = process.extract(
-                        entity_text, synonyms, limit=10, scorer=fuzz.token_sort_ratio
+                        entity_text, synonyms, limit=5, scorer=fuzz.token_sort_ratio
                     )
 
                 for synonym in top_synonyms:
@@ -145,6 +145,57 @@ def map_to_kb(
         matches.append(match)
 
     return matches, changed_cache, kb_cache
+
+
+def get_candidate_properties(
+        candidate, 
+        min_match_score, 
+        id_to_info,
+        kb,
+        kb_id_2_id,
+        candidates_list):
+
+    if candidate["match_score"] > min_match_score and candidate["kb_id"] != "NIL":
+
+        if kb != "ncbi_gene":
+
+            try:
+                outcount = id_to_info[candidate["kb_id"]][0]
+                incount = id_to_info[candidate["kb_id"]][1]
+
+            except KeyError:
+                incount = 0
+                outcount = 0
+
+        else:
+            outcount = 0
+            incount = 0
+
+        candidate_id = 0
+
+        if candidate["kb_id"] in kb_id_2_id.keys():
+            candidate_id = kb_id_2_id[candidate["kb_id"]]
+
+        else:
+            # generate random id for current candidate
+            candidate_id = random.randint(0, 1000000)
+            kb_id_2_id[candidate["kb_id"]] = candidate_id
+
+        # The first candidate in candidate_names
+        # should be the correct disambiguation for entity
+        candidates_list.append(
+            {
+                "url": candidate["kb_id"],
+                "name": candidate["name"],
+                "outcount": outcount,
+                "incount": incount,
+                "id": candidate_id,
+                "links": [],
+                "score": candidate["match_score"],
+            }
+        )
+
+    return candidates_list
 
 
 def generate_candidates_list(
@@ -202,14 +253,13 @@ def generate_candidates_list(
     """
 
     candidates_list = []
-    less_than_min_score = 0
 
     # Retrieve best KB candidates names and respective ids
     candidate_names = []
     changed_cache = False
     kb_cache_up = {}
-
-    if nil_candidates is not None:
+    
+    if nil_candidates is None:
         candidate_names, changed_cache, kb_cache_up = map_to_kb(
             entity_text,
             names,
@@ -220,56 +270,22 @@ def generate_candidates_list(
             kb_cache,
             doc_abbreviations,
         )
+        changed_cache = True
 
     else:
         candidate_names = nil_candidates
-
+    
     # Get properties for each retrieved candidate
-    for candidate in candidate_names:
-
-        if candidate["match_score"] > min_match_score and candidate["kb_id"] != "NIL":
-
-            if kb != "ncbi_gene":
-
-                try:
-                    outcount = id_to_info[candidate["kb_id"]][0]
-                    incount = id_to_info[candidate["kb_id"]][1]
-
-                except KeyError:
-                    incount = 0
-                    outcount = 0
-
-            else:
-                outcount = 0
-                incount = 0
-
-            candidate_id = 0
-
-            if candidate["kb_id"] in kb_id_2_id.keys():
-                candidate_id = kb_id_2_id[candidate["kb_id"]]
-
-            else:
-                # generate random id for current candidate
-                candidate_id = random.randint(0, 1000000)
-                kb_id_2_id[candidate["kb_id"]] = candidate_id
-
-            # The first candidate in candidate_names
-            # should be the correct disambiguation for entity
-            candidates_list.append(
-                {
-                    "url": candidate["kb_id"],
-                    "name": candidate["name"],
-                    "outcount": outcount,
-                    "incount": incount,
-                    "id": candidate_id,
-                    "links": [],
-                    "score": candidate["match_score"],
-                }
-            )
-
-        else:
-            less_than_min_score += 1
-
+    if candidate_names is not None and candidate_names != []:
+        for candidate in candidate_names:
+            candidates_list = get_candidate_properties(
+                                candidate,
+                                min_match_score,
+                                id_to_info,
+                                kb,
+                                kb_id_2_id,
+                                candidates_list)
+    
     return candidates_list, changed_cache, kb_cache_up, kb_id_2_id
 
 
@@ -387,7 +403,7 @@ def write_candidates_file(
     :type extracted_relations: list
     """
 
-    candidates_filename = candidates_dir + doc_id
+    candidates_filename = f"{candidates_dir}{doc_id}"
     candidates_file = open(candidates_filename, "w", encoding="utf-8")
 
     for annotation1 in doc_entities_candidates:

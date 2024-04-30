@@ -374,7 +374,7 @@ base, indicating the filenames (**terms_filename** and **edges_filename**) and t
 
 ::
 
-   import  bent.src.build.kb.generate_dicts  as  bkb
+   import  bent.src.dicts.kb.generate_dicts  as  bkb
 
    bkb.generate(
            custom=True,

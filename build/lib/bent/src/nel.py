@@ -46,15 +46,23 @@ class nel:
             # Get abbreviations with AB3P in each document of the dataset
             # ----------------------------------------------------------------
             abbreviations = run_Ab3P(ner_dir)  # CHeck if runs with NER_DIR specified
-
+            print(abbreviations)
             # ----------------------------------------------------------------
             # Sequentially link entities to the respective target knowledge base
             # ----------------------------------------------------------------
+            nil_mode = 'NILINKER'
+
             for ent_type in target_kbs.keys():
                 kb = target_kbs[ent_type]
 
                 # Run REEL
-                nel_run_name = run(self.run_id, ner_dir, kb, ent_type, abbreviations)
+                nel_run_name = run(
+                    self.run_id,
+                    ner_dir,
+                    kb,
+                    ent_type,
+                    abbreviations,
+                    nil_mode=nil_mode)
                 nel_runs.append(nel_run_name)
 
                 pbar.update(1)

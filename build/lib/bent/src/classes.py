@@ -149,7 +149,7 @@ class Document:
 class Dataset:
     """Collection of 1 or more documents."""
 
-    __slots__ = ["documents", "num_docs", "doc_ids"]
+    __slots__ = ["documents", "num_docs", "doc_ids", "name"]
 
     def __init__(self):
 

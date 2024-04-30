@@ -60,7 +60,7 @@ class ner:
             if "disease" in types:
                 model_name = "pruas/BENT-PubMedBERT-NER-Disease"
                 self.models["disease"] = ner.load_transformer_model(model_name)
-                dict_filename = f"{module_root_path}data/overlapping_entities/disease.json"                )
+                dict_filename = f"{module_root_path}data/overlapping_entities/disease.json"
 
                 if len(types) > 1:
                     self.disease_prob = ner.load_probabilities_file(dict_filename)
