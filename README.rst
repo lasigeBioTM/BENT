@@ -38,6 +38,7 @@ To use the current version of BENT it is required:
 If you have Docker installed in your system, the easiest way is to pull the BENT Docker image from DockerHub:
 
 ::
+
    docker pull pedroruas18/bent
 
 
