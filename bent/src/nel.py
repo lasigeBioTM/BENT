@@ -46,7 +46,7 @@ class nel:
             # Get abbreviations with AB3P in each document of the dataset
             # ----------------------------------------------------------------
             abbreviations = run_Ab3P(ner_dir)  # CHeck if runs with NER_DIR specified
-            print(abbreviations)
+            
             # ----------------------------------------------------------------
             # Sequentially link entities to the respective target knowledge base
             # ----------------------------------------------------------------

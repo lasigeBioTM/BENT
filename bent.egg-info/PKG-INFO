@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: bent
-Version: 0.0.54
+Version: 0.0.58
 Summary: BENT: Biomedical Entity Annotator
 Home-page: https://github.com/lasigeBioTM/bent
 Author: Pedro Ruas
@@ -279,14 +279,44 @@ To use the current version of BENT it is required:
 **NOTE**: Python Docker images (3.7 to 3.9) in `Docker Hub <https://hub.docker.com/_/python>`__ have Debian 11 as the base OS.
 
 
-Install the BENT package using pip:
+If you have Docker installed in your system, the easiest way is to pull the BENT Docker image from DockerHub:
+
+::
+   docker pull pedroruas18/bent
+
+
+Alternatively, you can install the BENT package using pip:
 
 ::
 
    pip install bent
 
 
+After the pip installation, it is required a further step to install non-Python dependencies and to download the necessary data. Run in the command line:
+
+::
+
+   bent_setup
+
+
+Only the default knowledge bases 'medic' and 'chebi' will be available at this point.
+
+To disable annoyng messages in the terminal run:
+
+::
+
+   export TF_CPP_MIN_LOG_LEVEL='3'
+
+
+You can download more knowledge bases later by specifying the desired knowledge bases among the ones that are available:
+
+::
+
+   python -c "from bent.get_kbs import get_additional_kbs;get_additional_kbs([<kb1>, <kb2>])"
+
+
 The following knowledge bases can be configured:
+
 
 * 'medic' (`MEDIC <http://ctdbase.org/>`__)
 
@@ -317,28 +347,6 @@ The following knowledge bases can be configured:
 * 'cellosaurus' (`Cellosaurus <https://www.cellosaurus.org/>`__)
 
 
-After the pip installation, it is required a further step to install non-Python dependencies and to download the necessary data. Run in the command line:
-
-::
-
-   bent_setup
-
-
-Only the default knowledge bases 'medic' and 'chebi' will be available at this point.
-
-To disable annoyng messages in the terminal run:
-
-::
-
-   export TF_CPP_MIN_LOG_LEVEL='3'
-
-
-You can download more knowledge bases later by specifying the desired knowledge bases among the ones that are available:
-
-::
-
-   python -c "from bent.get_kbs import get_additional_kbs;get_additional_kbs([<kb1>, <kb2>])"
-
 
 Example: to download the NCBI Taxonomy and the NCBI Gene run: 
 
@@ -359,7 +367,7 @@ To apply the complete pipeline of entity extraction (NER+NEL) set the arguments:
 * **out_dir**: the output directory that will contain the annotation files
 
 
-Example:
+Python example:
 
 ::
 
@@ -371,13 +379,9 @@ Example:
            types={
             'disease': 'medic'
             'chemical': 'chebi',
-            'gene': 'ncbi_gene',
-            'anatomical': 'uberon',
-            'cell_line': 'cellosaurus',
-            'bioprocess': 'go_bp'
             },
-           in_dir='input/txt/',
-           out_dir='output/nel/'
+           in_dir='data/txt/',
+           out_dir='data/ann/'
    )
 
 

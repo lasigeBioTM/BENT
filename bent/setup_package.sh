@@ -1,7 +1,11 @@
 #!/bin/bash
 
-package_path=$(find / -type d -name "bent" -print -quit)
-echo 'The root package paths is' $package_path
+package_path=$1
+
+if [ -n "$package_path" ]; then
+    package_path=$(find / -type d -name "bent" -print -quit)
+    echo 'The root package path is' "$package_path"
+fi
 
 # ---------------------------------------------------------------------------
 #                          Install utilities

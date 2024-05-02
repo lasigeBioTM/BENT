@@ -73,17 +73,12 @@ To disable annoyng messages in the terminal run:
 Docker image
 ~~~~~~~~~~~~
 
-If Docker is installed, you can pull BENT Docker image (~10 GB) from Docker hub and run a container.
+If you have Docker installed in your system, you can pull the BENT Docker image (~15 GB) from Docker Hub and run a container on Debian Gnu/Linux 12 with Python 3.10.13
 
 Pull the Docker image:
 
 ::
-   docker pull bent
-
-Build the image in your working directory:
-
-::
-   docker build -t bent .
+   docker pull pedroruas18/bent
 
 
 Then start a container using the built image. 
