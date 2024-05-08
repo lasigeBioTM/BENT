@@ -85,7 +85,7 @@ Then start a container using the built image.
 
 
 Get additional knowlegde bases
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can download more knowledge bases later by specifying the desired knowledge bases among the ones that are available:
 
