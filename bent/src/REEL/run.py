@@ -5,7 +5,7 @@ from bent.src.REEL.pre_process import pre_process
 from bent.src.REEL.post_process import process_results
 
 
-def run(run_id, ner_dir, kb, entity_type, abbreviations, nil_mode=None):
+def run(run_id, ner_dir, kb, entity_type, abbreviations, link_nil=False):
     """Apply the REEL model (preprocess, candidate scoring with PPR,
     postprocess) to the entities present in files in ner_dir.
 
@@ -32,7 +32,9 @@ def run(run_id, ner_dir, kb, entity_type, abbreviations, nil_mode=None):
     link_mode = "kb_corpus"
 
     # Use NILINKER model if available
-    if nil_mode:
+    nil_mode = None
+    
+    if link_nil:
         #TODO: implement efficient NILINKER-ctd_chem model
         available_kbs_nilinker = ["chebi", "medic", "go_bp", "hp"]
         

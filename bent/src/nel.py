@@ -50,8 +50,6 @@ class nel:
             # ----------------------------------------------------------------
             # Sequentially link entities to the respective target knowledge base
             # ----------------------------------------------------------------
-            nil_mode = 'NILINKER'
-
             for ent_type in target_kbs.keys():
                 kb = target_kbs[ent_type]
 
@@ -62,7 +60,7 @@ class nel:
                     kb,
                     ent_type,
                     abbreviations,
-                    nil_mode=nil_mode)
+                    link_nil=True)
                 nel_runs.append(nel_run_name)
 
                 pbar.update(1)
