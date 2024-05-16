@@ -4,6 +4,7 @@ import os
 import gc
 import psutil
 import shutil
+import re
 import orjson as json
 import bent.src.cfg as cfg
 from bent.src.classes import Document, Sentence, Entity
@@ -538,7 +539,7 @@ def _update_ner_file_with_nel_output(ner_dir, nel_run_ids, out_dir=None):
                 if final_output[-1:] != "\n":
                     final_output += "\n"
 
-                key_name = f"{entity_text}"
+                key_name = f"{entity_text}_{entity_type}"
                 
                 if key_name in linked_entities and term_id[0] == "T":
                     kb_id = linked_entities[key_name][0]

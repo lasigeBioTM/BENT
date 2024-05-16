@@ -137,7 +137,7 @@ def build_annotations_dict(corpora_dir, dicts_dir, kb):
         entity_2_kb_id['individual'] = 'NCBITaxon_9606'
         entity_2_kb_id['mother'] = 'NCBITaxon_9606'
         entity_2_kb_id['father'] = 'NCBITaxon_9606'
-        #print(entity_2_kb_id)
+        
     #-------------------------- DISEASE -----------------------------------
     elif kb == 'medic':
         

@@ -74,15 +74,8 @@ def _recognize(
             desc="Recognizing entities (documents)",
         )
 
-        for i, filename in enumerate(input_files, start=1):
-            doc_id = ""
-
-            if input_tmp:
-                doc_id = f"doc_{str(i)}"
-
-            else:
-                doc_id = filename.strip(in_dir).strip(".txt")
-
+        for filename in input_files:
+            doc_id = Path(filename).stem
             text = ""
 
             with open(filename, "r", encoding="utf-8") as input_file:
@@ -97,13 +90,13 @@ def _recognize(
 
             # Apply NER models to input text
             doc_entities = recognizer.apply(doc_obj)
-
+            
             # Output recognized entities to a file
             # Prepare output string with annotations
             doc_annots = utils._prepare_output_from_objects(doc_entities, only_ner=True)
-
+            
             out_filename = f"{out_dir}{doc_id}.ann"
-
+            
             with open(out_filename, "w", encoding="utf-8") as out_file:
                 out_file.write(doc_annots[:-1])
                 out_file.close()
@@ -344,7 +337,7 @@ def annotate(
                 in_dir, entity_types, out_dir, ner_model, run_id, input_tmp=input_tmp
             )
 
-        elif out_dir is not None:
+        else:
             # In this case a dataset object will be outputted and the
             # temporary annotation files will be stored in 'tmp/NER/' directory
             tmp_out_dir = f"{in_dir}ann/"
