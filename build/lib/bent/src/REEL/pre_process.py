@@ -299,7 +299,7 @@ def pre_process(run_id, ner_dir, kb, entity_type, link_mode, nil_mode, abbreviat
 
     id_to_info = None
 
-    if kb != "ncbi_gene":
+    if kb not in ("ncbi_gene", "ctd_gene"):
         id_to_info_filepath = f"{kb_dicts_dir}id_to_info.json"
 
         with open(id_to_info_filepath, "r", encoding="utf-8") as dict_file3:
@@ -352,7 +352,7 @@ def pre_process(run_id, ner_dir, kb, entity_type, link_mode, nil_mode, abbreviat
 
     kb_edges = []
 
-    if kb != "ncbi_gene":
+    if kb not in ("ncbi_gene", "ctd_gene"):
         edges_filepath = f"{kb_dicts_dir}node_to_node.json"
 
         with open(edges_filepath, "r", encoding="utf-8") as dict_file4:
@@ -410,7 +410,7 @@ def pre_process(run_id, ner_dir, kb, entity_type, link_mode, nil_mode, abbreviat
     # INTRINSIC INFORMATION CONTENT:
     # Create information content file including every KB concept appearing
     # in candidates files
-    if kb != "ncbi_gene":
+    if kb not in ("ncbi_gene", "ctd_gene"):
         generate_ic_file(run_id, candidates_dir, id_to_info)
 
     # Free up memory usage

@@ -141,7 +141,7 @@ def _link(
         target knowledge bases, defaults to {}. Options:
         {'disease': 'medic'}, {'disease': 'do'},
         {'chemical': 'chebi'}, {'chemical': 'ctd_chem'},
-        {'gene': 'ncbi_gene'},
+        {'gene': 'ncbi_gene'}, {'gene': 'ctd_gene'}
         {'bioprocess': 'go_bp'},
         {'organism': 'ncbi_taxon'},
         {'anatomical': 'uberon'}, {'anatomical', 'ctd_anat'},

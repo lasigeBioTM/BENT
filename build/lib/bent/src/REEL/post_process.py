@@ -9,7 +9,7 @@ def process_results(run_id, entity_type, kb):
     """Process the results after the application of the PPR-IC model and
     output a JSON file in the directory 'tmp/REEL/results/<run_id>/."""
 
-    if kb != "ncbi_gene":
+    if kb not in ("ncbi_gene", "ctd_gene"):
         results_filepath = f"{cfg.tmp_dir}{run_id}/REEL/results/candidate_scores"
 
         # Import PPR output
@@ -41,7 +41,7 @@ def process_results(run_id, entity_type, kb):
                     else:
                         linked_entities[doc_id] = {entity: (answer, entity_type)}
 
-    elif kb == "ncbi_gene":
+    elif kb in ("ncbi_gene", "ctd_gene"):
         results_filepath = f"{cfg.tmp_dir}{run_id}/REEL/candidates/"
         results_files = os.listdir(results_filepath)
         linked_entities = {}
@@ -52,27 +52,29 @@ def process_results(run_id, entity_type, kb):
             with open(results_filepath + file, "r", encoding="utf-8") as results:
                 data = results.readlines()
                 results.close()
-                entity = ""
+                search_key = ""
 
                 for line in data:
-
+                    
                     if found_entity:
                         # This is the top candidate
                         answer = line.split("url:")[1].split("\t")[0].replace("_", ":")
 
                         if file in linked_entities:
-                            linked_entities[file][entity] = (answer, "gene")
+                            linked_entities[file][search_key] = (answer, "gene")
 
                         else:
-                            linked_entities[file] = {entity: (answer, "gene")}
+                            linked_entities[file] = {search_key: (answer, "gene")}
 
                         found_entity = False
-                        entity = ""
+                        search_key = ""
 
                     else:
 
                         if line[0] == "E":
-                            entity = line.split("\t")[1].strip("text:")
+                            entity = line.split("\t")[1].strip("text:").replace(' ', '_')
+                            entity_type = line.split("\t")[3].split("predictedType:")[1]
+                            search_key = f"{entity}"
                             found_entity = True
 
     out_dir = f"{cfg.tmp_dir}{run_id}/REEL/results/"

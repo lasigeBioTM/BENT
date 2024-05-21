@@ -32,7 +32,7 @@ then
 
 elif [ "$target_kb" = "ctd_gene" ];
 then
-    download_url='https://drive.google.com/uc?id=1Mj97VK5b_MT-n-gj_k23tvOYZhxG_l71'
+    download_url='https://drive.google.com/uc?id=1bjte6i9ESQkMiYl7X1zlo7pI3ikMRM2G'
 
 elif [ "$target_kb" = "do" ];
 then

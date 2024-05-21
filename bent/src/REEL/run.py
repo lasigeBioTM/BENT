@@ -58,7 +58,7 @@ def run(run_id, ner_dir, kb, entity_type, abbreviations, link_nil=False):
     #         graph is built, it runs the PPR algorithm over the graph
     #         and ranks each candidate.
     # ------------------------------------------------------------------------#
-    if kb != "ncbi_gene":
+    if kb not in ("ncbi_gene", "ctd_gene"):
         ppr_dir = f"{cfg.root_path}/src/REEL/"
         comm = f"java -classpath :{ppr_dir} ppr_for_ned_all {nel_run_name} ppr_ic"
         os.system(comm)

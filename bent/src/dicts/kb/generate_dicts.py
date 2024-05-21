@@ -5,13 +5,13 @@ import orjson as json
 import os
 from bent.src.dicts.kb.kb import KnowledgeBase
 
-dict_dir = cfg.root_path + '/data/kbs/dicts/'
+dict_dir = f"{cfg.root_path}/data/kbs/dicts/"
 
 
 def generate_dicts_4_kb(kb=None, mode='reel', terms_filename=None, 
         edges_filename=None, kb_filename=None, input_format=None):
     
-    out_dir = dict_dir + kb 
+    out_dir = f"{dict_dir}{kb}"
 
     os.makedirs(out_dir, exist_ok=True)
 
@@ -77,6 +77,9 @@ def generate_dicts_4_kb(kb=None, mode='reel', terms_filename=None,
             outfile4.close
         
         del id_to_name_nilinker
+
+    print(f"{kb} dictinaries created in {out_dir}")
+
 
 def generate(
         kbs=[], custom=False, kb_name=None, kb_filename=None, 

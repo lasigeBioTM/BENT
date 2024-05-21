@@ -9,6 +9,7 @@ import bent.src.cfg as cfg
 
 data_dir = cfg.root_path + '/data/kbs/original_files/'
 
+csv.field_size_limit(100000000)
 
 class KnowledgeBase:
     """Represents a knowledge base that is loaded from a given local file."""
@@ -305,6 +306,13 @@ class KnowledgeBase:
                     
                     node_parents = row[4].split('|')
                     synonyms = row[7].split('|')
+
+                    if self.kb == "ctd_gene":
+                        node_name = row[0]
+                        node_id = row[2]
+                        synonyms = [row[1]]
+                        synonyms.extend(row[4].split('|'))
+
                     name_to_id[node_name] = node_id
                     id_to_name[node_id] = node_name
               

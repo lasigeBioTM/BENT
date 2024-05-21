@@ -5,7 +5,7 @@ from bent.src.REEL.pre_process import pre_process
 from bent.src.REEL.post_process import process_results
 
 
-def run(run_id, ner_dir, kb, entity_type, abbreviations, nil_mode=None):
+def run(run_id, ner_dir, kb, entity_type, abbreviations, link_nil=False):
     """Apply the REEL model (preprocess, candidate scoring with PPR,
     postprocess) to the entities present in files in ner_dir.
 
@@ -32,7 +32,9 @@ def run(run_id, ner_dir, kb, entity_type, abbreviations, nil_mode=None):
     link_mode = "kb_corpus"
 
     # Use NILINKER model if available
-    if nil_mode:
+    nil_mode = None
+    
+    if link_nil:
         #TODO: implement efficient NILINKER-ctd_chem model
         available_kbs_nilinker = ["chebi", "medic", "go_bp", "hp"]
         
@@ -56,7 +58,7 @@ def run(run_id, ner_dir, kb, entity_type, abbreviations, nil_mode=None):
     #         graph is built, it runs the PPR algorithm over the graph
     #         and ranks each candidate.
     # ------------------------------------------------------------------------#
-    if kb != "ncbi_gene":
+    if kb not in ("ncbi_gene", "ctd_gene"):
         ppr_dir = f"{cfg.root_path}/src/REEL/"
         comm = f"java -classpath :{ppr_dir} ppr_for_ned_all {nel_run_name} ppr_ic"
         os.system(comm)

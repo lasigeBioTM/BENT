@@ -76,7 +76,7 @@ def map_to_kb(
             # with entity_text
             top_concepts = None
 
-            if kb == "ncbi_gene":
+            if kb in ("ncbi_gene", "ctd_gene"):
                 top_concept = process.extractOne(
                     entity_text, names, scorer=fuzz.token_sort_ratio
                 )
@@ -96,7 +96,7 @@ def map_to_kb(
                 # Check for synonyms to this entity
                 top_synonyms = None
 
-                if kb == "ncbi_gene":
+                if kb in ("ncbi_gene", "ctd_gene"):
                     top_synonym = process.extractOne(
                         entity_text, synonyms, scorer=fuzz.token_sort_ratio
                     )
@@ -157,7 +157,7 @@ def get_candidate_properties(
 
     if candidate["match_score"] > min_match_score and candidate["kb_id"] != "NIL":
 
-        if kb != "ncbi_gene":
+        if kb not in ("ncbi_gene", "ctd_gene"):
 
             try:
                 outcount = id_to_info[candidate["kb_id"]][0]
@@ -413,7 +413,7 @@ def write_candidates_file(
         for c1 in annotation1[1]:
             c1["links"] = ""
 
-            if kb != "ncbi_gene":
+            if kb not in ("ncbi_gene", "ctd_gene"):
                 # Find links between the candidates in the current document
 
                 # Get all the candidates for the remaining entities in the
