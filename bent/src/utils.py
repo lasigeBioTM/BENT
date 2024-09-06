@@ -13,47 +13,6 @@ from bent.src.classes import Document, Sentence, Entity
 #                       INPUT ARGUMENTS VERIFICATION
 # ------------------------------------------------------------------------------
 
-
-def _check_input_types(types):
-    """Check if the inputted entity types are valid, as well the selected
-    target knowledge bases.
-
-    :param types: a dictionary with the format {'entity_type: 'target_kb'}
-    :type types: dict
-    :raises ValueError: if types is an empty dictionary
-    """
-
-    if types == {}:
-        raise ValueError("No specified entity types!")
-
-    else:
-        available_types = [
-            "disease",
-            "chemical",
-            "gene",
-            "organism",
-            "bioprocess",
-            "anatomical",
-            "cell_component",
-            "cell_line",
-            "cell_type",
-            "variant",
-            "NILDis",
-            "NILChem",
-            "NILGene",
-        ]
-
-        for ent_type in types:
-
-            if ent_type != "":
-                assert (
-                    ent_type in available_types
-                ), f"{ent_type} is an invalid entity type to recognize! Options:\
-                    'disease', 'chemical', 'gene', 'organism', 'bioprocess', \
-                    'bioprocess', 'anatomical', 'cell_component', 'cell_line',\
-                    'cell_type', 'variant', 'NILDis', 'NILChem', 'NILGene'"               
-
-
 def _check_input_args(
     recognize,
     link,
@@ -72,9 +31,6 @@ def _check_input_args(
     assert (
         recognize is True or link is True
     ), "It is available Named Entity Recognition (NER) and/or Named Entity ensure that either recognize == True and/or link == True"
-
-    # Verify the inputed entity types and respective target KBs
-    _check_input_types(types)
 
     # Verify input format and directory arguments
     if recognize:
